@@ -10,6 +10,9 @@
   --element-color-tertiary: #E8E8E8;
   --element-color-quartenary: #C3C3C3; 
 
+  --background-color-1: #F6F6F6;
+  --background-color-2: #FFF;
+
   --text-color-primary: #000;
   --text-color-secondary: #4A4B4C;
   --text-color-hyperlink: #067BC2;
@@ -28,4 +31,7 @@ h1 {
 }
 h2 {
   font: var(--font-h2-mobile);
+}
+body {
+  background-color: var(--background-color-1);
 }

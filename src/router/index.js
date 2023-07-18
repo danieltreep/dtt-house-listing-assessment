@@ -6,16 +6,16 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'listings'
+      redirect: 'houses'
     },
     {
-      path: '/listings',
-      name: 'listings',
+      path: '/houses',
+      name: 'Houses',
       component: HomeView
     },
     {
       path: '/about',
-      name: 'about',
+      name: 'About',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
