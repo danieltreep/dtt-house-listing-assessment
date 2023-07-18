@@ -9,7 +9,7 @@ const router = createRouter({
       redirect: 'listings'
     },
     {
-      path: '/',
+      path: '/listings',
       name: 'listings',
       component: HomeView
     },
