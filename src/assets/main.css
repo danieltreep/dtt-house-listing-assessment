@@ -18,20 +18,26 @@
   --text-color-hyperlink: #067BC2;
 
   --font-h1-desktop: 32px bold 'Montserrat', sans-serif;
-  --font-h1-mobile: 18px bold 'Montserrat', sans-serif;
+  --font-h1-mobile: 18px, bold 'Montserrat', sans-serif;
   --font-h2-desktop: 22px bold 'Montserrat', sans-serif;
   --font-h2-mobile: 14px bold 'Montserrat', sans-serif;
 
-  --border-radius-s: 8px;
+  --border-radius-s: 6px;
+  --border-radius-m: 8px;
   --border-radius-l: 15px;
-}
-
-h1 {
-  font: var(--font-h1-mobile);
-}
-h2 {
-  font: var(--font-h2-mobile);
 }
 body {
   background-color: var(--background-color-1);
+}
+header {
+  margin: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+h1 {
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+}
+h2 {
+  font: var(--font-h2-mobile);
 }
