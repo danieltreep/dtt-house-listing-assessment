@@ -39,5 +39,10 @@ h1 {
   font-family: 'Montserrat', sans-serif;
 }
 h2 {
-  font: var(--font-h2-mobile);
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+}
+p {
+  font-family: 'Open sans', sans-serif;
+  font-size: 12px;
 }

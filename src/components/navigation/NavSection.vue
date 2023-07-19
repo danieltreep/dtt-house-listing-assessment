@@ -39,6 +39,6 @@ watchEffect(() => {
         padding: 1rem;
     }
     nav img {
-        height: 32px;
+        height: 24px;
     }
 </style>

@@ -41,7 +41,7 @@ const searchTerm = ref('');
         padding: .5rem 1rem;
         border-radius: var(--border-radius-s);
         display: flex;
-        margin: 1rem 0;
+        margin: 1.5rem 0;
     }
     .search-icon {
         padding-right: 1rem;

@@ -6,6 +6,7 @@
     </router-link>
     <SearchBar />
     <SortBar />
+    <HouseListingList />
   </header>
 </template>
 
@@ -13,6 +14,7 @@
 import { onMounted } from 'vue';
 import SearchBar from '../components/SearchBar.vue';
 import SortBar from '../components/SortBar.vue';
+import HouseListingList from '../components/houseList/HouseListingList.vue';
 // import getHouseListings from '../composables/getHouseListings';
 
 onMounted(() => {
