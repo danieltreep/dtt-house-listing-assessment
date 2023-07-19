@@ -40,6 +40,9 @@
     @media (min-width: 768px) {
         header {
             display: flex;
+            position: sticky;
+            top: 0;
+            z-index: 1;
         }
     }
 </style>
