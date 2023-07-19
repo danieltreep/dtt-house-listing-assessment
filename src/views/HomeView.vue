@@ -6,8 +6,12 @@
     </router-link>
     <SearchBar />
     <SortBar />
-    <HouseListingList />
   </header>
+  <main>
+    <section>
+      <HouseListingList />
+    </section>
+  </main>
 </template>
 
 <script setup>

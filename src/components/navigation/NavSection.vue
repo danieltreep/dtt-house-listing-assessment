@@ -34,6 +34,7 @@ watchEffect(() => {
         width: 100%;
         background-color: var(--background-color-2);
         box-shadow: 0 -4px 10px #00000010;
+        z-index: 1;
     }
     nav a {
         padding: 1rem;

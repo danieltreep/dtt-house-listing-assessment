@@ -31,13 +31,13 @@
             <input hidden type="file" accept="image/png, image/jpeg" name="picture" id="picture">
 
             <label for="price">Price*</label>
-            <input type="text" name="price" id="price" placeholder="e.g. &euro;150.000">
+            <input type="text" name="price" id="price" placeholder="e.g. &euro; 150.000">
 
             <div class="grid-layout">
                 <label for="size">Size*</label>
                 <label for="garage">Garage*</label>
 
-                <input type="text" name="size" id="size" placeholder="e.g. 60m2">
+                <input type="text" name="size" id="size" placeholder="e.g. 60 m2">
                 <select name="garage" id="garage" placeholder="select">
                     <option selected disabled>Select</option>
                     <option value="true">Yes</option>
@@ -52,7 +52,7 @@
             </div>
 
             <label for="construction-date">Construction date*</label>
-            <input type="text" name="construction-date" id="construction-date" placeholder="e.g. 1990">
+            <input type="text" name="construction-date" id="construction-date" placeholder="e.g. 08/04/1990">
 
             <label for="description">Description*</label>
             <textarea name="description" id="description" cols="30" rows="5" placeholder="Enter description"></textarea>
@@ -127,7 +127,7 @@
         font-weight: bold;
         font-family: 'Montserrat';
         border-radius: var(--border-radius-s);
-        margin-top: 1rem;
+        margin-top: 2rem;
     }
 
     .grid-layout {

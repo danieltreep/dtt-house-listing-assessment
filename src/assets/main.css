@@ -24,7 +24,7 @@
 
   --border-radius-s: 6px;
   --border-radius-m: 8px;
-  --border-radius-l: 15px;
+  --border-radius-l: 25px;
 }
 body {
   background-color: var(--background-color-1);
@@ -33,6 +33,10 @@ header {
   margin: 1.5rem;
   text-align: center;
   position: relative;
+}
+section {
+  padding: 0 1.5rem;
+  /* background-color: var(--background-color-1); */
 }
 h1 {
   font-size: 18px;
@@ -45,4 +49,8 @@ h2 {
 p {
   font-family: 'Open sans', sans-serif;
   font-size: 12px;
+}
+a {
+  text-decoration: none;
+  color: inherit;           /* Apply custom styles to links */
 }

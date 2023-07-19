@@ -1,6 +1,8 @@
 <template>
     <ul>
         <HouseListingListItem />
+        <HouseListingListItem />
+        <HouseListingListItem />
     </ul>
 </template>
 
