@@ -24,15 +24,16 @@
     .sort-by {
         display: flex;
         justify-content: center;
-        font-weight: bold;
-        font-family: 'Montserrat';
-        color: white;
         width: 100%;
         padding: .6rem 1rem;
         font-size: 12px;
     }
+    .sort-by p {
+        font-weight: bold;
+        font-family: 'Montserrat';
+        color: white;
+    }
     .price {
         background-color: var(--element-color-primary);
-
     }
 </style>

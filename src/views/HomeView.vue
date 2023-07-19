@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>Houses</h1>
-    <router-link :to="{name: 'Houses'}">
+    <router-link :to="{name: 'NewListing'}">
       <img src="@/assets/icons/ic_plus_grey@3x.png" alt="Add a house listing">
     </router-link>
     <SearchBar />
