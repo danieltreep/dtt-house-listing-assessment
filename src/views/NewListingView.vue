@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="form-page">
         <header>
             <router-link :to="{name: 'Houses'}">
                 <img src="@/assets/icons/ic_back_grey@3x.png" alt="Go back to the previous page">
@@ -73,29 +73,33 @@
         height: 18px;
         left: 0;
     }
-    form {
-        display: flex;
-        flex-direction: column;
-        padding: 1.5rem;
-        margin-bottom: 60px;
+    .form-page {
         background-image: url('../assets/images/img_background@3x.png');
-        background-position: right bottom;
-        background-size: contain;
+        background-position: 0 100%;
+        background-size: 70vh;
         background-repeat: no-repeat;
-        position: relative;
+        margin-bottom: 60px;
     }
-
     /* This dims the background */
-    form::before {
+    .form-page::before {
         content: '';
         position: absolute;
         background-color: var(--background-color-1);
-        height: 400px;
+        height: 70vh;
         width: 100%;
         bottom: 0;
         left: 0;
         opacity: .6;
     }
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem;
+        position: relative;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
 
     label {
         font-size: 12px;
@@ -152,5 +156,31 @@
     }
     :disabled {
         opacity: .5;
+    }
+
+    @media (min-width: 768px) {
+        label, 
+        input,
+        .error {
+            font-size: 14px;
+        }
+
+        .form-page {
+            margin-bottom: 0;
+            /* background-size: 800px; */
+            background-position: 150px 120%;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .form-page {
+            background-size: cover;
+        }
+        .form-page::before {
+            display: none;
+        }
+        form {
+            margin-left: 1.5rem;
+        }
     }
 </style>

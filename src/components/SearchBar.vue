@@ -26,6 +26,14 @@ const searchTerm = ref('');
 </script>
 
 <style lang="css" scoped>
+    .search-bar {
+        background-color: var(--element-color-tertiary);
+        padding: .5rem 1rem;
+        border-radius: var(--border-radius-s);
+        display: flex;
+        min-width: 350px;
+        /* margin: 1.5rem 0; */
+    }
     img {
         height: 18px;
     }
@@ -35,13 +43,6 @@ const searchTerm = ref('');
         outline: transparent;
         font-family: 'Open Sans';
         font-size: 12px;
-    }
-    .search-bar {
-        background-color: var(--element-color-tertiary);
-        padding: .5rem 1rem;
-        border-radius: var(--border-radius-s);
-        display: flex;
-        margin: 1.5rem 0;
     }
     .search-icon {
         padding-right: 1rem;

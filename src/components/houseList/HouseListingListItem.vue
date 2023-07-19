@@ -35,19 +35,20 @@
     .list-item {
         background-color: var(--background-color-2);
         padding: .7rem;
-        margin: 1rem 0;
+        margin-bottom: 1rem;
         border-radius: var(--border-radius-s);
         display: grid;
-        grid-template-columns: 1fr 2.3fr;
+        grid-template-columns: 95px 1fr;
         gap: .7rem;
         text-align: start;
         box-shadow: 0 0 10px #00000010;
     }
     .listing-thumbnail {
-        width: 100%;
+        /* width: 100%; */
         object-fit: cover;
         object-position: 0 0;
-        height: 100%;
+        height: 95px;
+        aspect-ratio: 1 / 1;
         border-radius: var(--border-radius-s);
     }
     .listing-information {
@@ -77,5 +78,24 @@
     }
     .adress {
         color: grey;
+    }
+
+    @media (min-width: 768px) {
+        .list-item {
+            grid-template-columns: 120px 1fr;
+            padding: 1rem;
+            gap: 1rem;
+        }
+        .listing-thumbnail {
+            height: 120px;
+        }
+        .listing-options img {
+            height: 18px;
+        }
+        .listing-options {
+            top: .5rem;
+            right: .5rem;
+            gap: 1rem;
+        }
     }
 </style>

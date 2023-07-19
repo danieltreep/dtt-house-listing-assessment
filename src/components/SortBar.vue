@@ -20,6 +20,7 @@
         border-radius: var(--border-radius-m);
         background-color: var(--element-color-quartenary);
         overflow: hidden;
+        margin-left: auto;
     }
     .sort-by {
         display: flex;
@@ -27,9 +28,10 @@
         width: 100%;
         padding: .6rem 1rem;
         font-size: 12px;
+        min-width: 120px;
     }
     .sort-by p {
-        font-weight: bold;
+        font-weight: 600;
         font-family: 'Montserrat';
         color: white;
     }

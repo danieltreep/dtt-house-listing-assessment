@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav >
         <router-link :to="{name: 'Houses'}">
             <img v-if="page === 'Houses'" src="@/assets/icons/ic_mobile_navigation_home_active@3x.png" alt="Go to the home page">
             <img v-else src="@/assets/icons/ic_mobile_navigation_home@3x.png" alt="Go to the home page">
@@ -41,5 +41,11 @@ watchEffect(() => {
     }
     nav img {
         height: 24px;
+    }
+
+    @media (min-width: 768px) {
+        nav {
+            display: none;
+        }
     }
 </style>

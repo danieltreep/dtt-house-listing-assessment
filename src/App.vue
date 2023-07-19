@@ -1,11 +1,13 @@
 <template>
+  <DesktopNavHeader />
   <RouterView />
-  <NavSection />
+  <MobileNavTabs />
 </template>
 
 <script setup>
 import { RouterView } from 'vue-router'
-import NavSection from './components/navigation/NavSection.vue';
+import MobileNavTabs from './components/navigation/MobileNavTabs.vue';
+import DesktopNavHeader from './components/navigation/DesktopNavHeader.vue';
 </script>
 
 

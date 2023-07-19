@@ -109,4 +109,8 @@ import HouseListingList from '@/components/houseList/HouseListingList.vue'
     .recommended-section {
         margin: 1.5rem 0 calc(60px + 2rem);
     }
+
+    @media (min-width: 768px) {
+            
+    }
 </style>
