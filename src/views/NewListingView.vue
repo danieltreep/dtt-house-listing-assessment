@@ -7,58 +7,97 @@
                 <BackButtonMobile />
                 <h1>Create new listing</h1>
                 
-                <label for="street">Street name*</label>
-                <input type="text" name="street" id="street" placeholder="Enter the street name">
-    
                 <BaseInput 
                     label="Street name*"
                     placeholder="Enter the street name"
+                    name="street"
                 />
     
                 <div class="grid-layout">
-                    <label for="house-number">House number*</label>
-                    <label for="addition">Addition (optional)</label>
-    
-                    <input type="number" name="house-number" id="house-number" placeholder="Enter house number">
-                    <input type="text" name="addition" id="addition" placeholder="e.g. A.">
+                    <BaseInput 
+                        label="House number*"
+                        placeholder="Enter house number"
+                        name="house-number"
+                    />
+
+                    <BaseInput 
+                        label="Addition (optional)"
+                        placeholder="e.g. A."
+                        name="addition"
+                    />
                 </div>
     
-                <label for="postal-code">Postal code*</label>
-                <input type="text" name="postal-code" id="postal-code" placeholder="e.g. 1000 AA">
+                <BaseInput 
+                    label="Postal code*"
+                    placeholder="e.g. 1000 AA"
+                    name="postal-code"
+                />
+
+                <BaseInput 
+                    label="City*"
+                    placeholder="e.g. Utrecht"
+                    name="city"
+                />
+
+                <BaseFileInput 
+                    label="Upload picture (PNG or JPG)*"
+                    name="image"
+                    accept="image/png, image/jpeg"
+                />
     
-                <label for="city">City*</label>
-                <input type="text" name="city" id="city" placeholder="e.g. Utrecht">
-    
-                <label for="picture">Upload picture (PNG or JPG)*</label>
+                <!-- <label for="picture">Upload picture (PNG or JPG)*</label>
                 <label for="picture" class="upload-picture" tabindex="0">
                     <img src="@/assets/icons/ic_upload@3x.png" alt="Upload a picture of the listing">
                 </label>
-                <input hidden type="file" accept="image/png, image/jpeg" name="picture" id="picture">
+                <input hidden type="file" accept="image/png, image/jpeg" name="picture" id="picture"> -->
     
-                <label for="price">Price*</label>
-                <input type="text" name="price" id="price" placeholder="e.g. &euro; 150.000">
+
+                <BaseInput 
+                    type="number"
+                    label="Price*"
+                    placeholder="e.g. &euro; 150.000"
+                    name="price"
+                />
     
                 <div class="grid-layout">
-                    <label for="size">Size*</label>
-                    <label for="garage">Garage*</label>
-    
-                    <input type="text" name="size" id="size" placeholder="e.g. 60 m2">
-                    <select name="garage" id="garage" placeholder="select">
-                        <option selected disabled>Select</option>
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-        
-                    <label for="bedrooms">Bedrooms*</label>
-                    <label for="bathrooms">Bathrooms*</label>
-    
-                    <input type="text" name="bedrooms" id="bedrooms" placeholder="Enter amount">
-                    <input type="text" name="bathrooms" id="bathrooms" placeholder="Enter amount">
+
+                    <BaseInput 
+                        type="number"
+                        label="Size*"
+                        placeholder="e.g. 60 m2"
+                        name="size"
+                    />
+
+                    <div class="input-wrapper">
+                        <label for="garage">Garage*</label>
+                        <select name="garage" id="garage" placeholder="select">
+                            <option selected disabled>Select</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+
+                    <BaseInput 
+                        type="number"
+                        label="Bedrooms*"
+                        placeholder="Enter amount"
+                        name="bedrooms"
+                    />
+
+                    <BaseInput 
+                        type="number"
+                        label="Bathrooms*"
+                        placeholder="Enter amount"
+                        name="bathrooms"
+                    />
                 </div>
-    
-                <label for="construction-date">Construction date*</label>
-                <input type="text" name="construction-date" id="construction-date" placeholder="e.g. 08/04/1990">
-    
+
+                <BaseInput 
+                    label="Construction year*"
+                    placeholder="e.g. 1990"
+                    name="construction-year"
+                />
+               
                 <label for="description">Description*</label>
                 <textarea name="description" id="description" cols="30" rows="5" placeholder="Enter description"></textarea>
                 
@@ -69,7 +108,8 @@
 </template>
 
 <script setup>
-import BaseInput from '../components/BaseInput.vue';
+import BaseFileInput from '../components/formElements/BaseFileInput.vue';
+import BaseInput from '../components/formElements/BaseInput.vue';
 import BackButtonDesktop from '../components/navigation/BackButtonDesktop.vue'
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
 
@@ -84,6 +124,10 @@ import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
         margin-bottom: 60px;
         padding: 0;
         max-width: none;                    /* Overwrite styles from main.css too show picture on the full background*/
+    }
+    .input-wrapper {
+        display: flex;
+        flex-direction: column;
     }
     h1 {
         text-align: center;
@@ -163,12 +207,7 @@ import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
     .upload-picture img {
         height: 28px;
     }
-    :focus {
-        outline-color: var(--element-color-primary);
-    }
-    :disabled {
-        opacity: .5;
-    }
+    
 
     @media (min-width: 768px) {
         label, 

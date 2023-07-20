@@ -59,6 +59,13 @@ button {
   font-family: 'Montserrat', sans-serif;
 }
 
+:focus {
+  outline-color: var(--element-color-primary);
+}
+:disabled {
+  opacity: .5;
+}
+
 @media (min-width: 768px) {
   h1 {
     font-size: 32px;

@@ -3,8 +3,8 @@
         <li class="list-item">
             <img class="listing-thumbnail" :src="listing.image" alt="listing ...">
             <div class="listing-information">
-                <p class="title">{{ listing.location.street }} {{ listing.location.houseNumber }}</p>
-                <p class="price">&euro; {{ listing.price }}</p>
+                <p class="title">{{ listing.location.street }} {{ listing.location.houseNumber }} {{ listing.location?.houseNumberAddition }}</p>
+                <p class="price">&euro; {{ numberWithCommas(listing.price) }}</p>
                 <p class="adress">{{ listing.location.zip }} {{ listing.location.city }}</p>
     
                 <div class="listing-details">
@@ -28,9 +28,16 @@
 </template>
 
 <script setup>
+
 defineProps({
     listing: Object
 });
+
+// Function that adds dots to a number
+// Credit to: https://stackoverflow.com/questions/2901102/how-to-format-a-number-with-commas-as-thousands-separators
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 </script>
 

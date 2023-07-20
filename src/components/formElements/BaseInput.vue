@@ -35,5 +35,23 @@ const error = ref(null);
 </script>
 
 <style lang="css" scoped>
-    
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin: 1rem 0 .5rem;
+    z-index: 1;
+}
+input {
+    font-family: 'Open Sans';
+    font-size: 12px;
+    border: none;
+    padding: .8rem 0 .8rem 1rem;
+    border-radius: var(--border-radius-s);
+    z-index: 1;
+}
 </style>

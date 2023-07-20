@@ -31,7 +31,7 @@
                 <br>
             
                 <img src="@/assets/icons/ic_price@3x.png">
-                <p>{{ selectedListing?.price }}</p>
+                <p>{{ selectedListing?.price ? numberWithCommas(selectedListing.price) : null }}</p>
             
                 <img src="@/assets/icons/ic_size@3x.png">
                 <p>{{ selectedListing?.size }} m2</p>
@@ -51,24 +51,27 @@
                 <p>{{ selectedListing?.hasGarage ? 'Yes' : 'No' }}</p>
             </div>
 
-            <p class="description">{{ selectedListing.description }}</p>
+            <p class="description">{{ selectedListing?.description }}</p>
             <BaseModal v-if="modalActive" @delete="handleDelete" @close-modal="modalActive = false"/>
         </div>
     </section>
 </template>
 
 <script setup>
+// External
 import { ref, watchEffect } from 'vue';
 import { storeToRefs } from 'pinia'
+
+// Components
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue';
 import BaseModal from '../components/BaseModal.vue';
-// import getSelectedListing from '@/composables/getSelectedListing'
 
-const modalActive = ref(false);
-
+// Stores
 import { useSelectedListingStore } from '@/stores/selectedListing'
 const { fetchSelectedListing } = useSelectedListingStore()
 const { selectedListing } = storeToRefs(useSelectedListingStore())
+
+const modalActive = ref(false);
 
 const props = defineProps({
     id: String
@@ -87,6 +90,12 @@ watchEffect(async () => {
 const handleDelete = () => {
     console.log('deleted')
 };
+
+// Function that adds dots to a number
+// Credit to: https://stackoverflow.com/questions/2901102/how-to-format-a-number-with-commas-as-thousands-separators
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 </script>
 
