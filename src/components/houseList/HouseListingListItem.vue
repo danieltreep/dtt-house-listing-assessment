@@ -1,22 +1,22 @@
 <template>
     <router-link :to="{name: 'SingleListing'}">
         <li class="list-item">
-            <img class="listing-thumbnail" src="@/assets/images/img_placeholder_house@3x.png" alt="listing ...">
+            <img class="listing-thumbnail" :src="listing.image" alt="listing ...">
             <div class="listing-information">
-                <p class="title">Stokvisstraat 132</p>
-                <p class="price">&euro; 500.000</p>
-                <p class="adress">1011 AA, Amsterdam</p>
+                <p class="title">{{ listing.location.street }}</p>
+                <p class="price">&euro; {{ listing.price }}</p>
+                <p class="adress">{{ listing.location.zip }} {{ listing.location.city }}</p>
     
                 <div class="listing-details">
                     <img src="@/assets/icons/ic_bed@3x.png" alt="">
-                    <p>1</p>
+                    <p>{{ listing.rooms.bedrooms }}</p>
                     <img src="@/assets/icons/ic_bath@3x.png" alt="">
-                    <p>1</p>
+                    <p>{{ listing.rooms.bathrooms }}</p>
                     <img src="@/assets/icons/ic_size@3x.png" alt="">
-                    <p>120 m2</p>
+                    <p>{{ listing.size }} m2</p>
                 </div>
     
-                <div class="listing-options">
+                <div class="listing-options" v-if="listing.madeByMe">
                     <img src="@/assets/icons/ic_edit@3x.png" alt="">
                     <img src="@/assets/icons/ic_delete@3x.png" alt="">
                 </div>
@@ -28,6 +28,9 @@
 </template>
 
 <script setup>
+defineProps({
+    listing: Object
+});
 
 </script>
 

@@ -9,7 +9,14 @@
       <SortBar />
     </div>
     <section>
-      <HouseListingList />
+      <Suspense>
+        <HouseListingList />
+        <template #fallback>
+          <div>
+            <p>Loading</p>
+          </div>
+        </template>
+      </Suspense>
     </section>
   </main>
 </template>
@@ -20,11 +27,14 @@ import SearchBar from '../components/SearchBar.vue';
 import SortBar from '../components/SortBar.vue';
 import HouseListingList from '../components/houseList/HouseListingList.vue';
 import CreateListingButton from '../components/CreateListingButton.vue';
-// import getHouseListings from '../composables/getHouseListings';
+import { useListingsStore } from '../stores/listings';
 
-onMounted(() => {
-    // getHouseListings()
-});
+// const { fetchListings } = useListingsStore()
+
+
+// await fetchListings()
+
+
 </script>
 
 <style scoped>
