@@ -9,16 +9,24 @@
                 <img class="hero-image" src="@/assets/images/img_placeholder_house@3x.png" alt="">
                 <BackButtonMobile color="white"/>
                 <div class="listing-options-mobile">
-                    <img src="@/assets/icons/ic_edit_white@3x.png" alt="">
-                    <img src="@/assets/icons/ic_delete_white@3x.png" alt="">
+                    <button>
+                        <img src="@/assets/icons/ic_edit_white@3x.png" alt="">
+                    </button>
+                    <button>
+                        <img @click="modalActive = true" src="@/assets/icons/ic_delete_white@3x.png" alt="">
+                    </button>
                 </div>
             </div>
             <div class="listing-information">
                 <h1>Stokvisstraat 132</h1>
     
                 <div class="listing-options-desktop">
-                    <img src="@/assets/icons/ic_edit@3x.png" alt="">
-                    <img src="@/assets/icons/ic_delete@3x.png" alt="">
+                    <button>
+                        <img src="@/assets/icons/ic_edit@3x.png" alt="">
+                    </button>
+                    <button>
+                        <img @click="modalActive = true" src="@/assets/icons/ic_delete@3x.png" alt="">
+                    </button>
                 </div>
     
                 <div class="listing-details">
@@ -52,21 +60,23 @@
             </div>
         </section>
         <RecommendedSection />
-        <BaseModal v-if="modalActive" />
+        <BaseModal v-if="modalActive" @delete="handleDelete" @close-modal="modalActive = false"/>
     </main>
 </template>
 
 <script setup>
-import { defineAsyncComponent, ref } from 'vue'
+import { ref } from 'vue'
 import RecommendedSection from '../components/RecommendedSection.vue'
 import BackButtonDesktop from '../components/navigation/BackButtonDesktop.vue';
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue';
-
-const BaseModal = defineAsyncComponent(() => {
-    import("../components/BaseModal.vue")
-});
+import BaseModal from '../components/BaseModal.vue';
 
 const modalActive = ref(false);
+
+const handleDelete = () => {
+    console.log('deleted')
+};
+
 </script>
 
 <style lang="css" scoped>
@@ -121,6 +131,10 @@ const modalActive = ref(false);
         line-height: 1.5;
     }
 
+    button {
+        background-color: transparent;
+        border: none;
+    }
     .back-button-desktop {
         grid-column: 1 / span 2;
     }
@@ -129,7 +143,7 @@ const modalActive = ref(false);
         main {
             display: grid;
             grid-template-columns: 3fr 2fr;
-            padding-inline: 1.5rem;
+            padding-inline: 1rem;
         }
         .listing-information {
             background-color: var(--background-color-2);

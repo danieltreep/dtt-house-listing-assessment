@@ -83,8 +83,7 @@ import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
         background-repeat: no-repeat;
         margin-bottom: 60px;
         padding: 0;
-        max-width: none;                    /* Overwrite styles from main.css */
-        width: 100vw;
+        max-width: none;                    /* Overwrite styles from main.css too show picture on the full background*/
     }
     h1 {
         text-align: center;
@@ -203,6 +202,7 @@ import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
         }
         form {
             margin-left: 0;
+            padding: 0;
         }
     }
 </style>

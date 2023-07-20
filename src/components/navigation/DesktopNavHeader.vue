@@ -17,7 +17,7 @@
 <style lang="css" scoped>
 header {
     background-color: var(--background-color-2);
-    padding: 1rem;
+    padding-block: 1rem;
     display: none;
 }
 .header-content {
@@ -48,6 +48,7 @@ nav a {
 @media (min-width: 768px) {
     header {
         display: block;
+        padding-inline: 1rem;
     }
     .header-content {
         display: flex;
