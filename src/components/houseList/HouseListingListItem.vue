@@ -3,7 +3,7 @@
         <li class="list-item">
             <img class="listing-thumbnail" src="@/assets/images/img_placeholder_house@3x.png" alt="listing ...">
             <div class="listing-information">
-                <h2 class="title">Stokvisstraat 132</h2>
+                <p class="title">Stokvisstraat 132</p>
                 <p class="price">&euro; 500.000</p>
                 <p class="adress">1011 AA, Amsterdam</p>
     
@@ -58,6 +58,9 @@
     .listing-information img {
         height: 14px;
     }
+    .list-item p {
+        font-size: 14px;
+    }
     .listing-options {
         position: absolute;
         top: 0;
@@ -71,6 +74,10 @@
         gap: .6rem;
         align-items: center;
     }
+    .title {
+        font-family: 'Montserrat';
+        font-weight: bold;
+    }
     .price {
         color: var(--text-color-secondary);
         font-weight: 600;
@@ -80,7 +87,7 @@
         color: grey;
     }
 
-    @media (min-width: 768px) {
+    /* @media (min-width: 1024px) {
         .list-item {
             grid-template-columns: 120px 1fr;
             padding: 1rem;
@@ -97,5 +104,5 @@
             right: .5rem;
             gap: 1rem;
         }
-    }
+    } */
 </style>

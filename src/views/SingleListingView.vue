@@ -1,84 +1,98 @@
 <template>
-    <header>
-        <img class="image-header" src="@/assets/images/img_placeholder_house@3x.png" alt="">
-        <div class="listing-options">
-            <router-link :to="{name: 'Houses'}">
-                <img src="@/assets/icons/ic_back_white@3x.png" alt="">
-            </router-link>
-            <img class="edit-listing" src="@/assets/icons/ic_edit_white@3x.png" alt="">
-            <img src="@/assets/icons/ic_delete_white@3x.png" alt="">
-        </div>
-    </header>
     <main>
-        <section class="listing-information">
-            <h1>Stokvisstraat 132</h1>
-
-            <div class="listing-details">
-                <img src="@/assets/icons/ic_location@3x.png">
-                <p>1011 AA Amsterdam</p>
-            
-                <br>
-            
-                <img src="@/assets/icons/ic_price@3x.png">
-                <p>500.000</p>
-            
-                <img src="@/assets/icons/ic_size@3x.png">
-                <p>120 m2</p>
-
-                <img src="@/assets/icons/ic_construction_date@3x.png">
-                <p>Built in 1990</p>
-
-                <br>
-            
-                <img src="@/assets/icons/ic_bed@3x.png">
-                <p>1</p>
-
-                <img src="@/assets/icons/ic_bath@3x.png">
-                <p>1</p>
-
-                <img src="@/assets/icons/ic_garage@3x.png">
-                <p>Yes</p>
+        <div class="back-button-desktop">
+            <BackButtonDesktop />
+        </div>
+        
+        <section class="listing-section">
+            <div class="listing-hero">
+                <img class="hero-image" src="@/assets/images/img_placeholder_house@3x.png" alt="">
+                <BackButtonMobile color="white"/>
+                <div class="listing-options-mobile">
+                    <img src="@/assets/icons/ic_edit_white@3x.png" alt="">
+                    <img src="@/assets/icons/ic_delete_white@3x.png" alt="">
+                </div>
             </div>
-
-            <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis amet repellat nemo aut labore corporis suscipit non neque, voluptatem illo! Nulla, autem itaque recusandae doloremque cumque dolores quis illo fugit.</p>
+            <div class="listing-information">
+                <h1>Stokvisstraat 132</h1>
+    
+                <div class="listing-options-desktop">
+                    <img src="@/assets/icons/ic_edit@3x.png" alt="">
+                    <img src="@/assets/icons/ic_delete@3x.png" alt="">
+                </div>
+    
+                <div class="listing-details">
+                    <img src="@/assets/icons/ic_location@3x.png">
+                    <p>1011 AA Amsterdam</p>
+                
+                    <br>
+                
+                    <img src="@/assets/icons/ic_price@3x.png">
+                    <p>500.000</p>
+                
+                    <img src="@/assets/icons/ic_size@3x.png">
+                    <p>120 m2</p>
+    
+                    <img src="@/assets/icons/ic_construction_date@3x.png">
+                    <p>Built in 1990</p>
+    
+                    <br>
+                
+                    <img src="@/assets/icons/ic_bed@3x.png">
+                    <p>1</p>
+    
+                    <img src="@/assets/icons/ic_bath@3x.png">
+                    <p>1</p>
+    
+                    <img src="@/assets/icons/ic_garage@3x.png">
+                    <p>Yes</p>
+                </div>
+    
+                <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis amet repellat nemo aut labore corporis suscipit non neque, voluptatem illo! Nulla, autem itaque recusandae doloremque cumque dolores quis illo fugit.</p>
+            </div>
         </section>
-        <section class="recommended-section">
-            <h2>Recommended for you</h2>
-            <HouseListingList />
-        </section>
+        <RecommendedSection />
+        <BaseModal v-if="modalActive" />
     </main>
 </template>
 
 <script setup>
-import HouseListingList from '@/components/houseList/HouseListingList.vue'
+import { defineAsyncComponent, ref } from 'vue'
+import RecommendedSection from '../components/RecommendedSection.vue'
+import BackButtonDesktop from '../components/navigation/BackButtonDesktop.vue';
+import BackButtonMobile from '../components/navigation/BackButtonMobile.vue';
+
+const BaseModal = defineAsyncComponent(() => {
+    import("../components/BaseModal.vue")
+});
+
+const modalActive = ref(false);
 </script>
 
 <style lang="css" scoped>
-    header {
-        margin: 0;
-        /* position: sticky; */
-        top: 0;
-        left: 0;
+    main {
+        padding: 0;
+    }
+    .listing-hero {
         position: relative;
     }
-    .image-header {
+    .hero-image {
         z-index: -1;
         width: 100%;
         filter: brightness(80%);
     }
-    .listing-options {
+    .listing-options-desktop {
+        display: none;
+    }
+    .listing-options-mobile {
         position: absolute;
-        top: 2rem;
-        left: 1.5rem;
+        top: 1.5rem;
         right: 1.5rem;
         display: flex;
         gap: 1.5rem;
     }
-    .listing-options img {
+    .listing-options-mobile img {
         height: 18px;
-    }
-    .edit-listing {
-        margin-left: auto;
     }
     
     .listing-information {
@@ -106,11 +120,36 @@ import HouseListingList from '@/components/houseList/HouseListingList.vue'
         color: var(--text-color-secondary);
         line-height: 1.5;
     }
-    .recommended-section {
-        margin: 1.5rem 0 calc(60px + 2rem);
-    }
 
-    @media (min-width: 768px) {
-            
+    .back-button-desktop {
+        grid-column: 1 / span 2;
+    }
+    
+    @media (min-width: 1024px) {
+        main {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            padding-inline: 1.5rem;
+        }
+        .listing-information {
+            background-color: var(--background-color-2);
+            padding: 1.5rem;
+            border-radius: 0;
+            translate: 0;
+            margin-bottom: 0;
+        }
+        .listing-options-desktop {
+            display: flex;
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            gap: 1rem;
+        }       
+        .listing-options-desktop img {
+            height: 18px;
+        }
+        .listing-options-mobile {
+            display: none;
+        }
     }
 </style>

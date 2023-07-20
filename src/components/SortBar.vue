@@ -20,7 +20,7 @@
         border-radius: var(--border-radius-m);
         background-color: var(--element-color-quartenary);
         overflow: hidden;
-        margin-left: auto;
+        /* margin-left: auto; */
     }
     .sort-by {
         display: flex;

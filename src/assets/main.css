@@ -30,13 +30,13 @@ body {
   background-color: var(--background-color-1);
 }
 header {
-  margin: 1.5rem;
   text-align: center;
   position: relative;
 }
-section {
-  padding: 0 1.5rem;
-  /* background-color: var(--background-color-1); */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-inline: 1rem;
 }
 h1 {
   font-size: 18px;
@@ -53,6 +53,10 @@ p {
 a {
   text-decoration: none;
   color: inherit;           /* Apply custom styles to links */
+}
+button {
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
 }
 
 @media (min-width: 768px) {

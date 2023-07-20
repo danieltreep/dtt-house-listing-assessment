@@ -31,7 +31,6 @@ const searchTerm = ref('');
         padding: .5rem 1rem;
         border-radius: var(--border-radius-s);
         display: flex;
-        min-width: 350px;
         /* margin: 1.5rem 0; */
     }
     img {
@@ -49,5 +48,11 @@ const searchTerm = ref('');
     }
     .clear-icon {
         margin-left: auto;
+    }
+    
+    @media (min-width: 768px) {
+        .search-bar {
+            min-width: 350px;
+        }
     }
 </style>
