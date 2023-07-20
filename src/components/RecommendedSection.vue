@@ -1,7 +1,14 @@
 <template>
     <section class="recommended-section">
         <h2>Recommended for you</h2>
-        <HouseListingList />
+        <Suspense>
+            <HouseListingList />
+            <template #fallback>
+                <div >
+                    <p>loading</p>
+                </div>
+            </template>
+        </Suspense>
     </section>
 </template>
 

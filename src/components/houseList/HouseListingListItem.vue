@@ -1,9 +1,9 @@
 <template>
-    <router-link :to="{name: 'SingleListing'}">
+    <router-link :to="{name: 'SingleListing', params: {id: listing.id}}">
         <li class="list-item">
             <img class="listing-thumbnail" :src="listing.image" alt="listing ...">
             <div class="listing-information">
-                <p class="title">{{ listing.location.street }}</p>
+                <p class="title">{{ listing.location.street }} {{ listing.location.houseNumber }}</p>
                 <p class="price">&euro; {{ listing.price }}</p>
                 <p class="adress">{{ listing.location.zip }} {{ listing.location.city }}</p>
     

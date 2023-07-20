@@ -22,12 +22,12 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+// import { onMounted } from 'vue';
 import SearchBar from '../components/SearchBar.vue';
 import SortBar from '../components/SortBar.vue';
 import HouseListingList from '../components/houseList/HouseListingList.vue';
 import CreateListingButton from '../components/CreateListingButton.vue';
-import { useListingsStore } from '../stores/listings';
+// import { useListingsStore } from '../stores/listings';
 
 // const { fetchListings } = useListingsStore()
 
