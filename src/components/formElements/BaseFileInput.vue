@@ -1,13 +1,17 @@
 <template>
     <div class="input-wrapper" >
         <label>{{ label }}</label>
-        <label for="fileInput" class="upload-picture" tabindex="0" v-show="!imageUrl">
+        <label 
+            v-show="!imageUrl"
+            for="file-input" 
+            class="upload-picture" 
+            tabindex="0" 
+        >
             <img src="@/assets/icons/ic_upload@3x.png" alt="Upload a picture of the listing">
         </label>
         <input 
             type="file"
-            id="fileInput"
-            ref="fileInput"
+            id="file-input"
             hidden
             v-bind="$attrs"
             @change="handleChange"
@@ -36,19 +40,16 @@ defineProps({
     }
 });
 
-defineEmits(['update:modelValue'])
 const error = ref(null);
-
 const imageUrl = ref('')
-const fileInput = ref('fileInput')
 
-// Still a bug when uploading the same image
+// Reset images when clicked on the clear button and reset the imageUrl
 const handleReset = () => {
-    fileInput.value.files = null
-    // event.target.files = null
+    document.getElementById('file-input').value = ""
     imageUrl.value = ''
 }
 
+// Select first file on change and create a URL from the location to display
 const handleChange = (event) => {
     const selected = event.target.files[0]
 
@@ -68,11 +69,7 @@ const handleChange = (event) => {
     flex-direction: column;
 }
 label {
-    font-size: 12px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    margin: 1rem 0 .7rem;
-    z-index: 1;
+    margin: 1rem 0 .7rem;           
 }
 
 .upload-picture {

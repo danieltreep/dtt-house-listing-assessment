@@ -39,13 +39,6 @@ const error = ref(null);
     display: flex;
     flex-direction: column;
 }
-label {
-    font-size: 12px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    margin: 1rem 0 .5rem;
-    z-index: 1;
-}
 input {
     font-family: 'Open Sans';
     font-size: 12px;

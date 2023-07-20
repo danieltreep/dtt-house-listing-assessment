@@ -44,13 +44,6 @@
                     name="image"
                     accept="image/png, image/jpeg"
                 />
-    
-                <!-- <label for="picture">Upload picture (PNG or JPG)*</label>
-                <label for="picture" class="upload-picture" tabindex="0">
-                    <img src="@/assets/icons/ic_upload@3x.png" alt="Upload a picture of the listing">
-                </label>
-                <input hidden type="file" accept="image/png, image/jpeg" name="picture" id="picture"> -->
-    
 
                 <BaseInput 
                     type="number"
@@ -157,14 +150,6 @@ import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
         max-width: 400px;
         margin: 0 auto;
     }
-    label {
-        font-size: 12px;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
-        margin: 1rem 0 .5rem;
-        z-index: 1;
-    }
-    input,
     select,
     textarea {
         font-family: 'Open Sans';
@@ -195,19 +180,6 @@ import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
         grid-template-columns: 1fr 1fr;
         gap: 0 1rem;
     }
-
-    .upload-picture {
-        border: 2px dashed var(--element-color-quartenary);
-        aspect-ratio: 1 /1;
-        width: fit-content;
-        padding: 2rem;
-        margin-block: .2rem;
-        text-align: center;
-    }
-    .upload-picture img {
-        height: 28px;
-    }
-    
 
     @media (min-width: 768px) {
         label, 
