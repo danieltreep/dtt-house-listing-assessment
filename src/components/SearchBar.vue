@@ -21,8 +21,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-const searchTerm = ref(''); 
+import { useSearchStore } from '@/stores/search'
+import { storeToRefs } from 'pinia';
+
+const { searchTerm } = storeToRefs(useSearchStore()); 
+
 </script>
 
 <style lang="css" scoped>

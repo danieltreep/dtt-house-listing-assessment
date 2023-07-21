@@ -1,5 +1,5 @@
 <template>
-    <button class="desktop" @click="goBack" >
+    <button class="desktop" @click="router.push({name: 'Houses'})" >
         <img src="@/assets/icons/ic_back_grey@3x.png" alt="Go back to overview">
         <p>Back to overview</p>
     </button>
@@ -8,9 +8,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 
-const router = useRouter()
-
-const goBack = () => router.go(-1);
+const router = useRouter();
 
 </script>
 

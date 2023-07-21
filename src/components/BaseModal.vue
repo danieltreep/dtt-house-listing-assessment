@@ -20,9 +20,7 @@ defineEmits(['close-modal', 'delete']);
     position: fixed;
     display: flex;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
+    inset: 0 0 0 0;
     z-index: 1;
     background: rgba(0, 0, 0, 0.25);
 }

@@ -28,10 +28,9 @@ watchEffect(() => {
 <style lang="css" scoped>
     nav {
         position: fixed;
-        bottom: 0;
+        inset: auto 0 0 0;
         display: flex;
         justify-content: space-around;
-        width: 100%;
         background-color: var(--background-color-2);
         box-shadow: 0 -4px 10px #00000010;
         z-index: 1;

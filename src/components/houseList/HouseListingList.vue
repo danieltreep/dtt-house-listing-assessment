@@ -1,7 +1,7 @@
 <template>
     <ul>
         <HouseListingListItem 
-            v-for="listing in listings" 
+            v-for="listing in matchingResults" 
             :listing="listing" 
             :key="listing.id"
         />
@@ -12,9 +12,10 @@
 import HouseListingListItem from './HouseListingListItem.vue';
 import { storeToRefs } from 'pinia'
 import { useListingsStore } from '@/stores/listings';
+import { useSearchStore } from '@/stores/search';
 
 const { fetchListings } = useListingsStore()
-const { listings } = storeToRefs(useListingsStore())
+const { matchingResults } = storeToRefs(useSearchStore())
 
 await fetchListings()
 
