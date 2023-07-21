@@ -7,7 +7,7 @@
         >
         <input 
             type="text" 
-            placeholder="Search for a house" 
+            placeholder="Search for a house by city or street" 
             v-model="searchTerm"
         >
         <img 
@@ -45,6 +45,7 @@ const { searchTerm } = storeToRefs(useSearchStore());
         outline: transparent;
         font-family: 'Open Sans';
         font-size: 12px;
+        width: 100%;
     }
     .search-icon {
         padding-right: 1rem;

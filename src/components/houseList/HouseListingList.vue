@@ -1,4 +1,8 @@
 <template>
+    <h2 v-if="searchTerm">{{ matchingResults.length }} results found </h2>
+    <div class="no-results">
+        <img v-if="matchingResults.length === 0" src="@/assets/images/img_empty_houses@3x.png" alt="No listings match your search">
+    </div>
     <ul>
         <HouseListingListItem 
             v-for="listing in matchingResults" 
@@ -14,8 +18,9 @@ import { storeToRefs } from 'pinia'
 import { useListingsStore } from '@/stores/listings';
 import { useSearchStore } from '@/stores/search';
 
+
 const { fetchListings } = useListingsStore()
-const { matchingResults } = storeToRefs(useSearchStore())
+const { matchingResults, searchTerm } = storeToRefs(useSearchStore())
 
 await fetchListings()
 
@@ -26,5 +31,19 @@ await fetchListings()
         list-style: none;
         padding-left: 0;
         margin-block: 1rem;   
+    }
+    .no-results {
+        /* FIX THIS SHIT */
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    img {
+        width: 100%;
+        max-width: 400px;
+        /* position: absolute; */
+        
     }
 </style>

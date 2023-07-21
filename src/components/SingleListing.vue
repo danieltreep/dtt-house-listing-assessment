@@ -127,8 +127,8 @@ function numberWithCommas(x) {
     background-color: var(--background-color-2);
     padding: 1.5rem;
     border-radius: var(--border-radius-l) var(--border-radius-l) 0 0;
-    translate: 0 -50px;
-    margin-bottom: -50px;
+    translate: 0 -25px;
+    margin-bottom: -25px;
 }
 .listing-information img {
     height: 14px;
