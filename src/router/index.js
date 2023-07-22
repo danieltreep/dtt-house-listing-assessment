@@ -25,7 +25,7 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/houses/:id/edit',
+      path: '/houses/edit',
       name: 'EditListing',
       component: () => import('../views/EditListingView.vue')
     },

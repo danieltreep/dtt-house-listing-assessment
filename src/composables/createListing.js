@@ -5,17 +5,20 @@ const { newListing } = useNewListingStore()
 const myHeaders = new Headers();
 myHeaders.append("X-Api-Key", "u_S2bzOphtsEHvY-47k1LdKnMZUP8RjI");
 
-let formdata = new FormData();
+const formdata = new FormData();
 
 
-let requestOptions = {
+const requestOptions = {
   method: 'POST',
   headers: myHeaders,
   body: formdata,
   redirect: 'follow'
 };
 
-const createListing = () => {
+const createListing = async () => {
+
+  let submittedListingId = null;
+
   formdata.append("price", newListing.price);
   formdata.append("bedrooms", newListing.rooms.bedrooms);
   formdata.append("bathrooms", newListing.rooms.bathrooms);
@@ -29,10 +32,12 @@ const createListing = () => {
   formdata.append("hasGarage", newListing.hasGarage);
   formdata.append("description", newListing.description);
 
-  fetch("https://api.intern.d-tt.nl/api/houses", requestOptions)
+  await fetch("https://api.intern.d-tt.nl/api/houses", requestOptions)
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => submittedListingId = result.id)
     .catch(error => console.log('error', error));
+
+  return submittedListingId
 }
 
 export default createListing

@@ -121,11 +121,12 @@ import BackButtonDesktop from '../components/navigation/BackButtonDesktop.vue'
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
 import { useSelectedListingStore } from '../stores/selectedListing';
 import editListing from '../composables/editListing';
-
+import { useRouter } from 'vue-router'
 const { selectedListing } = storeToRefs(useSelectedListingStore());
-
-const handleSubmit = () => {
-    editListing(selectedListing.value.id)
+const router = useRouter()
+const handleSubmit = async () => {
+    await editListing(selectedListing.value.id)
+    router.push({name: 'SingleListing', params: {id: selectedListing.value.id}})
 };
 </script>
 

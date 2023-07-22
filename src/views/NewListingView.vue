@@ -124,10 +124,13 @@ import { useNewListingStore } from '../stores/newListing';
 import createListing from '../composables/createListing';
 
 const { newListing } = storeToRefs(useNewListingStore());
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-const handleSubmit = () => {
-    console.log('submit')
-    createListing()
+const handleSubmit = async () => {
+    const newListingId = await createListing()
+    console.log(newListingId)
+    router.push({name: 'SingleListing', params: {id: newListingId}})
 };
 
 </script>
