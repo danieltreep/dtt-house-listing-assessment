@@ -1,17 +1,17 @@
 <template>
     <main>
         <div class="form-page">
-            <form @submit.prevent="handleSubmit">
+            <form @submit.prevent="console.log('submitted')">
                 
                 <BackButtonDesktop />
                 <BackButtonMobile />
-                <h1>Create new listing</h1>
+                <h1>Edit listing</h1>
                 
                 <BaseInput 
                     label="Street name*"
                     placeholder="Enter the street name"
                     name="street"
-                    v-model="newListing.location.street"
+                    v-model="selectedListing.location.street"
                 />
     
                 <div class="grid-layout">
@@ -20,14 +20,14 @@
                         label="House number*"
                         placeholder="Enter house number"
                         name="house-number"
-                        v-model="newListing.location.houseNumber"
+                        v-model="selectedListing.location.houseNumber"
                     />
 
                     <BaseInput 
                         label="Addition (optional)"
                         placeholder="e.g. A."
                         name="addition"
-                        v-model="newListing.location.houseNumberAddition"
+                        v-model="selectedListing.location.houseNumberAddition"
                     />
                 </div>
     
@@ -35,14 +35,14 @@
                     label="Postal code*"
                     placeholder="e.g. 1000 AA"
                     name="postal-code"
-                    v-model="newListing.location.zip"
+                    v-model="selectedListing.location.zip"
                 />
 
                 <BaseInput 
                     label="City*"
                     placeholder="e.g. Utrecht"
                     name="city"
-                    v-model="newListing.location.city"
+                    v-model="selectedListing.location.city"
                 />
 
                 <BaseFileInput 
@@ -56,7 +56,7 @@
                     label="Price*"
                     placeholder="e.g. &euro; 150.000"
                     name="price"
-                    v-model="newListing.price"
+                    v-model="selectedListing.price"
                 />
     
                 <div class="grid-layout">
@@ -66,12 +66,12 @@
                         label="Size*"
                         placeholder="e.g. 60 m2"
                         name="size"
-                        v-model="newListing.size"
+                        v-model="selectedListing.size"
                     />
 
                     <div class="input-wrapper">
                         <label for="garage">Garage*</label>
-                        <select name="garage" id="garage" placeholder="select" v-model="newListing.hasGarage">
+                        <select name="garage" id="garage" placeholder="select" v-model="selectedListing.hasGarage">
                             <option selected disabled>Select</option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
@@ -83,7 +83,7 @@
                         label="Bedrooms*"
                         placeholder="Enter amount"
                         name="bedrooms"
-                        v-model="newListing.rooms.bedrooms"
+                        v-model="selectedListing.rooms.bedrooms"
                     />
 
                     <BaseInput 
@@ -91,7 +91,7 @@
                         label="Bathrooms*"
                         placeholder="Enter amount"
                         name="bathrooms"
-                        v-model="newListing.rooms.bathrooms"
+                        v-model="selectedListing.rooms.bathrooms"
                     />
                 </div>
 
@@ -99,15 +99,15 @@
                     label="Construction year*"
                     placeholder="e.g. 1990"
                     name="construction-year"
-                    v-model="newListing.construstionYear"
+                    v-model="selectedListing.construstionYear"
                 />
                
                 <label for="description">Description*</label>
                 <textarea name="description" id="description" cols="30" rows="5" placeholder="Enter description"
-                    v-model="newListing.description"
+                    v-model="selectedListing.description"
                 ></textarea>
                 
-                <button type="submit" >POST</button>
+                <button type="submit" disabled>POST</button>
             </form>
         </div>
     </main>
@@ -119,15 +119,9 @@ import BaseFileInput from '../components/formElements/BaseFileInput.vue';
 import BaseInput from '../components/formElements/BaseInput.vue';
 import BackButtonDesktop from '../components/navigation/BackButtonDesktop.vue'
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
-import { useNewListingStore } from '../stores/newListing';
-import createListing from '../composables/createListing';
+import { useSelectedListingStore } from '../stores/selectedListing';
 
-const { newListing } = storeToRefs(useNewListingStore());
-
-const handleSubmit = () => {
-    console.log('submit')
-    createListing()
-};
+const { selectedListing } = storeToRefs(useSelectedListingStore());
 
 </script>
 

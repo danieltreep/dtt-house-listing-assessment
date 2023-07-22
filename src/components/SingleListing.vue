@@ -4,7 +4,7 @@
             <img class="hero-image" :src="selectedListing?.image" alt="">
             <BackButtonMobile color="white"/>
             <div class="listing-options-mobile">
-                <button>
+                <button @click="router.push({name: 'EditListing'})">
                     <img src="@/assets/icons/ic_edit_white@3x.png" alt="">
                 </button>
                 <button>
@@ -60,7 +60,8 @@
 <script setup>
 // External
 import { ref, watchEffect } from 'vue';
-import { storeToRefs } from 'pinia'
+import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
 
 // Components
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue';
@@ -70,6 +71,8 @@ import BaseModal from '../components/BaseModal.vue';
 import { useSelectedListingStore } from '@/stores/selectedListing'
 const { fetchSelectedListing } = useSelectedListingStore()
 const { selectedListing } = storeToRefs(useSelectedListingStore())
+
+const router = useRouter()
 
 const modalActive = ref(false);
 

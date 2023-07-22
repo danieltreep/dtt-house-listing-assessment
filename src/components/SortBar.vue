@@ -16,6 +16,8 @@ import { useListingsStore } from '../stores/listings';
 
 const { sortListings } = useListingsStore();
 
+
+// Translate the active bar based on the button clicked
 const styles = ref('0%');
 
 const handleClick = (criteria) => {
@@ -36,9 +38,7 @@ const handleClick = (criteria) => {
         border-radius: var(--border-radius-m);
         background-color: var(--element-color-quartenary);
         overflow: hidden;
-        position: relative;
-        
-        /* margin-left: auto; */
+        position: relative;        
     }
     .sort-by {
         display: flex;
@@ -59,11 +59,8 @@ const handleClick = (criteria) => {
         position: absolute;
         inset: 0 auto 0 0;
         width: 50%;
-        transition: .5s;
+        transition: .2s ease-out;
         transform: translateX(v-bind(styles));
-        /* z-index: -1; */
-        /* height: 100%;
-        width: 100%; */
     }
     button {
         background-color: transparent;

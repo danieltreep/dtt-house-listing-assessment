@@ -25,6 +25,11 @@ const router = createRouter({
       props: true
     },
     {
+      path: '/houses/:id/edit',
+      name: 'EditListing',
+      component: () => import('../views/EditListingView.vue')
+    },
+    {
       path: '/about',
       name: 'About',
       // route level code-splitting
