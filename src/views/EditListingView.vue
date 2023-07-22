@@ -1,7 +1,7 @@
 <template>
     <main>
         <div class="form-page">
-            <form @submit.prevent="console.log('submitted')">
+            <form @submit.prevent="handleSubmit">
                 
                 <BackButtonDesktop />
                 <BackButtonMobile />
@@ -99,7 +99,7 @@
                     label="Construction year*"
                     placeholder="e.g. 1990"
                     name="construction-year"
-                    v-model="selectedListing.construstionYear"
+                    v-model="selectedListing.constructionYear"
                 />
                
                 <label for="description">Description*</label>
@@ -107,7 +107,7 @@
                     v-model="selectedListing.description"
                 ></textarea>
                 
-                <button type="submit" disabled>POST</button>
+                <button type="submit" >POST</button>
             </form>
         </div>
     </main>
@@ -120,9 +120,13 @@ import BaseInput from '../components/formElements/BaseInput.vue';
 import BackButtonDesktop from '../components/navigation/BackButtonDesktop.vue'
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
 import { useSelectedListingStore } from '../stores/selectedListing';
+import editListing from '../composables/editListing';
 
 const { selectedListing } = storeToRefs(useSelectedListingStore());
 
+const handleSubmit = () => {
+    editListing(selectedListing.value.id)
+};
 </script>
 
 <style lang="css" scoped>

@@ -22,16 +22,12 @@ const createListing = () => {
   formdata.append("size", newListing.size);
   formdata.append("streetName", newListing.location.street);
   formdata.append("houseNumber", newListing.location.houseNumber);
-  formdata.append("numberAddition", newListing.location.housenumberAddition);
+  formdata.append("numberAddition", newListing.location.houseNumberAddition);
   formdata.append("zip", newListing.location.zip);
   formdata.append("city", newListing.location.city);
   formdata.append("constructionYear", newListing.constructionYear);
   formdata.append("hasGarage", newListing.hasGarage);
   formdata.append("description", newListing.description);
-  
-  for (let pair of formdata.entries()) {
-    console.log(pair[0], pair[1])
-  }
 
   fetch("https://api.intern.d-tt.nl/api/houses", requestOptions)
     .then(response => response.json())
