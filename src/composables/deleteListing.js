@@ -8,9 +8,11 @@ var requestOptions = {
 };
 
 const deleteListing = (id) => {
-    fetch("https://api.intern.d-tt.nl/api/houses/:houseId", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
+    fetch(`https://api.intern.d-tt.nl/api/houses/${id}`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
 
 }
+
+export default deleteListing

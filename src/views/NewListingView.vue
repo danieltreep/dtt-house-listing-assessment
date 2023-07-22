@@ -95,11 +95,12 @@
                     />
                 </div>
 
+                <!-- Min 1901 -->
                 <BaseInput 
                     label="Construction year*"
                     placeholder="e.g. 1990"
                     name="construction-year"
-                    v-model="newListing.construstionYear"
+                    v-model="newListing.constructionYear"
                 />
                
                 <label for="description">Description*</label>

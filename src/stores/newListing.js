@@ -6,7 +6,7 @@ export const useNewListingStore = defineStore('newListing', () => {
     // Store the properties of the new listing
     const newListing = ref({
         createdAt: '',
-        construstionYear: null,
+        constructionYear: null,
         description: '',
         hasGarage: false,
         image: '',

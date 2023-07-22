@@ -1,6 +1,7 @@
 <template>
     <section class="listing-section">
         <div class="listing-hero">
+            <img src="@/assets/images/img_empty_houses@3x.png" alt="" class="hero-image">
             <img class="hero-image" :src="selectedListing?.image" alt="">
             <BackButtonMobile color="white"/>
             <div class="listing-options-mobile">
@@ -72,6 +73,8 @@ import { useSelectedListingStore } from '@/stores/selectedListing'
 const { fetchSelectedListing } = useSelectedListingStore()
 const { selectedListing } = storeToRefs(useSelectedListingStore())
 
+import deleteListing from '../composables/deleteListing';
+
 const router = useRouter()
 
 const modalActive = ref(false);
@@ -92,6 +95,11 @@ watchEffect(async () => {
 // Handle delete function that is fired from the modal
 const handleDelete = () => {
     console.log('deleted')
+    deleteListing(props.id)
+    router.push({name: 'Houses'})
+
+    // CONFIRM DELETION
+
 };
 
 // Function that adds dots to a number
