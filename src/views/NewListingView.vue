@@ -162,25 +162,24 @@ import { useNewListingStore } from '../stores/newListing';
 const { newListing } = storeToRefs(useNewListingStore());
 const { resetNewListing } = useNewListingStore()
 const router = useRouter()
-const allRequiredFieldsFilledIn = ref(true)
+const allRequiredFieldsFilledIn = ref(false)
 
-// watch(newListing.value, () => {
-//     if (checkFormInputs()) {
-//         allRequiredFieldsFilledIn.value = true
-//     } else {
-//         allRequiredFieldsFilledIn.value = false
-//     }
-// })
+watch(newListing.value, () => {
+    if (checkFormInputs()) {
+        allRequiredFieldsFilledIn.value = true
+    } else {
+        allRequiredFieldsFilledIn.value = false
+    }
+})
 
 const handleSubmit = async () => {
     
-    validateForm()
     // Create new listing, push to new listing and reset new listing once validateForm returns true
-    
-        // const newListingId = await createListing()
-        // router.push({name: 'SingleListing', params: {id: newListingId}})
-        // resetNewListing()
-    
+    if (validateForm()) {
+        const newListingId = await createListing()
+        router.push({name: 'SingleListing', params: {id: newListingId}})
+        resetNewListing()
+    }
 };
 
 
