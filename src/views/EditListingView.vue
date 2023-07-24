@@ -49,6 +49,8 @@
                     label="Upload picture (PNG or JPG)*"
                     name="image"
                     accept="image/png, image/jpeg"
+                    :image-url="selectedListing.image"
+                    v-model="selectedListing.image"
                 />
 
                 <BaseInput 

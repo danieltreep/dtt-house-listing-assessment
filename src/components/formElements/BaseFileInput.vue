@@ -34,21 +34,24 @@
 <script setup>
 import { ref } from 'vue';
 
-defineProps({
+const props = defineProps({
     label: {
         type: String,
         default: ''
     },
     modelValue: {
-        type: File,
+        type: [File, String],
         default: ''
+    },
+    imageUrl: {
+        type: [File, String]
     }
 });
 
 defineEmits(['update:modelValue'])
 
 const error = ref(null);
-const imageUrl = ref('')
+const imageUrl = ref(props.imageUrl)
 
 // Reset images when clicked on the clear button and reset the imageUrl
 const handleReset = () => {
@@ -63,9 +66,7 @@ const handleChange = (event) => {
     if (selected) {
         imageUrl.value = URL.createObjectURL(selected)
         
-        
-        // updateRecipeImage(selected)
-    } else {
+        } else {
         imageUrl.value = ''
     }
 };

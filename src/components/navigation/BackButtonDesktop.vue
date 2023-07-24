@@ -1,5 +1,5 @@
 <template>
-    <button class="desktop" @click="router.push({name: 'Houses'})" >
+    <button class="desktop" @click.prevent="router.push({name: 'Houses'})" >
         <img src="@/assets/icons/ic_back_grey@3x.png" alt="Go back to overview">
         <p>Back to overview</p>
     </button>

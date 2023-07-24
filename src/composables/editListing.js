@@ -1,4 +1,5 @@
 import { useSelectedListingStore } from '@/stores/selectedListing'
+import uploadImage from './uploadImage';
 
 const myHeaders = new Headers();
 myHeaders.append("X-Api-Key", "u_S2bzOphtsEHvY-47k1LdKnMZUP8RjI");
@@ -30,10 +31,17 @@ const editListing = async (id) => {
   formdata.append("hasGarage", selectedListing.hasGarage);
   formdata.append("description", selectedListing.description);
 
+  if (typeof selectedListing.image !== "string") {
+    await uploadImage(id, selectedListing.image)
+  }
+
   await fetch(`https://api.intern.d-tt.nl/api/houses/${id}`, requestOptions)
     .then(response => response.text())
     .then(result => console.log('Edited listing', result))
     .catch(error => console.log('error', error));
+
+    console.log(selectedListing.image)
+  
 }
 
 export default editListing
