@@ -24,9 +24,14 @@ export const useListingsStore = defineStore('listings', () => {
         }
     }
 
+    const deleteListingStore = (id) => {
+        listings.value = listings.value.filter(listing => listing.id !== id)
+    }
+
     return { 
         listings,
         fetchListings,
-        sortListings
+        sortListings,
+        deleteListingStore
     }
 })

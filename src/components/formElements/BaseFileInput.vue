@@ -15,6 +15,7 @@
             hidden
             v-bind="$attrs"
             @change="handleChange"
+            @input="$emit('update:modelValue', $event.target.files[0])"
         >
         <p v-if="error">Error</p>
     </div>
@@ -37,8 +38,14 @@ defineProps({
     label: {
         type: String,
         default: ''
+    },
+    modelValue: {
+        type: File,
+        default: ''
     }
 });
+
+defineEmits(['update:modelValue'])
 
 const error = ref(null);
 const imageUrl = ref('')
@@ -55,6 +62,8 @@ const handleChange = (event) => {
 
     if (selected) {
         imageUrl.value = URL.createObjectURL(selected)
+        
+        
         // updateRecipeImage(selected)
     } else {
         imageUrl.value = ''

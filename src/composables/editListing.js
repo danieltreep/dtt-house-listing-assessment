@@ -1,7 +1,4 @@
 import { useSelectedListingStore } from '@/stores/selectedListing'
-import { storeToRefs } from 'pinia';
-
-const { selectedListing } = useSelectedListingStore()
 
 const myHeaders = new Headers();
 myHeaders.append("X-Api-Key", "u_S2bzOphtsEHvY-47k1LdKnMZUP8RjI");
@@ -16,6 +13,10 @@ const requestOptions = {
 };
 
 const editListing = async (id) => {
+
+  // Get all the (new) information from the selected listing store
+  const { selectedListing } = useSelectedListingStore()
+
   formdata.append("price", selectedListing.price);
   formdata.append("bedrooms", selectedListing.rooms.bedrooms);
   formdata.append("bathrooms", selectedListing.rooms.bathrooms);
@@ -31,7 +32,7 @@ const editListing = async (id) => {
 
   await fetch(`https://api.intern.d-tt.nl/api/houses/${id}`, requestOptions)
     .then(response => response.text())
-    .then(result => console.log(result))
+    .then(result => console.log('Edited listing', result))
     .catch(error => console.log('error', error));
 }
 

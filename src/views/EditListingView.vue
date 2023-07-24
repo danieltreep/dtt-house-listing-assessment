@@ -114,16 +114,23 @@
 </template>
 
 <script setup>
+// External
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router'
+
+// Components
 import BaseFileInput from '../components/formElements/BaseFileInput.vue';
 import BaseInput from '../components/formElements/BaseInput.vue';
 import BackButtonDesktop from '../components/navigation/BackButtonDesktop.vue'
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
-import { useSelectedListingStore } from '../stores/selectedListing';
 import editListing from '../composables/editListing';
-import { useRouter } from 'vue-router'
+
+// Stores
+import { useSelectedListingStore } from '../stores/selectedListing';
+
 const { selectedListing } = storeToRefs(useSelectedListingStore());
 const router = useRouter()
+
 const handleSubmit = async () => {
     await editListing(selectedListing.value.id)
     router.push({name: 'SingleListing', params: {id: selectedListing.value.id}})

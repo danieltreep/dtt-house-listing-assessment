@@ -8,7 +8,7 @@ export const useNewListingStore = defineStore('newListing', () => {
         createdAt: '',
         constructionYear: null,
         description: '',
-        hasGarage: null,
+        hasGarage: 'select',
         image: '',
         location: {
             city: '',
@@ -23,7 +23,8 @@ export const useNewListingStore = defineStore('newListing', () => {
             bathrooms: null,
             bedrooms: null
         },
-        size: null
+        size: null,
+        file: null
     })
   
     return { 

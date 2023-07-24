@@ -1,5 +1,5 @@
 <template>
-    <button class="mobile" @click="goBack" >
+    <button class="mobile" @click.prevent="goBack" >
         <img :src="imageUrl" alt="Go back to overview" >
     </button>
 </template>
@@ -19,6 +19,7 @@ const imageUrl = ref(new URL(`/src/assets/icons/ic_back_${props.color}@3x.png`, 
 
 const router = useRouter()
 
+// I added prevent to the click handler because of unwanted submission, describe better
 const goBack = () => router.go(-1);
 
 </script>

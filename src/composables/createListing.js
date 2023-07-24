@@ -1,4 +1,5 @@
 import { useNewListingStore } from '@/stores/newListing'
+import uploadImage from './uploadImage';
 
 const { newListing } = useNewListingStore()
 
@@ -17,6 +18,7 @@ const requestOptions = {
 
 const createListing = async () => {
 
+  // Save returned id from api so it can be returned
   let submittedListingId = null;
 
   formdata.append("price", newListing.price);
@@ -37,6 +39,10 @@ const createListing = async () => {
     .then(result => submittedListingId = result.id)
     .catch(error => console.log('error', error));
 
+  // Upload image after receiving the id
+  await uploadImage(submittedListingId, newListing.file)
+
+  // Return id to use as a parameter for the router
   return submittedListingId
 }
 

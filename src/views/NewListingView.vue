@@ -49,6 +49,7 @@
                     label="Upload picture (PNG or JPG)*"
                     name="image"
                     accept="image/png, image/jpeg"
+                    v-model="newListing.file"
                 />
 
                 <BaseInput 
@@ -72,7 +73,7 @@
                     <div class="input-wrapper">
                         <label for="garage">Garage*</label>
                         <select name="garage" id="garage" placeholder="select" v-model="newListing.hasGarage">
-                            <option selected disabled>Select</option>
+                            <option selected disabled value="select">Select</option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
@@ -115,16 +116,25 @@
 </template>
 
 <script setup>
+// External
 import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router'
+
+
+// Components
 import BaseFileInput from '../components/formElements/BaseFileInput.vue';
 import BaseInput from '../components/formElements/BaseInput.vue';
 import BackButtonDesktop from '../components/navigation/BackButtonDesktop.vue'
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
-import { useNewListingStore } from '../stores/newListing';
+
+
+// Composables
 import createListing from '../composables/createListing';
 
+// Stores
+import { useNewListingStore } from '../stores/newListing';
+
 const { newListing } = storeToRefs(useNewListingStore());
-import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const handleSubmit = async () => {

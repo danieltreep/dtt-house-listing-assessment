@@ -1,10 +1,10 @@
 <template>
     <section class="listing-section">
         <div class="listing-hero">
-            <img src="@/assets/images/img_empty_houses@3x.png" alt="" class="hero-image">
+            <img class="hero-image" v-if="!selectedListing?.image" src="@/assets/images/img_empty_houses@3x.png" alt="There is no image" >
             <img class="hero-image" :src="selectedListing?.image" alt="">
             <BackButtonMobile color="white"/>
-            <div class="listing-options-mobile">
+            <div class="listing-options-mobile" v-if="selectedListing?.madeByMe">
                 <button @click="router.push({name: 'EditListing'})">
                     <img src="@/assets/icons/ic_edit_white@3x.png" alt="">
                 </button>
@@ -16,8 +16,8 @@
         <div class="listing-information">
             <h1> {{ selectedListing?.location.street }} {{ selectedListing?.location.houseNumber }}</h1>
 
-            <div class="listing-options-desktop">
-                <button>
+            <div class="listing-options-desktop" v-if="selectedListing?.madeByMe">
+                <button @click="router.push({name: 'EditListing'})">
                     <img src="@/assets/icons/ic_edit@3x.png" alt="">
                 </button>
                 <button>
