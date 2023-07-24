@@ -72,7 +72,22 @@ label {
 :disabled {
   opacity: .5;
 }
-
+.errorMessage {
+  color: red;
+  font-family: 'Montserrat';
+  font-size: 14px;
+  margin-top: .5rem;
+  font-style: italic;
+}
+.error {
+  border:  1px solid red !important; 
+}
+.input-wrapper:invalid::after {
+  content: 'Required field missing';
+  font-size: 14px;
+  font-family: 'Montserrat';
+  color: red;
+}
 @media (min-width: 768px) {
   h1 {
     font-size: 32px;

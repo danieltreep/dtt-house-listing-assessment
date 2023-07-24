@@ -1,18 +1,18 @@
 <template>
-    <div class="input-wrapper">
+    <div class="input-wrapper" >
         <label>{{ label }}</label>
         <input 
             :placeholder="placeholder"
             :value="modelValue" 
             @input="$emit('update:modelValue', $event.target.value)"
             v-bind="$attrs"
+            :class="required ? 'validateInput' : ''"
         >
-        <p v-if="error">Error</p>
+        <p v-if="required" class="errorMessage"></p>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 
 defineProps({
     label: {
@@ -26,11 +26,17 @@ defineProps({
     modelValue: {
         type: [String, Number],
         default: ''
+    },
+    required: {
+        type: Boolean,
+        default: true
+    },
+    validate: {
+        type: String
     }
 });
 
-defineEmits(['update:modelValue'])
-const error = ref(null);
+defineEmits(['update:modelValue']);
 
 </script>
 
@@ -47,4 +53,5 @@ input {
     border-radius: var(--border-radius-s);
     z-index: 1;
 }
+
 </style>

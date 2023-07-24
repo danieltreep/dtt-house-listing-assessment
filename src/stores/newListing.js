@@ -27,7 +27,32 @@ export const useNewListingStore = defineStore('newListing', () => {
         file: null
     })
   
+    const resetNewListing = () => {
+        newListing.value = {
+            createdAt: '',
+            constructionYear: null,
+            description: '',
+            hasGarage: 'select',
+            image: '',
+            location: {
+                city: '',
+                zip: '',
+                street: '',
+                houseNumber: null,
+                houseNumberAddition: '',  
+            },
+            madeByMe: true,
+            price: null,
+            rooms: {
+                bathrooms: null,
+                bedrooms: null
+            },
+            size: null,
+            file: null
+        }
+    }
     return { 
-        newListing
+        newListing,
+        resetNewListing
     }
 })

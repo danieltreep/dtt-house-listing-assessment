@@ -1,10 +1,11 @@
 <template>
     <main>
         <div class="form-page">
+            
+            <BackButtonMobile />
+            <BackButtonDesktop />
             <form @submit.prevent="handleSubmit">
                 
-                <BackButtonDesktop />
-                <BackButtonMobile />
                 <h1>Create new listing</h1>
                 
                 <BaseInput 
@@ -12,6 +13,7 @@
                     placeholder="Enter the street name"
                     name="street"
                     v-model="newListing.location.street"
+                    
                 />
     
                 <div class="grid-layout">
@@ -21,6 +23,7 @@
                         placeholder="Enter house number"
                         name="house-number"
                         v-model="newListing.location.houseNumber"
+                        
                     />
 
                     <BaseInput 
@@ -28,6 +31,7 @@
                         placeholder="e.g. A."
                         name="addition"
                         v-model="newListing.location.houseNumberAddition"
+                        :required="false"
                     />
                 </div>
     
@@ -36,6 +40,7 @@
                     placeholder="e.g. 1000 AA"
                     name="postal-code"
                     v-model="newListing.location.zip"
+                    class="zip"
                 />
 
                 <BaseInput 
@@ -72,11 +77,19 @@
 
                     <div class="input-wrapper">
                         <label for="garage">Garage*</label>
-                        <select name="garage" id="garage" placeholder="select" v-model="newListing.hasGarage">
+                        <select 
+                            class="validateInput" 
+                            name="garage" 
+                            id="garage" 
+                            placeholder="select" 
+                            v-model="newListing.hasGarage"
+                            required
+                        >
                             <option selected disabled value="select">Select</option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
+                        <p class="errorMessage"></p>
                     </div>
 
                     <BaseInput 
@@ -96,20 +109,30 @@
                     />
                 </div>
 
-                <!-- Min 1901 -->
                 <BaseInput 
+                    type="number"
                     label="Construction year*"
                     placeholder="e.g. 1990"
                     name="construction-year"
                     v-model="newListing.constructionYear"
+                    class="construction-year-input"
                 />
                
-                <label for="description">Description*</label>
-                <textarea name="description" id="description" cols="30" rows="5" placeholder="Enter description"
-                    v-model="newListing.description"
-                ></textarea>
+                <div class="input-wrapper">
+                    <label for="description">Description*</label>
+                    <textarea 
+                        name="description" 
+                        id="description" 
+                        cols="30" 
+                        rows="5" 
+                        placeholder="Enter description"
+                        v-model="newListing.description"
+                        class="validateInput"
+                    ></textarea>
+                    <p class="errorMessage"></p>
+                </div>
                 
-                <button type="submit" >POST</button>
+                <button type="submit" :disabled="!allRequiredFieldsFilledIn">POST</button>
             </form>
         </div>
     </main>
@@ -119,7 +142,7 @@
 // External
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router'
-
+import { ref, watch } from 'vue'
 
 // Components
 import BaseFileInput from '../components/formElements/BaseFileInput.vue';
@@ -130,18 +153,37 @@ import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
 
 // Composables
 import createListing from '../composables/createListing';
+import checkFormInputs from '@/composables/checkFormInputs'
+import validateForm from '@/composables/validateForm'
 
 // Stores
 import { useNewListingStore } from '../stores/newListing';
 
 const { newListing } = storeToRefs(useNewListingStore());
+const { resetNewListing } = useNewListingStore()
 const router = useRouter()
+const allRequiredFieldsFilledIn = ref(true)
+
+// watch(newListing.value, () => {
+//     if (checkFormInputs()) {
+//         allRequiredFieldsFilledIn.value = true
+//     } else {
+//         allRequiredFieldsFilledIn.value = false
+//     }
+// })
 
 const handleSubmit = async () => {
-    const newListingId = await createListing()
-    console.log(newListingId)
-    router.push({name: 'SingleListing', params: {id: newListingId}})
+    
+    validateForm()
+    // Create new listing, push to new listing and reset new listing once validateForm returns true
+    
+        // const newListingId = await createListing()
+        // router.push({name: 'SingleListing', params: {id: newListingId}})
+        // resetNewListing()
+    
 };
+
+
 
 </script>
 

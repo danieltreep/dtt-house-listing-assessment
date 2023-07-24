@@ -16,19 +16,21 @@
             v-bind="$attrs"
             @change="handleChange"
             @input="$emit('update:modelValue', $event.target.files[0])"
+            class="validateInput"
         >
-        <p v-if="error">Error</p>
     </div>
-
+    
     <div class="image-preview-container" v-if="imageUrl">
         <img class="image-preview" :src="imageUrl" >
         <img 
-            class="reset-image" 
-            src="@/assets/icons/ic_clear_white@3x.png" 
-            alt="Reset image"
-            @click="handleReset"    
+        class="reset-image" 
+        src="@/assets/icons/ic_clear_white@3x.png" 
+        alt="Reset image"
+        @click="handleReset"    
         >
     </div>
+    
+    <p class="errorMessage"></p>
 </template>
 
 <script setup>
@@ -50,7 +52,6 @@ const props = defineProps({
 
 defineEmits(['update:modelValue'])
 
-const error = ref(null);
 const imageUrl = ref(props.imageUrl)
 
 // Reset images when clicked on the clear button and reset the imageUrl

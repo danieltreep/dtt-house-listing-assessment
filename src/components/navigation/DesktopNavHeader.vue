@@ -19,6 +19,10 @@ header {
     background-color: var(--background-color-2);
     padding-block: 1rem;
     display: none;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 4px 10px #00000010;
 }
 .header-content {
     margin: 0 auto;
