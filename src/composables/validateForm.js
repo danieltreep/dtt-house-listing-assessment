@@ -35,7 +35,7 @@ const validateZip = () => {
     // Validate if the value is a valid postal code. If not add error message and class
     if (!zipRegEx.test(zip.value)) {
         zip.classList.add('error')
-        zip.nextElementSibling.innerText = 'Please fill in a valid postal code';
+        zip.nextElementSibling.innerText = 'Please enter a valid postal code';
 
     } else {
         zip.classList.remove('error')
