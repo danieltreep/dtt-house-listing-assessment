@@ -15,9 +15,9 @@
             hidden
             v-bind="$attrs"
             @change="handleChange"
-            class="validateInput"
         >
     </div>
+    <!-- / Label pointing to file input acts as the input so it can be styled. Only shown if there is no image url or file -->
     
     <div class="image-preview-container" v-if="imageUrl">
         <img class="image-preview" :src="imageUrl" >
@@ -28,6 +28,7 @@
         @click="handleReset"    
         >
     </div>
+    <!-- / Image preview and reset. Only shown if there is an image link or file -->
     
     <p class="errorMessage"></p>
 </template>
@@ -45,22 +46,25 @@ const props = defineProps({
         default: ''
     },
     imageUrl: {
-        type: [File, String]
+        type: [File, String],
+        default: ''
     }
 });
 
+// Emit the value to the vmodel prop
 const emit = defineEmits(['update:modelValue'])
 
+// If there is an image, start with that value
 const imageUrl = ref(props.imageUrl)
 
-// Reset images when clicked on the clear button and reset the imageUrl
+// Reset images when clicked on the clear button and reset the imageUrl and store
 const handleReset = () => {
     document.getElementById('file-input').value = ""
     imageUrl.value = ''
     emit('update:modelValue', null)
 }
 
-// Select first file on change and create a URL from the location to display
+// Select first file on change and create a URL from the location to display a preview
 const handleChange = (event) => {
     const selected = event.target.files[0]
 
@@ -72,7 +76,6 @@ const handleChange = (event) => {
         emit('update:modelValue', '')
     }
 };
-
 </script>
 
 <style lang="css" scoped>
@@ -83,7 +86,6 @@ const handleChange = (event) => {
 label {
     margin: 1rem 0 .7rem;           
 }
-
 .upload-picture {
     border: 2px dashed var(--element-color-quartenary);
     aspect-ratio: 1 / 1;

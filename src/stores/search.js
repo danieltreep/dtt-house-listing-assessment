@@ -4,10 +4,10 @@ import { useListingsStore } from './listings'
 
 export const useSearchStore = defineStore('search', () => {
 
-    // Destructure the listings from the listings store
+    // Get the listings from the listings store
     const { listings } = storeToRefs(useListingsStore())
 
-    // Store the search term that can be updated. 
+    // Store the search term 
     const searchTerm = ref('')
   
     // Filter the listings with the search term. It is possible to search for city and street name

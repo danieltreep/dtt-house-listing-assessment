@@ -15,11 +15,12 @@ const props = defineProps({
     }
 });
 
+// Load image based on prop color
 const imageUrl = ref(new URL(`/src/assets/icons/ic_back_${props.color}@3x.png`, import.meta.url).href)
 
 const router = useRouter()
 
-// I added prevent to the click handler because of unwanted submission, describe better
+// Added prevent to click handler because of unwanted submission of form
 const goBack = () => router.go(-1);
 
 </script>
@@ -32,7 +33,6 @@ button {
     border: none;
     background-color: transparent;
     align-self: center;
-    /* z-index: 10; */
 }
 button p {
     font-weight: bold;

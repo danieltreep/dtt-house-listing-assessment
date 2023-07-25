@@ -5,18 +5,19 @@
             :listing="listing" 
             :key="listing.id"
         />
+        <!-- Limit to 3 listings -->
     </ul>
 </template>
 
 <script setup>
-import ShowcaseListitem from '@/components/houseList/ShowcaseListitem.vue';
 import { storeToRefs } from 'pinia'
 import { useListingsStore } from '@/stores/listings';
-
+import ShowcaseListitem from '@/components/houseList/ShowcaseListitem.vue';
 
 const { fetchListings } = useListingsStore()
 const { listings } = storeToRefs(useListingsStore())
 
+// Possible because of parent suspense component
 await fetchListings()
 
 </script>
@@ -29,9 +30,7 @@ await fetchListings()
     }
     img {
         width: 100%;
-        max-width: 400px;
-        /* position: absolute; */
-        
+        max-width: 400px;        
     }
     h2 {
         margin: 2rem 0 1rem;

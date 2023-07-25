@@ -14,7 +14,6 @@
 
 <script setup>
 import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
-
 </script>
 
 <style lang="css" scoped>

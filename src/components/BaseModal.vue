@@ -1,6 +1,6 @@
 <template>
     <Teleport to="body">
-        <div class="modal-wrapper">
+        <div class="modal-wrapper" @keydown.esc="$emit('close-modal')">
             <dialog open>
                 <h2>Delete listing</h2>
                 <p>Are you sure you want to delete this listing? <br> This action cannot be undone.</p>
@@ -21,11 +21,11 @@ defineEmits(['close-modal', 'delete']);
     display: flex;
     align-items: center;
     inset: 0 0 0 0;
-    z-index: 1;
+    z-index: 11;
     background: rgba(0, 0, 0, 0.25);
 }
 dialog {
-    padding: 2rem 2.5rem;
+    padding: 4rem 4.5rem;
     border-radius: var(--border-radius-m);
     border: none;
     margin: 0 auto;
@@ -41,7 +41,7 @@ button {
     border: none;
     border-radius: var(--border-radius-s);
     color: white;
-    font-weight: bold;
+    font-size: 14px;
 }
 button.delete {
     background-color: var(--element-color-primary);

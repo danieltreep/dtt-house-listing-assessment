@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;1,500&family=Open+Sans:wght@400;600&display=swap');
 
+/* Reset margins */
 * {
   margin: 0;
 }
 
+/* Set base variables */
 :root {
   --element-color-primary: #EB5440;
   --element-color-secondary: #4A4B4C;
@@ -26,6 +28,8 @@
   --border-radius-m: 8px;
   --border-radius-l: 25px;
 }
+
+/* Layout styles */
 body {
   background-color: var(--background-color-1);
   min-height: 100vh;
@@ -39,6 +43,8 @@ main {
   margin: 0 auto;
   padding-inline: 1rem;
 }
+
+/* Element styles */
 h1 {
   font-size: 18px;
   font-family: 'Montserrat', sans-serif;
@@ -58,6 +64,8 @@ a {
 button {
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
 }
 label {
   font-size: 12px;
@@ -65,12 +73,6 @@ label {
   font-weight: 600;
   margin: 1rem 0 .5rem;
   z-index: 1;
-}
-:focus {
-  outline-color: var(--element-color-primary);
-}
-:disabled {
-  opacity: .5;
 }
 .errorMessage {
   color: red;
@@ -84,6 +86,15 @@ label {
   border:  1px solid red !important; 
 }
 
+/* State styles */
+:focus {
+  outline-color: var(--element-color-primary);
+}
+:disabled {
+  opacity: .5;
+}
+
+/* Media queries */
 @media (min-width: 768px) {
   h1 {
     font-size: 32px;
@@ -102,5 +113,11 @@ label {
   }
   .errorMessage {
     font-size: 14px;
+  }
+  label {
+    font-size: 14px;
+  }
+  button {
+    font-size: 18px;
   }
 }

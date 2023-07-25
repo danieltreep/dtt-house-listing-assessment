@@ -12,10 +12,9 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useListingsStore } from '../stores/listings';
+import { useListingsStore } from '@/stores/listings';
 
 const { sortListings } = useListingsStore();
-
 
 // Translate the active bar based on the button clicked
 const styles = ref('0%');
@@ -32,39 +31,34 @@ const handleClick = (criteria) => {
 </script>
 
 <style lang="css" scoped>
-    .sort-bar {
-        display: flex;
-        justify-content: space-between;
-        border-radius: var(--border-radius-m);
-        background-color: var(--element-color-quartenary);
-        overflow: hidden;
-        position: relative;        
-    }
-    .sort-by {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        padding: .6rem 1rem;
-        font-size: 12px;
-        min-width: 120px;
-        border: none;
-    }
-    .sort-by p {
-        /* font-weight: 600; */
-        font-family: 'Montserrat';
-        color: white;
-    }
-    .active-bar {
-        background-color: var(--element-color-primary);
-        position: absolute;
-        inset: 0 auto 0 0;
-        width: 50%;
-        transition: .2s ease-out;
-        transform: translateX(v-bind(styles));
-    }
-    button {
-        background-color: transparent;
-        z-index: 1;
-    }
-    
+.sort-bar {
+    display: flex;
+    justify-content: space-between;
+    border-radius: var(--border-radius-m);
+    background-color: var(--element-color-quartenary);
+    overflow: hidden;
+    position: relative;        
+}
+.sort-by {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: .6rem 1rem;
+    font-size: 12px;
+    min-width: 140px;
+    border: none;
+    color: white;
+}
+.active-bar {
+    background-color: var(--element-color-primary);
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 50%;
+    transition: .2s ease-out;
+    transform: translateX(v-bind(styles));
+}
+button {
+    background-color: transparent;
+    z-index: 1;
+}
 </style>

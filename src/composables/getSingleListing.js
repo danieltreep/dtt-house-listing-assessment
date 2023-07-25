@@ -9,20 +9,17 @@ const requestOptions = {
     redirect: 'follow'
 };
 
-const getSelectedListing = async (id) => {
-    const error = ref(null);
-    const isPending = ref(false)
+const getSingleListing = async (id) => {
+    
+    // Save listing is this ref so it can be returned
     const document = ref([])
 
     await fetch(`https://api.intern.d-tt.nl/api/houses/${id}`, requestOptions)
         .then(response => response.json())
-        .then(result => {
-            // console.log(result)
-            document.value = result
-        })
+        .then(result => document.value = result)
         .catch(error => console.log('error', error));
 
-    return { error, isPending, document }
+    return { document }
 }
 
-export default getSelectedListing
+export default getSingleListing

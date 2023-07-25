@@ -1,4 +1,4 @@
-import { useSelectedListingStore } from '@/stores/selectedListing'
+import { useSingleListingStore } from '@/stores/singleListing'
 import uploadImage from './uploadImage';
 
 const myHeaders = new Headers();
@@ -15,32 +15,31 @@ const requestOptions = {
 
 const editListing = async (id) => {
 
-  // Get all the (new) information from the selected listing store
-  const { selectedListing } = useSelectedListingStore()
+  // Get all the (new) information from the Single listing store
+  const { singleListing } = useSingleListingStore()
 
-  formdata.append("price", selectedListing.price);
-  formdata.append("bedrooms", selectedListing.rooms.bedrooms);
-  formdata.append("bathrooms", selectedListing.rooms.bathrooms);
-  formdata.append("size", selectedListing.size);
-  formdata.append("streetName", selectedListing.location.street);
-  formdata.append("houseNumber", selectedListing.location.houseNumber);
-  formdata.append("numberAddition", selectedListing.location.houseNumberAddition);
-  formdata.append("zip", selectedListing.location.zip);
-  formdata.append("city", selectedListing.location.city);
-  formdata.append("constructionYear", selectedListing.constructionYear);
-  formdata.append("hasGarage", selectedListing.hasGarage);
-  formdata.append("description", selectedListing.description);
+  formdata.append("price", singleListing.price);
+  formdata.append("bedrooms", singleListing.rooms.bedrooms);
+  formdata.append("bathrooms", singleListing.rooms.bathrooms);
+  formdata.append("size", singleListing.size);
+  formdata.append("streetName", singleListing.location.street);
+  formdata.append("houseNumber", singleListing.location.houseNumber);
+  formdata.append("numberAddition", singleListing.location.houseNumberAddition);
+  formdata.append("zip", singleListing.location.zip);
+  formdata.append("city", singleListing.location.city);
+  formdata.append("constructionYear", singleListing.constructionYear);
+  formdata.append("hasGarage", singleListing.hasGarage);
+  formdata.append("description", singleListing.description);
 
-  if (typeof selectedListing.image !== "string") {
-    await uploadImage(id, selectedListing.image)
+  // Only upload an image if it is a file and not a link
+  if (typeof singleListing.image !== "string") {
+    await uploadImage(id, singleListing.image)
   }
 
   await fetch(`https://api.intern.d-tt.nl/api/houses/${id}`, requestOptions)
     .then(response => response.text())
     .then(result => console.log('Edited listing', result))
     .catch(error => console.log('error', error));
-
-    console.log(selectedListing.image)
   
 }
 

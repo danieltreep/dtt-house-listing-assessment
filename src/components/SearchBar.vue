@@ -21,42 +21,44 @@
 </template>
 
 <script setup>
-import { useSearchStore } from '@/stores/search'
 import { storeToRefs } from 'pinia';
+
+import { useSearchStore } from '@/stores/search'
 
 const { searchTerm } = storeToRefs(useSearchStore()); 
 
 </script>
 
 <style lang="css" scoped>
+.search-bar {
+    background-color: var(--element-color-tertiary);
+    padding: .5rem 1rem;
+    border-radius: var(--border-radius-s);
+    display: flex;
+    align-items: center;
+}
+img {
+    height: 18px;
+}
+input {
+    border: transparent;
+    background-color: var(--element-color-tertiary);
+    outline: transparent;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    width: 100%;
+}
+.search-icon {
+    padding-right: 1rem;
+}
+.clear-icon {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
     .search-bar {
-        background-color: var(--element-color-tertiary);
-        padding: .5rem 1rem;
-        border-radius: var(--border-radius-s);
-        display: flex;
-        /* margin: 1.5rem 0; */
+        min-width: 350px;
     }
-    img {
-        height: 18px;
-    }
-    input {
-        border: transparent;
-        background-color: var(--element-color-tertiary);
-        outline: transparent;
-        font-family: 'Open Sans';
-        font-size: 12px;
-        width: 100%;
-    }
-    .search-icon {
-        padding-right: 1rem;
-    }
-    .clear-icon {
-        margin-left: auto;
-    }
-    
-    @media (min-width: 768px) {
-        .search-bar {
-            min-width: 350px;
-        }
-    }
+}
 </style>

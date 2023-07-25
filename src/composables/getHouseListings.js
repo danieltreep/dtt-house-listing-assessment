@@ -10,19 +10,16 @@ const requestOptions = {
 };
 
 const getHouseListings = async () => {
-    const error = ref(null);
-    const isPending = ref(false)
+
+    // Save the listings in this ref that can be returned
     const documents = ref([])
 
     await fetch("https://api.intern.d-tt.nl/api/houses", requestOptions)
         .then(response => response.json())
-        .then(result => {
-            // console.log(result)
-            documents.value = result
-        })
+        .then(result => documents.value = result)
         .catch(error => console.log('error', error));
 
-    return { error, isPending, documents }
+    return { documents }
 }
 
 export default getHouseListings

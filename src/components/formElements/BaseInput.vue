@@ -8,7 +8,9 @@
             v-bind="$attrs"
             :class="required ? 'validateInput' : ''"
         >
+
         <p v-if="required" class="errorMessage"></p>
+        <!-- If there is an error message display it here -->
     </div>
 </template>
 
@@ -36,6 +38,7 @@ defineProps({
     }
 });
 
+// Emit the value to the vmodel prop
 defineEmits(['update:modelValue']);
 
 </script>
@@ -53,5 +56,4 @@ input {
     border-radius: var(--border-radius-s);
     z-index: 1;
 }
-
 </style>

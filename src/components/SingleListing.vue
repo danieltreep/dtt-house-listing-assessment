@@ -1,59 +1,72 @@
 <template>
     <section class="listing-section">
+
         <div class="listing-hero">
-            <img class="hero-image" v-if="!selectedListing?.image" src="@/assets/images/img_empty_houses@3x.png" alt="There is no image" >
-            <img class="hero-image" :src="selectedListing?.image" alt="">
+            <img class="hero-image" v-if="!singleListing?.image" src="@/assets/images/img_empty_houses@3x.png" alt="There is no image" >
+            <img class="hero-image" :src="singleListing?.image" alt="">
+
             <BackButtonMobile color="white"/>
-            <div class="listing-options-mobile" v-if="selectedListing?.madeByMe">
+
+            <div class="listing-options-mobile" v-if="singleListing?.madeByMe">
                 <button @click="router.push({name: 'EditListing'})">
-                    <img src="@/assets/icons/ic_edit_white@3x.png" alt="">
+                    <img src="@/assets/icons/ic_edit_white@3x.png" alt="Edit this listing">
                 </button>
-                <button>
-                    <img @click="modalActive = true" src="@/assets/icons/ic_delete_white@3x.png" alt="">
+                <button @click="modalActive = true" >
+                    <img src="@/assets/icons/ic_delete_white@3x.png" alt="Delete this listing">
                 </button>
             </div>
         </div>
-        <div class="listing-information">
-            <h1> {{ selectedListing?.location.street }} {{ selectedListing?.location.houseNumber }}</h1>
+        <!-- /  The top of the listing with the image and the options for mobile-->
 
-            <div class="listing-options-desktop" v-if="selectedListing?.madeByMe">
+        <div class="listing-information">
+            <h1> {{ singleListing?.location.street }} {{ singleListing?.location.houseNumber }}</h1>
+
+            <div class="listing-options-desktop" v-if="singleListing?.madeByMe">
                 <button @click="router.push({name: 'EditListing'})">
-                    <img src="@/assets/icons/ic_edit@3x.png" alt="">
+                    <img src="@/assets/icons/ic_edit@3x.png" alt="Edit this listing">
                 </button>
-                <button>
-                    <img @click="modalActive = true" src="@/assets/icons/ic_delete@3x.png" alt="">
+
+                <button @click="modalActive = true">
+                    <img  src="@/assets/icons/ic_delete@3x.png" alt="Delete this listing">
                 </button>
             </div>
+            <!-- / Listing options for desktop -->
 
             <div class="listing-details">
                 <img src="@/assets/icons/ic_location@3x.png">
-                <p>{{ selectedListing?.location.zip }} {{ selectedListing?.location.city}}</p>
+                <p>{{ singleListing?.location.zip }} {{ singleListing?.location.city}}</p>
             
                 <br>
             
                 <img src="@/assets/icons/ic_price@3x.png">
-                <p>{{ selectedListing?.price ? numberWithCommas(selectedListing.price) : null }}</p>
+                <p>{{ singleListing?.price ? numberWithCommas(singleListing.price) : null }}</p>
             
                 <img src="@/assets/icons/ic_size@3x.png">
-                <p>{{ selectedListing?.size }} m2</p>
+                <p>{{ singleListing?.size }} m2</p>
 
                 <img src="@/assets/icons/ic_construction_date@3x.png">
-                <p>Built in {{ selectedListing?.constructionYear }}</p>
+                <p>Built in {{ singleListing?.constructionYear }}</p>
 
                 <br>
             
                 <img src="@/assets/icons/ic_bed@3x.png">
-                <p>{{ selectedListing?.rooms.bedrooms }}</p>
+                <p>{{ singleListing?.rooms.bedrooms }}</p>
 
                 <img src="@/assets/icons/ic_bath@3x.png">
-                <p>{{ selectedListing?.rooms.bathrooms }}</p>
+                <p>{{ singleListing?.rooms.bathrooms }}</p>
 
                 <img src="@/assets/icons/ic_garage@3x.png">
-                <p>{{ selectedListing?.hasGarage ? 'Yes' : 'No' }}</p>
+                <p>{{ singleListing?.hasGarage ? 'Yes' : 'No' }}</p>
             </div>
+            <!-- / Listing details -->
 
-            <p class="description">{{ selectedListing?.description }}</p>
-            <BaseModal v-if="modalActive" @delete="handleDelete" @close-modal="modalActive = false"/>
+            <p class="description">{{ singleListing?.description }}</p>
+
+            <BaseModal 
+                v-if="modalActive" 
+                @delete="handleDelete" 
+                @close-modal="modalActive = false"
+            />
         </div>
     </section>
 </template>
@@ -65,18 +78,19 @@ import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 
 // Components
-import BackButtonMobile from '../components/navigation/BackButtonMobile.vue';
-import BaseModal from '../components/BaseModal.vue';
+import BackButtonMobile from '@/components/navigation/BackButtonMobile.vue';
+import BaseModal from '@/components/BaseModal.vue';
+
+// Composables
+import deleteListing from '@/composables/deleteListing';
 
 // Stores
-import { useSelectedListingStore } from '@/stores/selectedListing'
-const { fetchSelectedListing } = useSelectedListingStore()
-const { selectedListing } = storeToRefs(useSelectedListingStore())
+import { useSingleListingStore } from '@/stores/singleListing'
 
-import deleteListing from '../composables/deleteListing';
+const { fetchSingleListing } = useSingleListingStore()
+const { singleListing } = storeToRefs(useSingleListingStore())
 
 const router = useRouter()
-
 const modalActive = ref(false);
 
 const props = defineProps({
@@ -85,21 +99,20 @@ const props = defineProps({
 
 // Fetch data in the store when the id in the URL changes and scroll to the top
 watchEffect(async () => {
-    await fetchSelectedListing(props.id)
+    await fetchSingleListing(props.id)
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     })
 });
 
-// Handle delete function that is fired from the modal
+// Handle delete function that is emitted from the modal
 const handleDelete = () => {
     console.log('deleted')
     deleteListing(props.id)
     router.push({name: 'Houses'})
 
     // CONFIRM DELETION
-
 };
 
 // Function that adds dots to a number
@@ -107,11 +120,9 @@ const handleDelete = () => {
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
-
 </script>
 
 <style lang="css" scoped>
-
 .listing-hero {
     position: relative;
 }
@@ -136,7 +147,6 @@ function numberWithCommas(x) {
 .listing-options-mobile img {
     height: 18px;
 }
-
 .listing-information {
     background-color: var(--background-color-2);
     padding: 1.5rem;
@@ -162,7 +172,6 @@ function numberWithCommas(x) {
     color: var(--text-color-secondary);
     line-height: 1.5;
 }
-
 button {
     background-color: transparent;
     border: none;

@@ -10,6 +10,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
+// This function is only called when a file is uploaded.
 const uploadImage = async (id, file) => {
 
   formdata.append("image", file, file.name);

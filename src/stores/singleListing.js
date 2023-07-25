@@ -1,15 +1,17 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import getSingleListing from '../composables/getSingleListing'
 
-export const useNewListingStore = defineStore('newListing', () => {
+// Every time a single list is necessary, this store will be updated
+export const useSingleListingStore = defineStore('singleListing', () => {
     
-    // Store the properties of the new listing
-    const newListing = ref({
+    // Store the properties of the single listing
+    const singleListing = ref({
         createdAt: '',
         constructionYear: null,
         description: '',
         hasGarage: 'select',
-        image: '',
+        image: null,
         location: {
             city: '',
             zip: '',
@@ -23,17 +25,23 @@ export const useNewListingStore = defineStore('newListing', () => {
             bathrooms: null,
             bedrooms: null
         },
-        size: null,
-        file: null
+        size: null
     })
   
-    const resetNewListing = () => {
-        newListing.value = {
+    // Fetch a single listing and update the single listing ref
+    const fetchSingleListing = async (id) => {
+        const { document } = await getSingleListing(id)
+        singleListing.value = document.value[0]
+    }
+
+    // Reset singleListing to original state
+    const resetSingleListing = () => {
+        singleListing.value = {
             createdAt: '',
             constructionYear: null,
             description: '',
             hasGarage: 'select',
-            image: '',
+            image: null,
             location: {
                 city: '',
                 zip: '',
@@ -47,12 +55,13 @@ export const useNewListingStore = defineStore('newListing', () => {
                 bathrooms: null,
                 bedrooms: null
             },
-            size: null,
-            file: null
+            size: null
         }
     }
+    
     return { 
-        newListing,
-        resetNewListing
+        singleListing,
+        fetchSingleListing,
+        resetSingleListing
     }
 })

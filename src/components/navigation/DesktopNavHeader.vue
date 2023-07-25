@@ -3,7 +3,7 @@
         <div class="header-content">
             <img class="logo" src="@/assets/images/img_logo_dtt@3x.png" alt="Doing Things Together logo">
             <nav>
-                <router-link :to="{name: 'Houses'}">Houses</router-link>
+                <router-link :to="{name: 'Houses'}" :class="route.path.includes('houses') ? 'router-link-active' : ''">Houses</router-link>
                 <router-link :to="{name: 'About'}">About</router-link>
             </nav>
         </div>
@@ -11,6 +11,11 @@
 </template>
 
 <script setup>
+
+// Add active router class to all links that include houses
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 
 </script>
 
@@ -30,7 +35,6 @@ header {
     max-width: 1100px;
     align-items: center;
     gap: 3rem;
-    /* padding-inline: 2rem; */
     display: none;
 }
 .logo {
