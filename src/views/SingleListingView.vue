@@ -1,7 +1,7 @@
 <template>
     <main>
         <div class="back-button-desktop">
-            <BackButtonDesktop />
+            <BackButtonDesktop text="Back to overview" route="Houses"/>
         </div>
         
         <Suspense>
@@ -31,6 +31,7 @@ defineProps({
 <style lang="css" scoped>
     main {
         padding: 0;
+        margin-bottom: 4rem;
     }
     
     .back-button-desktop {
@@ -42,6 +43,7 @@ defineProps({
             display: grid;
             grid-template-columns: 3fr 2fr;
             padding-inline: 1rem;
+            margin: 1.5rem auto 4rem;
         }
     }
 </style>

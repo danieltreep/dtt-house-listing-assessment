@@ -1,11 +1,11 @@
 <template>
     <main>
         <div class="form-page">
-            
-            <BackButtonMobile />
-            <BackButtonDesktop />
             <form @submit.prevent="handleSubmit">
                 
+                <BackButtonMobile />
+                <BackButtonDesktop text="Back to overview" route="Houses"/>
+
                 <h1>Create new listing</h1>
                 
                 <BaseInput 
@@ -13,7 +13,6 @@
                     placeholder="Enter the street name"
                     name="street"
                     v-model="newListing.location.street"
-                    
                 />
     
                 <div class="grid-layout">
@@ -83,13 +82,11 @@
                             id="garage" 
                             placeholder="select" 
                             v-model="newListing.hasGarage"
-                            required
                         >
                             <option selected disabled value="select">Select</option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
-                        <p class="errorMessage"></p>
                     </div>
 
                     <BaseInput 
@@ -129,10 +126,12 @@
                         v-model="newListing.description"
                         class="validateInput"
                     ></textarea>
-                    <p class="errorMessage"></p>
                 </div>
                 
-                <button type="submit" :disabled="!allRequiredFieldsFilledIn">POST</button>
+                <button 
+                    type="submit" 
+                    :disabled="!allRequiredFieldsFilledIn"
+                >POST</button>
             </form>
         </div>
     </main>
@@ -162,6 +161,7 @@ import { useNewListingStore } from '../stores/newListing';
 const { newListing } = storeToRefs(useNewListingStore());
 const { resetNewListing } = useNewListingStore()
 const router = useRouter()
+
 const allRequiredFieldsFilledIn = ref(false)
 
 watch(newListing.value, () => {

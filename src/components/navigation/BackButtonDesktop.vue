@@ -1,7 +1,7 @@
 <template>
-    <button class="desktop" @click.prevent="router.push({name: 'Houses'})" >
+    <button class="desktop" @click.prevent="handleClick" >
         <img src="@/assets/icons/ic_back_grey@3x.png" alt="Go back to overview">
-        <p>Back to overview</p>
+        <p>{{ text }} </p>
     </button>
 </template>
 
@@ -9,6 +9,19 @@
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+
+const props = defineProps({
+    text: {
+        type: String
+    },
+    route: {
+        type: String
+    }
+}); 
+
+const handleClick = () => {
+    router.push({name: `${props.route}`})
+};
 
 </script>
 
@@ -27,7 +40,7 @@ button {
         padding: 1rem 0;
     }
     button p {
-        font-weight: bold;
+        font-weight: 600;
         font-weight: 16px;
         font-family: 'Montserrat', sans-serif;
     }

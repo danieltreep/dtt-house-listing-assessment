@@ -50,7 +50,7 @@ const handleClick = (criteria) => {
         border: none;
     }
     .sort-by p {
-        font-weight: 600;
+        /* font-weight: 600; */
         font-family: 'Montserrat';
         color: white;
     }

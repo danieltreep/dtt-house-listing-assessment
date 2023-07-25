@@ -32,6 +32,7 @@ button {
     border: none;
     background-color: transparent;
     align-self: center;
+    /* z-index: 10; */
 }
 button p {
     font-weight: bold;

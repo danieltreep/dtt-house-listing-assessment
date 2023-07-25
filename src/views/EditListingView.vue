@@ -1,10 +1,13 @@
 <template>
     <main>
         <div class="form-page">
+
+            
             <form @submit.prevent="handleSubmit">
-                
-                <BackButtonDesktop />
+
+                <BackButtonDesktop text="Back to detail page" route="SingleListing"/>
                 <BackButtonMobile />
+                
                 <h1>Edit listing</h1>
                 
                 <BaseInput 
@@ -28,6 +31,7 @@
                         placeholder="e.g. A."
                         name="addition"
                         v-model="selectedListing.location.houseNumberAddition"
+                        :required="false"
                     />
                 </div>
     
@@ -36,6 +40,7 @@
                     placeholder="e.g. 1000 AA"
                     name="postal-code"
                     v-model="selectedListing.location.zip"
+                    class="zip"
                 />
 
                 <BaseInput 
@@ -73,8 +78,14 @@
 
                     <div class="input-wrapper">
                         <label for="garage">Garage*</label>
-                        <select name="garage" id="garage" placeholder="select" v-model="selectedListing.hasGarage">
-                            <option selected disabled>Select</option>
+                        <select 
+                            class="validateInput"
+                            name="garage" 
+                            id="garage" 
+                            placeholder="select" 
+                            v-model="selectedListing.hasGarage"
+                        >
+                            <option disabled>Select</option>
                             <option value="true">Yes</option>
                             <option value="false">No</option>
                         </select>
@@ -98,18 +109,29 @@
                 </div>
 
                 <BaseInput 
+                    type="number"
                     label="Construction year*"
                     placeholder="e.g. 1990"
                     name="construction-year"
                     v-model="selectedListing.constructionYear"
+                    class="construction-year-input"
                 />
                
                 <label for="description">Description*</label>
-                <textarea name="description" id="description" cols="30" rows="5" placeholder="Enter description"
+                <textarea 
+                    name="description" 
+                    id="description" 
+                    cols="30" 
+                    rows="5" 
+                    placeholder="Enter description"
                     v-model="selectedListing.description"
+                    class="validateInput"
                 ></textarea>
                 
-                <button type="submit" >POST</button>
+                <button 
+                    type="submit" 
+                    :disabled="!allRequiredFieldsFilledIn"
+                >POST</button>
             </form>
         </div>
     </main>
@@ -118,7 +140,8 @@
 <script setup>
 // External
 import { storeToRefs } from 'pinia';
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
+import { ref, watch } from 'vue';
 
 // Components
 import BaseFileInput from '../components/formElements/BaseFileInput.vue';
@@ -127,15 +150,32 @@ import BackButtonDesktop from '../components/navigation/BackButtonDesktop.vue'
 import BackButtonMobile from '../components/navigation/BackButtonMobile.vue'
 import editListing from '../composables/editListing';
 
+// Composables
+import checkFormInputs from '@/composables/checkFormInputs'
+import validateForm from '@/composables/validateForm'
+
 // Stores
 import { useSelectedListingStore } from '../stores/selectedListing';
 
 const { selectedListing } = storeToRefs(useSelectedListingStore());
 const router = useRouter()
 
+const allRequiredFieldsFilledIn = ref(true)
+
+watch(selectedListing.value, () => {
+    if (checkFormInputs()) {
+        allRequiredFieldsFilledIn.value = true
+    } else {
+        allRequiredFieldsFilledIn.value = false
+    }
+})
+
 const handleSubmit = async () => {
-    await editListing(selectedListing.value.id)
-    router.push({name: 'SingleListing', params: {id: selectedListing.value.id}})
+
+    if (validateForm()) {
+        await editListing(selectedListing.value.id)
+        router.push({name: 'SingleListing', params: {id: selectedListing.value.id}})
+    }
 };
 </script>
 
@@ -149,18 +189,19 @@ const handleSubmit = async () => {
         padding: 0;
         max-width: none;                    /* Overwrite styles from main.css too show picture on the full background*/
     }
+    .form-page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding-block: 1.5rem;
+        /* position: relative; */
+    }
     .input-wrapper {
         display: flex;
         flex-direction: column;
     }
     h1 {
         text-align: center;
-    }
-    .form-page {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding-block: 1.5rem;
-        /* position: relative; */
+        margin-bottom: 1rem;
     }
     /* This dims the background */
     main::before {
@@ -212,6 +253,11 @@ const handleSubmit = async () => {
         gap: 0 1rem;
     }
 
+    @media (max-width: 370px) {
+        .grid-layout {
+            grid-template-columns: 1fr;
+        }
+    }
     @media (min-width: 768px) {
         label, 
         input,
@@ -223,12 +269,13 @@ const handleSubmit = async () => {
         }
         main {
             margin-bottom: 0;
+            margin-left: 1rem;
             /* background-size: 800px; */
-            background-position: 150px 120%;
+            /* background-position: 150px 120%; */
         }
     }
     
-    @media (min-width: 1024px) {
+    @media (min-width: 1116px) {
         main {
             background-size: 80%;
             background-position: bottom right;
@@ -241,9 +288,10 @@ const handleSubmit = async () => {
         h1 {
             text-align: start;
             font-size: 32px;
+            margin-block: 1.5rem;
         }
         form {
-            margin-left: 0;
+            margin-left: 0rem;
             padding: 0;
         }
     }

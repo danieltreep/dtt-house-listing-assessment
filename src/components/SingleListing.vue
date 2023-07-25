@@ -119,6 +119,9 @@ function numberWithCommas(x) {
     z-index: -1;
     width: 100%;
     filter: brightness(80%);
+    max-height: 600px;
+    object-fit: cover;
+    object-position: top;
 }
 .listing-options-desktop {
     display: none;
@@ -185,6 +188,9 @@ button {
     }
     .listing-options-mobile {
         display: none;
+    }
+    .listing-details p {
+        font-size: 16px;
     }
 }
 </style>

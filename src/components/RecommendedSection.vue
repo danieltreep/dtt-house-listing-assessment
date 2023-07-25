@@ -2,7 +2,7 @@
     <section class="recommended-section">
         <h2>Recommended for you</h2>
         <Suspense>
-            <HouseListingList />
+            <ShowcaseList />
             <template #fallback>
                 <div >
                     <p>loading</p>
@@ -13,7 +13,8 @@
 </template>
 
 <script setup>
-import HouseListingList from '@/components/houseList/HouseListingList.vue'
+import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
+
 </script>
 
 <style lang="css" scoped>

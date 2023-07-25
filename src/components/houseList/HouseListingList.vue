@@ -1,7 +1,7 @@
 <template>
     <h2 v-if="searchTerm">{{ matchingResults.length }} results found </h2>
-    <div class="no-results">
-        <img v-if="matchingResults.length === 0" src="@/assets/images/img_empty_houses@3x.png" alt="No listings match your search">
+    <div class="no-results" v-if="matchingResults.length === 0">
+        <img src="@/assets/images/img_empty_houses@3x.png" alt="No listings match your search">
     </div>
     <ul>
         <HouseListingListItem 
@@ -45,5 +45,8 @@ await fetchListings()
         max-width: 400px;
         /* position: absolute; */
         
+    }
+    h2 {
+        margin: 2rem 0 1rem;
     }
 </style>

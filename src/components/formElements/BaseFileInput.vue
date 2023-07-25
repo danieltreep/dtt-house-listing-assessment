@@ -15,7 +15,6 @@
             hidden
             v-bind="$attrs"
             @change="handleChange"
-            @input="$emit('update:modelValue', $event.target.files[0])"
             class="validateInput"
         >
     </div>
@@ -50,7 +49,7 @@ const props = defineProps({
     }
 });
 
-defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
 
 const imageUrl = ref(props.imageUrl)
 
@@ -58,6 +57,7 @@ const imageUrl = ref(props.imageUrl)
 const handleReset = () => {
     document.getElementById('file-input').value = ""
     imageUrl.value = ''
+    emit('update:modelValue', null)
 }
 
 // Select first file on change and create a URL from the location to display
@@ -66,9 +66,10 @@ const handleChange = (event) => {
 
     if (selected) {
         imageUrl.value = URL.createObjectURL(selected)
-        
+        emit('update:modelValue', selected)
         } else {
         imageUrl.value = ''
+        emit('update:modelValue', '')
     }
 };
 
