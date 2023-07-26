@@ -1,18 +1,47 @@
 <template>
     <Teleport to="body">
-        <div class="modal-wrapper" @keydown.esc="$emit('close-modal')">
-            <dialog open>
-                <h2>Delete listing</h2>
-                <p>Are you sure you want to delete this listing? <br> This action cannot be undone.</p>
-                <button @click="$emit('delete')" class="delete">YES, DELETE</button>
-                <button @click="$emit('close-modal')" class="return">GO BACK</button>
-            </dialog>
-        </div>
+        <Transition name="open">
+        <div class="modal-wrapper" @keydown.esc="modalActive = false" v-if="modalActive" >
+                <dialog open>
+                    <h2>Delete listing</h2>
+                    <p>Are you sure you want to delete this listing? <br> This action cannot be undone.</p>
+                    <button @click="handleDelete" class="delete">YES, DELETE</button>
+                    <button @click="modalActive = false" class="return">GO BACK</button>
+                </dialog>
+            </div>
+        </Transition>
     </Teleport>
 </template>
 
 <script setup>
-defineEmits(['close-modal', 'delete']);
+import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
+
+// Stores
+import { useListingsStore } from '@/stores/listings'
+import { useModalStore } from '@/stores/modal'
+import { useRecentListingsStore } from '@/stores/recentListings';
+
+// Composables
+import deleteListing from '@/composables/deleteListing';
+
+const { modalActive, toDeleteListingId } = storeToRefs(useModalStore())
+const { deleteListingStore } = useListingsStore();
+const { deleteRecentListing } = useRecentListingsStore()
+
+const router = useRouter();
+
+// Delete listing from database, recent listing and API. Then close modal and push to homepage
+const handleDelete = () => {
+
+    deleteListing(toDeleteListingId.value)
+    deleteListingStore(toDeleteListingId.value)
+    deleteRecentListing(toDeleteListingId.value)
+    modalActive.value = false
+    router.push({name: 'Houses'})
+
+    // CONFIRM DELETION
+};
 </script>
 
 <style lang="css" scoped>
@@ -25,7 +54,7 @@ defineEmits(['close-modal', 'delete']);
     background: rgba(0, 0, 0, 0.25);
 }
 dialog {
-    padding: 4rem 4.5rem;
+    padding: 2rem 2.5rem;
     border-radius: var(--border-radius-m);
     border: none;
     margin: 0 auto;
@@ -34,6 +63,9 @@ dialog {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+}
+h2 {
+    font-size: 18px;
 }
 button {
     padding: .5rem;
@@ -51,5 +83,21 @@ button.return {
 }
 p {
     color: var(--text-color-secondary);
+}
+
+@media (min-width: 768px) {
+    dialog {
+        padding: 4rem 4.5rem;
+    }
+}
+/* Transition */ 
+.open-enter-from,
+.open-leave-to {
+    scale: 1.1;
+    opacity: 0;
+}
+.open-enter-active,
+.open-leave-active {
+    transition: all .3s ease;
 }
 </style>

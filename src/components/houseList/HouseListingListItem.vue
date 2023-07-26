@@ -25,41 +25,31 @@
                     <img src="@/assets/icons/ic_edit@3x.png" alt="">
                 </button>
                 <button>
-                    <img @click.stop.prevent="modalActive = true" src="@/assets/icons/ic_delete@3x.png" alt="">
+                    <img @click.stop.prevent="handleDelete" src="@/assets/icons/ic_delete@3x.png" alt="">
                 </button>
             </div>
             <!-- / Additional listing options if the user owns the listing -->
-            
-            <BaseModal v-if="modalActive" @delete="handleDelete" @close-modal="modalActive = false"/>
         </div>
     </li>
-    
     
 </template>
 
 <script setup>
 // External
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-
-// Composables
-import deleteListing from '@/composables/deleteListing';
-
-// Components
-import BaseModal from '@/components/BaseModal.vue';
+import { storeToRefs } from 'pinia';
 
 // Stores
 import { useSingleListingStore } from '@/stores/singleListing'
-import { useListingsStore } from '@/stores/listings'
+import { useModalStore } from '@/stores/modal'
 
 const props = defineProps({
     listing: Object
 });
 
 const router = useRouter();
-
+const { modalActive, toDeleteListingId } = storeToRefs(useModalStore())
 const { fetchSingleListing } = useSingleListingStore()
-const { deleteListingStore } = useListingsStore()
 
 // Function that adds dots to a number
 // Credit to: https://stackoverflow.com/questions/2901102/how-to-format-a-number-with-commas-as-thousands-separators
@@ -67,18 +57,10 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-const modalActive = ref(false);
-
-// Delete listing from database and API. Then close modal and push to homepage
 const handleDelete = () => {
-    console.log('deleted')
-    deleteListing(props.listing.id)
-    deleteListingStore(props.listing.id)
-    modalActive.value = false
-    router.push({name: 'Houses'})
-
-    // CONFIRM DELETION
-};
+    modalActive.value = true,
+    toDeleteListingId.value = props.listing.id
+}
 
 // First fetch the selected listing and then push to the edit page
 const handleEdit = async () => {
@@ -99,6 +81,7 @@ const handleEdit = async () => {
     text-align: start;
     box-shadow: 0 0 10px #00000010;
     cursor: pointer;
+    width: 100%;
 }
 .listing-thumbnail {
     /* width: 100%; */
@@ -166,5 +149,14 @@ button {
         right: .5rem;
     }
 }
-
+/* Transition */ 
+.open-enter-from,
+.open-leave-to {
+    scale: 1.1;
+    opacity: 0;
+}
+.open-enter-active,
+.open-leave-active {
+    transition: all .5s ease;
+}
 </style>

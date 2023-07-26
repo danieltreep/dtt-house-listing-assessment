@@ -11,7 +11,7 @@
                 <button @click="router.push({name: 'EditListing'})">
                     <img src="@/assets/icons/ic_edit_white@3x.png" alt="Edit this listing">
                 </button>
-                <button @click="modalActive = true" >
+                <button @click="handleDelete" >
                     <img src="@/assets/icons/ic_delete_white@3x.png" alt="Delete this listing">
                 </button>
             </div>
@@ -26,7 +26,7 @@
                     <img src="@/assets/icons/ic_edit@3x.png" alt="Edit this listing">
                 </button>
 
-                <button @click="modalActive = true">
+                <button @click="handleDelete">
                     <img  src="@/assets/icons/ic_delete@3x.png" alt="Delete this listing">
                 </button>
             </div>
@@ -62,18 +62,14 @@
 
             <p class="description">{{ singleListing?.description }}</p>
 
-            <BaseModal 
-                v-if="modalActive" 
-                @delete="handleDelete" 
-                @close-modal="modalActive = false"
-            />
+            <BaseModal />
         </div>
     </section>
 </template>
 
 <script setup>
 // External
-import { ref, watchEffect } from 'vue';
+import { watchEffect } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 
@@ -81,19 +77,17 @@ import { useRouter } from 'vue-router';
 import BackButtonMobile from '@/components/navigation/BackButtonMobile.vue';
 import BaseModal from '@/components/BaseModal.vue';
 
-// Composables
-import deleteListing from '@/composables/deleteListing';
-
 // Stores
 import { useSingleListingStore } from '@/stores/singleListing'
 import { useRecentListingsStore } from '@/stores/recentListings'
+import { useModalStore } from '@/stores/modal'
 
+const { modalActive, toDeleteListingId } = storeToRefs(useModalStore())
 const { fetchSingleListing } = useSingleListingStore()
 const { singleListing } = storeToRefs(useSingleListingStore())
 const { addRecentListing } = useRecentListingsStore()
 
 const router = useRouter()
-const modalActive = ref(false);
 
 const props = defineProps({
     id: String
@@ -113,11 +107,8 @@ watchEffect(async () => {
 
 // Handle delete function that is emitted from the modal
 const handleDelete = () => {
-    console.log('deleted')
-    deleteListing(props.id)
-    router.push({name: 'Houses'})
-
-    // CONFIRM DELETION
+    modalActive.value = true
+    toDeleteListingId.value = Number(props.id)
 };
 
 // Function that adds dots to a number

@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import getHouseListings from '../composables/getHouseListings'
+import getHouseListings from '@/composables/getHouseListings'
 
 export const useListingsStore = defineStore('listings', () => {
 

@@ -15,6 +15,8 @@
         />
     </TransitionGroup>
     <!-- Loop over the computed list passed in as prop and add transition effects-->
+
+    <BaseModal />
 </template>
 
 <script setup>
@@ -23,6 +25,7 @@ import { storeToRefs } from 'pinia'
 
 // Components
 import HouseListingListItem from './HouseListingListItem.vue';
+import BaseModal from '@/components/BaseModal.vue';
 
 // Stores
 import { useListingsStore } from '@/stores/listings';

@@ -14,7 +14,6 @@ import { storeToRefs } from 'pinia'
 
 import ShowcaseListItem from '@/components/houseList/ShowcaseListItem.vue';
 
-
 import { useRecentListingsStore } from '@/stores/recentListings';
 
 const { recentListings } = storeToRefs(useRecentListingsStore())

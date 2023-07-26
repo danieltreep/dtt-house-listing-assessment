@@ -57,13 +57,13 @@ nav a {
 @media (min-width: 768px) {
     header {
         display: block;
-        padding-inline: 1rem;
     }
     .header-content {
         display: flex;
         position: sticky;
         top: 0;
         z-index: 1;
+        padding-inline: 1rem;
     }
 }
 </style>

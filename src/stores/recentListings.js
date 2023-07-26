@@ -1,6 +1,5 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-// import { useSingleListingStore } from './singleListing'
 
 export const useRecentListingsStore = defineStore('recentListings', () => {
 
@@ -30,7 +29,7 @@ export const useRecentListingsStore = defineStore('recentListings', () => {
             recentListings.value.unshift(listing)                           // Put the item at index 0 of the array
         }       
 
-        // Remove the last item to keep the list to 4 items
+        // Remove the last item to keep the list to 4
         if (recentListings.value.length === 5) {
             recentListings.value.pop()
         }
@@ -39,9 +38,21 @@ export const useRecentListingsStore = defineStore('recentListings', () => {
         localStorage.setItem('recentListings', JSON.stringify(recentListings.value))
     }
 
+
+    const deleteRecentListing = (id) => {
+        
+        recentListings.value = recentListings.value.filter(listing => {
+            console.log(listing.id)
+            console.log(id)
+            return listing.id !== id
+        })
+        localStorage.setItem('recentListings', JSON.stringify(recentListings.value))
+    }
+
     return { 
         recentListings,
         getRecentListingsFromStorage,
         addRecentListing,
+        deleteRecentListing
     }
 })
