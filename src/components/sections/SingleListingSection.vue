@@ -86,9 +86,11 @@ import deleteListing from '@/composables/deleteListing';
 
 // Stores
 import { useSingleListingStore } from '@/stores/singleListing'
+import { useRecentListingsStore } from '@/stores/recentListings'
 
 const { fetchSingleListing } = useSingleListingStore()
 const { singleListing } = storeToRefs(useSingleListingStore())
+const { addRecentListing } = useRecentListingsStore()
 
 const router = useRouter()
 const modalActive = ref(false);
@@ -97,13 +99,14 @@ const props = defineProps({
     id: String
 })
 
-// Fetch data in the store when the id in the URL changes and scroll to the top
+// Fetch data when id in the URL changes. Scroll to the top for mobile and push to recently viewed
 watchEffect(async () => {
     await fetchSingleListing(props.id)
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     })
+    addRecentListing(singleListing.value)
 });
 
 // Handle delete function that is emitted from the modal

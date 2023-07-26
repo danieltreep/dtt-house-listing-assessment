@@ -1,6 +1,6 @@
 <template>
-    <section class="recommended-section">
-        <h2>Recommended for you</h2>
+    <section>
+        <h2>Recently viewed</h2>
         <Suspense>
             <ShowcaseList />
             <template #fallback>
@@ -17,11 +17,11 @@ import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
 </script>
 
 <style lang="css" scoped>
-.recommended-section {
+section {
     padding: 1.5rem;
 }
 @media (min-width: 1024px) {
-    .recommended-section {
+    section {
         margin-left: auto;
         min-width: 350px;
         padding: 0;

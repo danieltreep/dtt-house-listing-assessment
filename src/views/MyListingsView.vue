@@ -1,10 +1,10 @@
 <template>
     <main>
-        <MainHeaderSection title="Houses"/>
+        <MainHeaderSection title="My Listings"/>
 
         <section>
             <Suspense>
-                <HouseListingList :list="matchingResults"/>
+                <HouseListingList :list="listingsMadeByMe"/>
                 
                 <template #fallback>
                     <div>
@@ -19,7 +19,7 @@
 <script setup>
 // External
 import { onMounted } from 'vue';
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from 'pinia'
 
 // Components
 import HouseListingList from '@/components/houseList/HouseListingList.vue';
@@ -27,10 +27,10 @@ import MainHeaderSection from '@/components/sections/MainHeaderSection.vue';
 
 // Stores
 import { useSingleListingStore } from '@/stores/singleListing'
+import { useFilteredListingsStore } from '@/stores/filteredListings'
 
 const { resetSingleListing } = useSingleListingStore()
-import { useFilteredListingsStore } from '@/stores/filteredListings';
-const { matchingResults } = storeToRefs(useFilteredListingsStore())
+const { listingsMadeByMe } = storeToRefs(useFilteredListingsStore());
 
 // Reset single listing store when going back to home page
 onMounted(() => {

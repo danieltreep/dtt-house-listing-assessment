@@ -2,7 +2,7 @@ import { computed, ref } from 'vue'
 import { defineStore, storeToRefs } from 'pinia'
 import { useListingsStore } from './listings'
 
-export const useSearchStore = defineStore('search', () => {
+export const useFilteredListingsStore = defineStore('filteredListings', () => {
 
     // Get the listings from the listings store
     const { listings } = storeToRefs(useListingsStore())
@@ -20,8 +20,21 @@ export const useSearchStore = defineStore('search', () => {
         })
     })
 
+    // Filter listings that match search term and are madebyme
+    const listingsMadeByMe = computed(() => {
+        return listings.value.filter(listing => {
+            if (listing.madeByMe) {
+                return (
+                    listing.location.city.toUpperCase().includes(searchTerm.value.toUpperCase()) ||
+                    listing.location.street.toUpperCase().includes(searchTerm.value.toUpperCase())
+                )
+            }
+        })
+    })
+
     return { 
         searchTerm,
-        matchingResults
+        matchingResults,
+        listingsMadeByMe
     }
 })

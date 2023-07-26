@@ -75,10 +75,6 @@ function numberWithCommas(x) {
     gap: .6rem;
     align-items: center;
 }
-.title {
-    font-family: 'Montserrat';
-    font-weight: bold;
-}
 .price {
     color: var(--text-color-secondary);
     font-weight: 600;
@@ -91,5 +87,11 @@ function numberWithCommas(x) {
 button {
     background-color: transparent;
     border: none;
+}
+
+@media (min-width: 1024px) {
+    h2 {
+        font-size: 18px !important;
+    }
 }
 </style>

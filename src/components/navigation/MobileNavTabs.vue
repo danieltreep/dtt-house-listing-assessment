@@ -5,10 +5,21 @@
             <img v-else src="@/assets/icons/ic_mobile_navigation_home@3x.png" alt="Go to the home page">
         </router-link>
 
+        <router-link :to="{name: 'MyListings'}">
+            <img v-if="page === 'MyListings'" src="@/assets/icons/ic_mobile_navigation_mylistings_active@3x.png" alt="Go to the about page">
+            <img v-else src="@/assets/icons/ic_mobile_navigation_mylistings@3x.png" alt="Go to the about page"> 
+        </router-link>
+
+        <router-link :to="{name: 'Favorites'}">
+            <img v-if="page === 'Favorites'" src="@/assets/icons/ic_mobile_navigation_favorites_active@3x.png" alt="Go to the about page">
+            <img v-else src="@/assets/icons/ic_mobile_navigation_favorites@3x.png" alt="Go to the about page"> 
+        </router-link>
+        
         <router-link :to="{name: 'About'}">
             <img v-if="page === 'About'" src="@/assets/icons/ic_mobile_navigation_info_active@3x.png" alt="Go to the about page">
             <img v-else src="@/assets/icons/ic_mobile_navigation_info@3x.png" alt="Go to the about page"> 
         </router-link>
+
     </nav>
 </template>
 
@@ -38,9 +49,11 @@ nav {
 }
 nav a {
     padding: 1rem;
+    text-align: center;
 }
 nav img {
     height: 24px;
+    margin: o auto;
 }
 
 @media (min-width: 768px) {

@@ -23,9 +23,9 @@
 <script setup>
 import { storeToRefs } from 'pinia';
 
-import { useSearchStore } from '@/stores/search'
+import { useFilteredListingsStore } from '@/stores/filteredListings'
 
-const { searchTerm } = storeToRefs(useSearchStore()); 
+const { searchTerm } = storeToRefs(useFilteredListingsStore()); 
 
 </script>
 

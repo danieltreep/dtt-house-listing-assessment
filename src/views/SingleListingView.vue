@@ -5,7 +5,7 @@
         </div>
         
         <Suspense>
-            <SingleListing :id="id" />
+            <SingleListingSection :id="id" />
             <template #fallback>
                 <div>
                     <p>loading...</p>
@@ -13,18 +13,25 @@
             </template>
         </Suspense>
 
-        <RecommendedSection />
+        <aside>
+            <RecommendedSection />
+            <RecentlyViewedSection />
+        </aside>
+
+        
     </main>
 </template>
 
 <script setup>
-import RecommendedSection from '@/components/RecommendedSection.vue'
+import RecommendedSection from '@/components/sections/RecommendedSection.vue'
 import BackButtonDesktop from '@/components/navigation/BackButtonDesktop.vue';
-import SingleListing from '@/components/SingleListing.vue'
+import SingleListingSection from '@/components/sections/SingleListingSection.vue'
+import RecentlyViewedSection from '@/components/sections/RecentlyViewedSection.vue';
 
 defineProps({
     id: String
 });
+
 </script>
 
 <style lang="css" scoped>
@@ -45,5 +52,12 @@ main {
         padding-inline: 1rem;
         margin: 1.5rem auto 4rem;
     }
+    aside {
+        margin-left: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
 }
 </style>

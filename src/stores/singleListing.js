@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import getSingleListing from '../composables/getSingleListing'
+import getSingleListing from '@/composables/getSingleListing'
 
 // Every time a single list is necessary, this store will be updated
 export const useSingleListingStore = defineStore('singleListing', () => {

@@ -1,7 +1,7 @@
 <template>
     <ul>
         <ShowcaseListitem 
-            v-for="listing in listings.slice(0, 3)" 
+            v-for="listing in recentListings.slice(0, 3)" 
             :listing="listing" 
             :key="listing.id"
         />
@@ -11,14 +11,17 @@
 
 <script setup>
 import { storeToRefs } from 'pinia'
-import { useListingsStore } from '@/stores/listings';
+
 import ShowcaseListitem from '@/components/houseList/ShowcaseListitem.vue';
 
-const { fetchListings } = useListingsStore()
-const { listings } = storeToRefs(useListingsStore())
+
+import { useRecentListingsStore } from '@/stores/recentListings';
+
+const { recentListings } = storeToRefs(useRecentListingsStore())
+const { getRecentListingsFromStorage } = useRecentListingsStore()
 
 // Possible because of parent suspense component
-await fetchListings()
+await getRecentListingsFromStorage()
 
 </script>
 
