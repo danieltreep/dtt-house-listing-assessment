@@ -1,5 +1,5 @@
 <template>
-    <button class="mobile" @click.prevent="goBack" >
+    <button @click.prevent="goBack" >
         <img :src="imageUrl" alt="Go back to overview" >
     </button>
 </template>
@@ -44,7 +44,7 @@ button img {
 }
 
 @media (min-width: 1024px) {
-    .mobile {
+    button {
         display: none;
     }
 }

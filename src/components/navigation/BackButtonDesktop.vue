@@ -26,6 +26,10 @@ const handleClick = () => {
 </script>
 
 <style lang="css" scoped>
+button {
+    display: none;
+}
+
 @media (min-width: 1024px) {
     button {
         border: none;

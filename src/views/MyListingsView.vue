@@ -2,7 +2,13 @@
     <main>
         <MainHeaderSection title="My Listings"/>
 
-        <section>
+        <div class="no-listings" v-if="!listingsMadeByMe.length">
+            <h2>You have no listings</h2>
+            <router-link :to="{name: 'NewListing'}">
+                <button>Create a new listing</button>
+            </router-link>
+        </div>
+        <section v-if="listingsMadeByMe.length">
             <Suspense>
                 <HouseListingList :list="listingsMadeByMe"/>
                 
@@ -41,6 +47,19 @@ onMounted(() => {
 <style scoped>
 main {
     padding-bottom: 4rem;
+}
+.no-listings {
+    text-align: center;
+}
+.no-listings h2 {
+    margin: 3rem 0 1rem;
+}
+button {
+    border: 2px solid var(--element-color-primary);
+    background-color: transparent;
+    padding: .5rem 1rem;
+    border-radius: var(--border-radius-s);
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
