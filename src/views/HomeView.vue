@@ -7,9 +7,7 @@
                 <HouseListingList :list="matchingResults"/>
                 
                 <template #fallback>
-                    <div>
-                    <p>Loading</p>
-                    </div>
+                    <SuspenseList :amount="5" />
                 </template>
             </Suspense>
         </section>
@@ -30,6 +28,7 @@ import { useSingleListingStore } from '@/stores/singleListing'
 
 const { resetSingleListing } = useSingleListingStore()
 import { useFilteredListingsStore } from '@/stores/filteredListings';
+import SuspenseList from '../components/suspense/SuspenseList.vue';
 const { matchingResults } = storeToRefs(useFilteredListingsStore())
 
 // Reset single listing store when going back to home page

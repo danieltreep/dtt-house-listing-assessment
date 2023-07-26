@@ -7,9 +7,7 @@
                 <HouseListingList :list="listingsMadeByMe"/>
                 
                 <template #fallback>
-                    <div>
-                    <p>Loading</p>
-                    </div>
+                    <SuspenseList :amount="5"/>
                 </template>
             </Suspense>
         </section>
@@ -24,6 +22,7 @@ import { storeToRefs } from 'pinia'
 // Components
 import HouseListingList from '@/components/houseList/HouseListingList.vue';
 import MainHeaderSection from '@/components/sections/MainHeaderSection.vue';
+import SuspenseList from '@/components/suspense/SuspenseList.vue';
 
 // Stores
 import { useSingleListingStore } from '@/stores/singleListing'

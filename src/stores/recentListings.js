@@ -30,8 +30,8 @@ export const useRecentListingsStore = defineStore('recentListings', () => {
             recentListings.value.unshift(listing)                           // Put the item at index 0 of the array
         }       
 
-        // Remove the last item to keep the list short
-        if (recentListings.value.length === 4) {
+        // Remove the last item to keep the list to 4 items
+        if (recentListings.value.length === 5) {
             recentListings.value.pop()
         }
 

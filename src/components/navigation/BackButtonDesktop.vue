@@ -1,5 +1,5 @@
 <template>
-    <button class="desktop" @click.prevent="handleClick" >
+    <button @click.prevent="handleClick" >
         <img src="@/assets/icons/ic_back_grey@3x.png" alt="Go back to overview">
         <p>{{ text }} </p>
     </button>
@@ -26,10 +26,6 @@ const handleClick = () => {
 </script>
 
 <style lang="css" scoped>
-button {
-    display: none;
-}
-
 @media (min-width: 1024px) {
     button {
         border: none;

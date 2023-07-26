@@ -34,7 +34,7 @@
   </main>
 </template>
 
-<style>
+<style lang="css" scoped>
 h1 {
   text-align: center;
   margin-top: 2rem;

@@ -49,11 +49,9 @@ nav {
 }
 nav a {
     padding: 1rem;
-    text-align: center;
 }
 nav img {
     height: 24px;
-    margin: o auto;
 }
 
 @media (min-width: 768px) {

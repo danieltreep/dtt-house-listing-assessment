@@ -2,7 +2,7 @@
     <section class="listing-section">
 
         <div class="listing-hero">
-            <img class="hero-image" v-if="!singleListing?.image" src="@/assets/images/img_empty_houses@3x.png" alt="There is no image" >
+            <!-- <img class="hero-image" v-if="!singleListing?.image" src="@/assets/images/img_empty_houses@3x.png" alt="There is no image" > -->
             <img class="hero-image" :src="singleListing?.image" alt="">
 
             <BackButtonMobile color="white"/>
@@ -98,6 +98,8 @@ const modalActive = ref(false);
 const props = defineProps({
     id: String
 })
+
+await fetchSingleListing(props.id)
 
 // Fetch data when id in the URL changes. Scroll to the top for mobile and push to recently viewed
 watchEffect(async () => {

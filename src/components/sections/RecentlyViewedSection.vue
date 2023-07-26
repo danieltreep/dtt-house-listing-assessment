@@ -4,9 +4,7 @@
         <Suspense>
             <ShowcaseList />
             <template #fallback>
-                <div >
-                    <p>loading</p>
-                </div>
+                <SuspenseList :amount="3"/>
             </template>
         </Suspense>
     </section>
@@ -14,6 +12,7 @@
 
 <script setup>
 import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
+import SuspenseList from '../suspense/SuspenseList.vue';
 </script>
 
 <style lang="css" scoped>

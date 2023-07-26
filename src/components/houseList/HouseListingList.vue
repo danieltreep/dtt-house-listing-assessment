@@ -7,14 +7,14 @@
     </div>
     <!-- No results image -->
     
-    <ul>
+    <TransitionGroup tag="ul" name="list">
         <HouseListingListItem 
             v-for="listing in list" 
             :listing="listing" 
             :key="listing.id"
         />
-    </ul>
-    <!-- Loop over the computed list passed in as prop -->
+    </TransitionGroup>
+    <!-- Loop over the computed list passed in as prop and add transition effects-->
 </template>
 
 <script setup>
@@ -46,7 +46,8 @@ await fetchListings()
 ul {
     list-style: none;
     padding-left: 0;
-    margin-block: 1rem;   
+    margin-block: 1rem; 
+    position: relative;  
 }
 .no-results {
     width: 100%;
@@ -62,5 +63,20 @@ img {
 }
 h2 {
     margin: 2rem 0 1rem;
+}
+
+/* Transition effects */
+.list-move,
+.list-enter-active,
+.list-leave-active {
+    transition: all .3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    scale: .5;
+}
+.list-leave-active {
+    position: absolute;
 }
 </style>
