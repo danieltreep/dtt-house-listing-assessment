@@ -1,10 +1,13 @@
 <template>
     <div class="sort-bar">
-        <button class="sort-by price" @click="handleClick('price')">
+        <button class="sort-by" @click="handleClick('price')">
             <p>Price</p>
         </button>
-        <button class="sort-by size" @click="handleClick('size')">
+        <button class="sort-by" @click="handleClick('size')">
             <p>Size</p>
+        </button>
+        <button class="sort-by" @click="handleClick('year')">
+            <p>Year</p>
         </button>
         <div class="active-bar"></div>
     </div>
@@ -23,8 +26,10 @@ const handleClick = (criteria) => {
     sortListings(criteria)
     if (criteria === 'price') {
         styles.value = '0%'
-    } else {
+    } else if (criteria === 'size') {
         styles.value = '100%'
+    } else {
+        styles.value = '200%'
     }
 };
 
@@ -45,7 +50,7 @@ const handleClick = (criteria) => {
     width: 100%;
     padding: .6rem 1rem;
     font-size: 12px;
-    min-width: 140px;
+    /* min-width: 140px; */
     border: none;
     color: white;
 }
@@ -53,12 +58,18 @@ const handleClick = (criteria) => {
     background-color: var(--element-color-primary);
     position: absolute;
     inset: 0 auto 0 0;
-    width: 50%;
+    width: 33.3%;
     transition: .2s ease-out;
     transform: translateX(v-bind(styles));
 }
 button {
     background-color: transparent;
     z-index: 1;
+}
+
+@media (min-width: 1024px) {
+    .sort-by {
+        min-width: 140px;
+    }
 }
 </style>

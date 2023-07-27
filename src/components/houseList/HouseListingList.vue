@@ -2,11 +2,6 @@
     <h2 v-if="searchTerm">{{ list.length }} results found </h2>
     <!-- / How many results, only shown if there is search input -->
 
-    <div class="no-results" v-if="list.length === 0">
-        <img src="@/assets/images/img_empty_houses@3x.png" alt="No listings match your search">
-    </div>
-    <!-- No results image -->
-    
     <TransitionGroup tag="ul" name="list">
         <HouseListingListItem 
             v-for="listing in list" 
@@ -15,6 +10,11 @@
         />
     </TransitionGroup>
     <!-- Loop over the computed list passed in as prop and add transition effects-->
+
+    <div class="no-results" v-if="list.length === 0">
+        <img src="@/assets/images/img_empty_houses@3x.png" alt="No listings match your search">
+    </div>
+    <!-- No results image -->
 
     <BaseModal />
 </template>
@@ -68,7 +68,7 @@ h2 {
     margin: 2rem 0 1rem;
 }
 
-@media (prefer-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
     /* Transition effects */
     .list-move,
     .list-enter-active,
@@ -78,7 +78,7 @@ h2 {
     .list-enter-from,
     .list-leave-to {
         opacity: 0;
-        scale: .5;
+        /* scale: .9; */
     }
     .list-leave-active {
         position: absolute;

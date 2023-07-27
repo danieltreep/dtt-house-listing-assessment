@@ -30,7 +30,7 @@ const validateZip = () => {
 
     // Get the adress input and compare it to a regex, [1] because the class is also applied to the whole base input element
     const zip = document.querySelectorAll('.zip')[1]
-    const zipRegEx = new RegExp(/^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i);
+    const zipRegEx = new RegExp(/^[1-9][0-9]{3} ?[a-z]{2}$/i);
     
     // Validate if the value is a valid postal code. If not add error message and class
     if (!zipRegEx.test(zip.value)) {

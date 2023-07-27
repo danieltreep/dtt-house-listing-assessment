@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <router-link :to="{name: 'Houses'}" :class="route.path.includes('houses') ? 'router-link-active' : ''">
+        <router-link :to="{name: 'Houses'}">
             <img v-if="page === 'Houses'" src="@/assets/icons/ic_mobile_navigation_home_active@3x.png" alt="Go to the home page">
             <img v-else src="@/assets/icons/ic_mobile_navigation_home@3x.png" alt="Go to the home page">
         </router-link>
@@ -33,6 +33,9 @@ const route = useRoute();
 
 watchEffect(() => {
     page.value = route.name;
+    if (route.path.includes('houses')) {
+        page.value = 'Houses'
+    }
 });
 
 </script>

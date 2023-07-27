@@ -11,18 +11,18 @@
             <!-- / Location details of listing-->
 
             <div class="listing-details">
-                <img src="@/assets/icons/ic_bed@3x.png" alt="">
+                <img src="@/assets/icons/ic_bed@3x.png">
                 <p>{{ listing.rooms.bedrooms }}</p>
-                <img src="@/assets/icons/ic_bath@3x.png" alt="">
+                <img src="@/assets/icons/ic_bath@3x.png">
                 <p>{{ listing.rooms.bathrooms }}</p>
-                <img src="@/assets/icons/ic_size@3x.png" alt="">
+                <img src="@/assets/icons/ic_size@3x.png">
                 <p>{{ listing.size }} m2</p>
             </div>
             <!-- / Three details of the listing -->
 
             <div class="listing-options" v-if="listing.madeByMe">
                 <button @click.stop.prevent="handleEdit">
-                    <img src="@/assets/icons/ic_edit@3x.png" alt="">
+                    <img src="@/assets/icons/ic_edit@3x.png">
                 </button>
                 <button>
                     <img @click.stop.prevent="handleDelete" src="@/assets/icons/ic_delete@3x.png" alt="">
@@ -30,6 +30,11 @@
             </div>
             <!-- / Additional listing options if the user owns the listing -->
         </div>
+
+        <div class="favorite" v-if="isFavorite">
+            <img src="@/assets/icons/ic_favorite_white@3x.png">
+        </div>
+        <!-- / Favorite indicator -->
     </li>
     
 </template>
@@ -42,12 +47,16 @@ import { storeToRefs } from 'pinia';
 // Stores
 import { useSingleListingStore } from '@/stores/singleListing'
 import { useModalStore } from '@/stores/modal'
+import { ref } from 'vue';
+import { useFavoritesStore } from '@/stores/favorites';
 
+const {  checkIfFavorite } = useFavoritesStore()
 const props = defineProps({
     listing: Object
 });
 
 const router = useRouter();
+const isFavorite = ref(checkIfFavorite(props.listing.id))
 const { modalActive, toDeleteListingId } = storeToRefs(useModalStore())
 const { fetchSingleListing } = useSingleListingStore()
 
@@ -67,6 +76,12 @@ const handleEdit = async () => {
     await fetchSingleListing(props.listing.id)
     router.push({name: 'EditListing', params: {id: props.listing.id}})
 };
+
+// onMounted(() => {
+//     if (checkIfFavorite(Number(props.listing.id))) {
+//         isFavorite.value = true
+//     }
+// })
 </script>
 
 <style lang="css" scoped>
@@ -82,11 +97,13 @@ const handleEdit = async () => {
     box-shadow: 0 0 10px #00000010;
     cursor: pointer;
     width: 100%;
+    position: relative;
+    overflow: hidden;
 }
 .listing-thumbnail {
     /* width: 100%; */
     object-fit: cover;
-    object-position: 0 0;
+    object-position: center 0;
     height: 95px;
     aspect-ratio: 1 / 1;
     border-radius: var(--border-radius-s);
@@ -131,7 +148,19 @@ button {
     background-color: transparent;
     border: none;
 }
-
+.favorite {
+    height: 35px;
+    width: 35px;
+    background-color: var(--element-color-primary);
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: polygon(100% 0, 0% 100%, 0 0);
+}
+.favorite img {
+    height: 12px;
+    margin: 5px;
+}
 @media (min-width: 768px) {
     .list-item {
         grid-template-columns: 140px 1fr;
@@ -147,6 +176,19 @@ button {
     .listing-options {
         top: .5rem;
         right: .5rem;
+    }
+    .favorite {
+        height: 55px;
+        width: 55px;
+        background-color: var(--element-color-primary);
+        position: absolute;
+        top: 0;
+        left: 0;
+        clip-path: polygon(100% 0, 0% 100%, 0 0);
+    }
+    .favorite img {
+        height: 20px;
+        margin: 7px;
     }
 }
 /* Transition */ 

@@ -1,5 +1,5 @@
 <template>
-    <button @click.prevent="goBack" >
+    <button @click.prevent="router.push({name: 'Houses'})" >
         <img :src="imageUrl" alt="Go back to overview" >
     </button>
 </template>
@@ -18,10 +18,7 @@ const props = defineProps({
 // Load image based on prop color
 const imageUrl = ref(new URL(`/src/assets/icons/ic_back_${props.color}@3x.png`, import.meta.url).href)
 
-const router = useRouter()
-
-// Added prevent to click handler because of unwanted submission of form
-const goBack = () => router.go(-1);
+const router = useRouter();
 
 </script>
 

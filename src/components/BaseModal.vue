@@ -21,6 +21,7 @@ import { useRouter } from 'vue-router';
 import { useListingsStore } from '@/stores/listings'
 import { useModalStore } from '@/stores/modal'
 import { useRecentListingsStore } from '@/stores/recentListings';
+import { useFavoritesStore } from '@/stores/favorites';
 
 // Composables
 import deleteListing from '@/composables/deleteListing';
@@ -28,6 +29,7 @@ import deleteListing from '@/composables/deleteListing';
 const { modalActive, toDeleteListingId } = storeToRefs(useModalStore())
 const { deleteListingStore } = useListingsStore();
 const { deleteRecentListing } = useRecentListingsStore()
+const { deleteFavorite } = useFavoritesStore()
 
 const router = useRouter();
 
@@ -37,6 +39,7 @@ const handleDelete = () => {
     deleteListing(toDeleteListingId.value)
     deleteListingStore(toDeleteListingId.value)
     deleteRecentListing(toDeleteListingId.value)
+    deleteFavorite(toDeleteListingId.value)
     modalActive.value = false
     router.push({name: 'Houses'})
 

@@ -4,16 +4,16 @@ import uploadImage from './uploadImage';
 const myHeaders = new Headers();
 myHeaders.append("X-Api-Key", "u_S2bzOphtsEHvY-47k1LdKnMZUP8RjI");
 
-const formdata = new FormData();
-
-const requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: formdata,
-  redirect: 'follow'
-};
-
 const editListing = async (id) => {
+
+  const formdata = new FormData();
+
+  const requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata,
+    redirect: 'follow'
+  };
 
   // Get all the (new) information from the Single listing store
   const { singleListing } = useSingleListingStore()

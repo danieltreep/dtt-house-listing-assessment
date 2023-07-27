@@ -20,7 +20,9 @@ export const useListingsStore = defineStore('listings', () => {
         if (criteria === 'price') {
             listings.value = listings.value.sort((a, b) => a.price - b.price)
         } else if (criteria === 'size') {
-            listings.value = listings.value.sort((a, b) => a.size - b.size)
+            listings.value = listings.value.sort((a, b) => b.size - a.size)
+        } else if (criteria === 'year') {
+            listings.value = listings.value.sort((a, b) => b.constructionYear - a.constructionYear)
         }
     }
 

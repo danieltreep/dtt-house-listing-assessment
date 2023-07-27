@@ -8,9 +8,11 @@
             <BackButtonMobile color="white"/>
 
             <div class="listing-options-mobile" v-if="singleListing?.madeByMe">
+                
                 <button @click="router.push({name: 'EditListing'})">
                     <img src="@/assets/icons/ic_edit_white@3x.png" alt="Edit this listing">
                 </button>
+
                 <button @click="handleDelete" >
                     <img src="@/assets/icons/ic_delete_white@3x.png" alt="Delete this listing">
                 </button>
@@ -19,7 +21,7 @@
         <!-- /  The top of the listing with the image and the options for mobile-->
 
         <div class="listing-information">
-            <h1> {{ singleListing?.location.street }} {{ singleListing?.location.houseNumber }}</h1>
+            <h1> {{ singleListing?.location.street }} {{ singleListing?.location.houseNumber }} {{ singleListing?.location.houseNumberAddition }}</h1>
 
             <div class="listing-options-desktop" v-if="singleListing?.madeByMe">
                 <button @click="router.push({name: 'EditListing'})">
@@ -30,6 +32,11 @@
                     <img  src="@/assets/icons/ic_delete@3x.png" alt="Delete this listing">
                 </button>
             </div>
+
+            <button class="favorite" @click="handleFavorite">
+                    <img v-if="isFavorite" src="@/assets/icons/ic_favorite@3x.png" alt="">
+                    <img v-if="!isFavorite" src="@/assets/icons/ic_favorite_empty@3x.png" alt="Edit this listing">
+            </button>
             <!-- / Listing options for desktop -->
 
             <div class="listing-details">
@@ -69,7 +76,7 @@
 
 <script setup>
 // External
-import { watchEffect } from 'vue';
+import { onMounted, ref, watchEffect } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 
@@ -81,14 +88,16 @@ import BaseModal from '@/components/BaseModal.vue';
 import { useSingleListingStore } from '@/stores/singleListing'
 import { useRecentListingsStore } from '@/stores/recentListings'
 import { useModalStore } from '@/stores/modal'
+import { useFavoritesStore } from '@/stores/favorites';
 
 const { modalActive, toDeleteListingId } = storeToRefs(useModalStore())
 const { fetchSingleListing } = useSingleListingStore()
 const { singleListing } = storeToRefs(useSingleListingStore())
 const { addRecentListing } = useRecentListingsStore()
+const { addFavorite, deleteFavorite, checkIfFavorite } = useFavoritesStore()
 
 const router = useRouter()
-
+const isFavorite = ref(checkIfFavorite(props.id));
 const props = defineProps({
     id: String
 })
@@ -110,6 +119,22 @@ const handleDelete = () => {
     modalActive.value = true
     toDeleteListingId.value = Number(props.id)
 };
+
+const handleFavorite = () => {
+    
+    if (isFavorite.value) {
+        deleteFavorite(singleListing.value.id)
+        isFavorite.value = false
+    } else {
+        addFavorite(singleListing.value)
+        isFavorite.value = true
+    }
+}
+onMounted(() => {
+    if (checkIfFavorite(Number(props.id))) {
+        isFavorite.value = true
+    }
+})
 
 // Function that adds dots to a number
 // Credit to: https://stackoverflow.com/questions/2901102/how-to-format-a-number-with-commas-as-thousands-separators
@@ -153,6 +178,15 @@ function numberWithCommas(x) {
 .listing-information img {
     height: 14px;
     margin-right: .5rem;
+}
+.favorite {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+.favorite img {
+    height: 18px;
+    margin: 0 auto;
 }
 .listing-details {
     margin-block: .5rem;

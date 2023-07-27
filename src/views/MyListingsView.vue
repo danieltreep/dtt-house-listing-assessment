@@ -2,13 +2,7 @@
     <main>
         <MainHeaderSection title="My Listings"/>
 
-        <div class="no-listings" v-if="!listingsMadeByMe.length">
-            <h2>You have no listings</h2>
-            <router-link :to="{name: 'NewListing'}">
-                <button>Create a new listing</button>
-            </router-link>
-        </div>
-        <section v-if="listingsMadeByMe.length">
+        <section>
             <Suspense>
                 <HouseListingList :list="listingsMadeByMe"/>
                 

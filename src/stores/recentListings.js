@@ -38,14 +38,9 @@ export const useRecentListingsStore = defineStore('recentListings', () => {
         localStorage.setItem('recentListings', JSON.stringify(recentListings.value))
     }
 
-
     const deleteRecentListing = (id) => {
         
-        recentListings.value = recentListings.value.filter(listing => {
-            console.log(listing.id)
-            console.log(id)
-            return listing.id !== id
-        })
+        recentListings.value = recentListings.value.filter(listing => listing.id !== id)
         localStorage.setItem('recentListings', JSON.stringify(recentListings.value))
     }
 
