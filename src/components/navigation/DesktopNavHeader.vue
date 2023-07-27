@@ -5,6 +5,7 @@
             <nav>
                 <router-link :to="{name: 'Houses'}" :class="route.path.includes('houses') ? 'router-link-active' : ''">Houses</router-link>
                 <router-link :to="{name: 'MyListings'}">My Listings</router-link>
+                <router-link :to="{name: 'Favorites'}">Favorites</router-link>
                 <router-link :to="{name: 'About'}">About</router-link>
             </nav>
         </div>

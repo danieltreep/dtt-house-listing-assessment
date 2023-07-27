@@ -26,9 +26,6 @@ import SuspenseList from '@/components/suspense/SuspenseList.vue';
 import { useFavoritesStore } from '../stores/favorites';
 
 const { favorites } = storeToRefs(useFavoritesStore());
-const { getFavoritesFromStorage } = useFavoritesStore();
-
-getFavoritesFromStorage()
 
 </script>
 

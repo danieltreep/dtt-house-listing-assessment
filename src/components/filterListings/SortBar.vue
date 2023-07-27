@@ -50,7 +50,7 @@ const handleClick = (criteria) => {
     width: 100%;
     padding: .6rem 1rem;
     font-size: 12px;
-    /* min-width: 140px; */
+    min-width: 90px;
     border: none;
     color: white;
 }

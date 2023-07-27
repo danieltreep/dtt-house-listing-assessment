@@ -9,13 +9,18 @@
             <SearchBar />
             <SortBar />
         </div>
+
+        <div>
+            <FilterBar />
+        </div>
     </section>
 </template>
 
 <script setup>
-import SearchBar from '@/components/SearchBar.vue';
-import SortBar from '@/components/SortBar.vue';
+import SearchBar from '@/components/filterListings/SearchBar.vue';
+import SortBar from '@/components/filterListings/SortBar.vue';
 import CreateListingButton from '@/components/CreateListingButton.vue';
+import FilterBar from '../filterListings/FilterBar.vue';
 
 defineProps({
     title: String

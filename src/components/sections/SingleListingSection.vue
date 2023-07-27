@@ -207,7 +207,7 @@ button {
     border: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     .listing-information {
         background-color: var(--background-color-2);
         padding: 1.5rem;
@@ -219,8 +219,8 @@ button {
         display: flex;
         position: absolute;
         top: 2rem;
-        right: 2rem;
-        gap: 1rem;
+        right: 4rem;
+        gap: .5rem;
     }       
     .listing-options-desktop img {
         height: 18px;
@@ -230,6 +230,13 @@ button {
     }
     .listing-details p {
         font-size: 16px;
+    }
+    .favorite {
+        top: 2rem;
+        right: 1.5rem;
+    }
+    .favorite img {
+        height: 18px;
     }
 }
 </style>

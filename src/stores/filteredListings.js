@@ -9,9 +9,10 @@ export const useFilteredListingsStore = defineStore('filteredListings', () => {
 
     // Store the search term 
     const searchTerm = ref('')
-  
+    
     // Filter the listings with the search term. It is possible to search for city and street name
     const matchingResults = computed(() => {
+       
         return listings.value.filter(listing => {
             return (
                 listing.location.city.toUpperCase().includes(searchTerm.value.toUpperCase()) ||
@@ -22,19 +23,47 @@ export const useFilteredListingsStore = defineStore('filteredListings', () => {
 
     // Filter listings that match search term and are madebyme
     const listingsMadeByMe = computed(() => {
-        return listings.value.filter(listing => {
-            if (listing.madeByMe) {
-                return (
-                    listing.location.city.toUpperCase().includes(searchTerm.value.toUpperCase()) ||
-                    listing.location.street.toUpperCase().includes(searchTerm.value.toUpperCase())
-                )
-            }
+        return matchingResults.value.filter(listing => listing.madeByMe)
+    })
+
+    // FilterOptions
+    const bedrooms = ref('')
+    const bathrooms = ref('')
+    const size = ref('')
+
+    const filteredResults = computed(() => {
+        
+        // Return all matching search results when there are no values from filters
+        if (
+            bathrooms.value === '' && 
+            bedrooms.value === '' && 
+            size.value === ''
+        ) return matchingResults.value
+        
+        // Compare filters against values in matchingresults. Return true if it's a match or if there's no filter
+        return matchingResults.value.filter(listing => {
+            return (
+                (listing.rooms.bedrooms === +bedrooms.value || bedrooms.value === '') &&
+                (listing.rooms.bathrooms === +bathrooms.value || bathrooms.value === '') &&
+                (listing.size >= +size.value || size.value === '')
+            )
         })
     })
 
+    const resetFilters = () => {
+        bedrooms.value = ''
+        bathrooms.value = ''
+        size.value = ''
+    }
+
     return { 
+        bedrooms,
+        bathrooms,
+        size,
         searchTerm,
         matchingResults,
-        listingsMadeByMe
+        listingsMadeByMe,
+        filteredResults,
+        resetFilters
     }
 })
