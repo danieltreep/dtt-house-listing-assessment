@@ -2,7 +2,7 @@
     <section>
         <h2>Recently viewed</h2>
         <Suspense>
-            <ShowcaseList :list="recentListings"/>
+            <ShowcaseList :list="recentListings.slice(1, 4)"/>
             <template #fallback>
                 <SuspenseList :amount="3"/>
             </template>

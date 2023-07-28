@@ -11,11 +11,12 @@ export const useRecommendedStore = defineStore('recommended', () => {
     const recommendedListings = computed(() => {
 
         return listings.value.filter(listing => {
-            return (
-                listing.rooms.bedrooms === singleListing.value.rooms.bedrooms ||
-                listing.rooms.bathrooms === singleListing.value.rooms.bathrooms ||
-                listing.price <= singleListing.price
-            )
+            if (listing.id !== singleListing.value.id) {
+                return (
+                    listing.rooms.bathrooms === singleListing.value.rooms.bathrooms ||
+                    listing.rooms.bedrooms === singleListing.value.rooms.bedrooms
+                )
+            }
         })
     })
 

@@ -77,11 +77,6 @@ const handleEdit = async () => {
     router.push({name: 'EditListing', params: {id: props.listing.id}})
 };
 
-// onMounted(() => {
-//     if (checkIfFavorite(Number(props.listing.id))) {
-//         isFavorite.value = true
-//     }
-// })
 </script>
 
 <style lang="css" scoped>
@@ -101,7 +96,6 @@ const handleEdit = async () => {
     overflow: hidden;
 }
 .listing-thumbnail {
-    /* width: 100%; */
     object-fit: cover;
     object-position: center 0;
     height: 95px;

@@ -1,7 +1,7 @@
 <template>
     <ul>
         <ShowcaseListItem 
-            v-for="listing in list.slice(1, 4)" 
+            v-for="listing in list.slice(0, 3)" 
             :listing="listing" 
             :key="listing.id"
         />
