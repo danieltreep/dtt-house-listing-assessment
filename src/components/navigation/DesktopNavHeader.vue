@@ -8,6 +8,7 @@
                 <router-link :to="{name: 'Favorites'}">Favorites</router-link>
                 <router-link :to="{name: 'About'}">About</router-link>
             </nav>
+            <RandomListing />
         </div>
     </header>
 </template>
@@ -16,6 +17,7 @@
 
 // Add active router class to all links that include houses
 import { useRoute } from 'vue-router';
+import RandomListing from '../RandomListing.vue';
 
 const route = useRoute();
 
@@ -46,7 +48,7 @@ nav a {
     font-family: 'Montserrat';
     font-weight: bold;
     font-size: 18px;
-    margin-right: 3rem;
+    margin-right: 2.5rem;
     color: #999;
     font-weight: normal;
 }

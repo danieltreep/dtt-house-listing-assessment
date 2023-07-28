@@ -1,6 +1,9 @@
 <template>
     <section>
         <div class="row-1">
+            <div class="random-listing">
+                <RandomListing />
+            </div>
             <h1>{{ title }}</h1>
             <CreateListingButton />
         </div>
@@ -20,7 +23,8 @@
 import SearchBar from '@/components/filterListings/SearchBar.vue';
 import SortBar from '@/components/filterListings/SortBar.vue';
 import CreateListingButton from '@/components/CreateListingButton.vue';
-import FilterBar from '../filterListings/FilterBar.vue';
+import FilterBar from '@/components/filterListings/FilterBar.vue';
+import RandomListing from '../RandomListing.vue';
 
 defineProps({
     title: String
@@ -34,12 +38,15 @@ defineProps({
     position: relative;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 .row-2 {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+.random-listing {
+    margin-left: 0;
 }
 
 @media (min-width: 768px) {
@@ -48,6 +55,9 @@ defineProps({
         justify-content: space-between;
         text-align: start;
         gap: 1rem;
+    }
+    .random-listing {
+        display: none;
     }
 }
 </style>

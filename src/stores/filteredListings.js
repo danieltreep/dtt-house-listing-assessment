@@ -23,7 +23,7 @@ export const useFilteredListingsStore = defineStore('filteredListings', () => {
 
     // Filter listings that match search term and are madebyme
     const listingsMadeByMe = computed(() => {
-        return matchingResults.value.filter(listing => listing.madeByMe)
+        return filteredResults.value.filter(listing => listing.madeByMe)
     })
 
     // FilterOptions

@@ -21,9 +21,6 @@
 
 <style lang="css" scoped>
 .mobile-button {
-    position: absolute;
-    right: 0;
-    top: 0;
     border: none;
     background-color: transparent;
 }

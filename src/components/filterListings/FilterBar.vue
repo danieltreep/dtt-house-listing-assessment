@@ -1,41 +1,41 @@
 <template>
     <div class="filter-bar">
-        
-            <p>Filter by: </p>
-            <select v-model="bedrooms">
-                <option value="">Bedrooms</option>
-                <option value="1">1 bedroom</option>
-                <option value="2">2 bedrooms</option>
-                <option value="3">3 bedrooms</option>
-                <option value="4">4+ bedrooms</option>
-            </select>
-            <select v-model="bathrooms">
-                <option value="">bathrooms</option>
-                <option value="1">1 bathroom</option>
-                <option value="2">2 bathrooms</option>
-                <option value="3">3 bathrooms</option>
-                <option value="4">4+ bathrooms</option>
-            </select>  
-            <select v-model="size">
-                <option value="">Size</option>
-                <option value="50">&gt; 50 m2</option>
-                <option value="100">&gt; 100 m2</option>
-                <option value="150">&gt; 150 m2</option>
-                <option value="200">&gt; 200 m2</option>
-                <option value="250">&gt; 250 m2</option>
-            </select> 
 
-            <div @click="resetFilters">reset</div>
+        <FilterSelect 
+            v-model="bedrooms"
+            :options="['1', '2', '3', '4']"
+            :values="['1', '2', '3', '4']"
+            img="bed"
+        />
+
+        <FilterSelect 
+            v-model="bathrooms"
+            :options="['1', '2', '3', '4']"
+            :values="['1', '2', '3', '4']"
+            img="bath"
+        />
+
+        <FilterSelect 
+            v-model="size"
+            :options="['50 m2', '100 m2', '150 m2', '200 m2']"
+            :values="['50', '100', '150', '200']"
+            img="size"
+        />
+
+        <button @click="resetFilters" v-if="bedrooms || bathrooms || size">
+            <img src="@/assets/icons/ic_reset@3x.png" alt="">
+            <p>Reset</p>
+        </button>
     </div>
 </template>
 
 <script setup>
 import { storeToRefs } from 'pinia';
 import { useFilteredListingsStore } from '@/stores/filteredListings'
+import FilterSelect from './FilterSelect.vue';
 
 const { bedrooms, bathrooms, size } = storeToRefs(useFilteredListingsStore())
 const { resetFilters } = useFilteredListingsStore();
-
 
 </script>
 
@@ -45,6 +45,49 @@ const { resetFilters } = useFilteredListingsStore();
     margin: 1rem 0;
     padding-bottom: 1rem;
     display: flex;
-    gap: 1rem;
+    /* justify-content: stretch; */
+    gap: .5rem;
+}
+select {
+    border: none;
+    background-color: transparent;
+    font-family: 'Open Sans', sans-serif;
+    border-right: 5px solid transparent;
+    padding-right: .5rem;
+}
+img {
+    height: 18px;
+}
+button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    display: flex;
+    gap: .5rem;
+    display: none;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-color-secondary);
+}
+.input-wrapper {
+    display: flex;
+    border-radius: var(--border-radius-s);
+    gap: .5rem;
+    padding: .5rem;
+    align-items: center;
+    background-color: white;
+}
+
+@media (min-width: 768px) {
+    button {
+        display: flex;
+    }
+    button p {
+        font-size: 14px;
+    }
+    .filter-bar {
+        justify-content: start;
+        gap: 1rem;
+    }
 }
 </style>
