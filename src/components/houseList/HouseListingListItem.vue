@@ -1,6 +1,4 @@
 <template>
-    
-    
     <li class="list-item" tabindex="0" @click="router.push({name: 'SingleListing', params: {id: listing.id}})">
         <img class="listing-thumbnail" :src="listing.image" alt="listing ...">
 
@@ -41,7 +39,7 @@
 
 <script setup>
 // External
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia';
 
 // Stores
