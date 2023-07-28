@@ -14,6 +14,11 @@
 
 <script setup>
 import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
+import { useRecommendedStore } from '@/stores/recommended';
+import { storeToRefs } from 'pinia';
+
+const { recommendedListings } = storeToRefs(useRecommendedStore());
+
 </script>
 
 <style lang="css" scoped>

@@ -2,7 +2,7 @@
     <section>
         <h2>Recently viewed</h2>
         <Suspense>
-            <ShowcaseList />
+            <ShowcaseList :list="recentListings"/>
             <template #fallback>
                 <SuspenseList :amount="3"/>
             </template>
@@ -13,6 +13,11 @@
 <script setup>
 import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
 import SuspenseList from '../suspense/SuspenseList.vue';
+import { storeToRefs } from 'pinia';
+
+import { useRecentListingsStore } from '@/stores/recentListings';
+const { recentListings } = storeToRefs(useRecentListingsStore());
+
 </script>
 
 <style lang="css" scoped>

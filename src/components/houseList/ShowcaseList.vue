@@ -1,7 +1,7 @@
 <template>
     <ul>
         <ShowcaseListItem 
-            v-for="listing in recentListings.slice(1, 4)" 
+            v-for="listing in list.slice(1, 4)" 
             :listing="listing" 
             :key="listing.id"
         />
@@ -16,12 +16,15 @@ import ShowcaseListItem from '@/components/houseList/ShowcaseListItem.vue';
 
 import { useRecentListingsStore } from '@/stores/recentListings';
 
-const { recentListings } = storeToRefs(useRecentListingsStore())
+
 const { getRecentListingsFromStorage } = useRecentListingsStore()
 
 // Possible because of parent suspense component
 await getRecentListingsFromStorage()
 
+defineProps({
+    list: Array
+});
 </script>
 
 <style lang="css" scoped>
