@@ -10,17 +10,16 @@
 </template>
 
 <script setup>
-import { storeToRefs } from 'pinia'
-
 import ShowcaseListItem from '@/components/houseList/ShowcaseListItem.vue';
 
 import { useRecentListingsStore } from '@/stores/recentListings';
-
+import { useListingsStore } from '../../stores/listings';
 
 const { getRecentListingsFromStorage } = useRecentListingsStore()
+const { fetchListings } = useListingsStore()
 
-// Possible because of parent suspense component
 await getRecentListingsFromStorage()
+await fetchListings()
 
 defineProps({
     list: Array

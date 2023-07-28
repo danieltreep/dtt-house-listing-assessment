@@ -12,10 +12,6 @@
     </li>
 </template>
 
-<script setup>
-
-</script>
-
 <style lang="css" scoped>
 .list-item {
     background-color: var(--background-color-2);
@@ -26,7 +22,8 @@
     grid-template-columns: 95px 1fr;
     gap: .7rem;
     box-shadow: 0 0 10px #00000010;
-
+    container-name: suspense;
+    container-type: inline-size;
 }
 .image {
     height: 95px;
@@ -60,24 +57,28 @@
     border-radius: var(--border-radius-s);
 }
 
-@media (min-width: 768px) {
+/* Make the list item bigger when it is larger than 768px */
+@container (width > 768px) {
     .list-item {
         grid-template-columns: 140px 1fr;
         padding: 1rem;
         gap: 1rem;
+    }
+    .listing-information {
+        margin-left: 3rem;
     }
     .image {
         height: 140px;
     }
     .details {
         height: 18px;
-        background-color: var(--background-color-1);
     }
     .details:first-of-type {
         height: 32px;
     }
 }
 
+/* Animation for suspense item */
 @keyframes bg-animate {
     0% {
         background-position: 50% 0;

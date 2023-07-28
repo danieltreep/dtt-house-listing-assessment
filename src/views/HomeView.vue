@@ -29,7 +29,7 @@ import { useFilteredListingsStore } from '@/stores/filteredListings';
 import { useSingleListingStore } from '@/stores/singleListing'
 
 const { resetSingleListing } = useSingleListingStore()
-const { matchingResults, filteredResults } = storeToRefs(useFilteredListingsStore())
+const { filteredResults } = storeToRefs(useFilteredListingsStore())
 
 // Reset single listing store when going back to home page
 onMounted(() => {

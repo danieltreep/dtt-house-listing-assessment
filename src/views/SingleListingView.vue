@@ -12,7 +12,7 @@
         </Suspense>
 
         <aside>
-            <!-- <RecommendedSection /> -->
+            <RecommendedSection />
             <RecentlyViewedSection />
         </aside>
 

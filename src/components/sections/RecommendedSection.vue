@@ -2,11 +2,9 @@
     <section>
         <h2>Recommended for you</h2>
         <Suspense>
-            <ShowcaseList />
+            <ShowcaseList :list="recommendedListings"/>
             <template #fallback>
-                <div >
-                    <p>loading</p>
-                </div>
+                <SuspenseList :amount="3"/>
             </template>
         </Suspense>
     </section>
@@ -16,6 +14,7 @@
 import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
 import { useRecommendedStore } from '@/stores/recommended';
 import { storeToRefs } from 'pinia';
+import SuspenseList from '../suspense/SuspenseList.vue';
 
 const { recommendedListings } = storeToRefs(useRecommendedStore());
 

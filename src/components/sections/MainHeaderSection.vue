@@ -24,7 +24,7 @@ import SearchBar from '@/components/filterListings/SearchBar.vue';
 import SortBar from '@/components/filterListings/SortBar.vue';
 import CreateListingButton from '@/components/CreateListingButton.vue';
 import FilterBar from '@/components/filterListings/FilterBar.vue';
-import RandomListing from '../RandomListing.vue';
+import RandomListing from '@/components/RandomListing.vue';
 
 defineProps({
     title: String
