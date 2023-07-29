@@ -1,22 +1,20 @@
 <template>
-    <button class="mobile-button">
-        <router-link :to="{name: 'NewListing'}">
-            <img src="@/assets/icons/ic_plus_grey@3x.png" alt="Add a house listing">
-        </router-link>
+    <button class="mobile-button" @click="router.push({name: 'NewListing'})">
+        <img src="@/assets/icons/ic_plus_grey@3x.png" alt="Add a house listing">
     </button>
     <!-- / Only rendered on mobile -->
 
-    <button class="desktop-button">
-        <router-link :to="{name: 'NewListing'}">
-            <img src="@/assets/icons/ic_plus_white@3x.png" alt="Add a house listing">
-            <p>CREATE NEW</p>
-        </router-link>
+    <button class="desktop-button" @click="router.push({name: 'NewListing'})">
+        <img src="@/assets/icons/ic_plus_white@3x.png" alt="Add a house listing">
+        <p>CREATE NEW</p>
     </button>
     <!-- / Only rendered on desktop -->
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 </script>
 
 <style lang="css" scoped>
@@ -34,14 +32,12 @@ img {
     background-color: var(--element-color-primary);
     border: none;
     border-radius: var(--border-radius-s);
-    display: none;
-}
-.desktop-button a {
-    display: flex;
     align-items: center;
     padding: .6rem;
     gap: .5rem;
+    display: none;
 }
+
 .desktop-button p {
     color: white;
     font-weight: bold;
@@ -50,7 +46,7 @@ img {
 
 @media (min-width: 768px) {
     .desktop-button {
-        display: inline;
+        display: flex;
         margin-left: auto;
     }
     .mobile-button {

@@ -6,8 +6,8 @@
 
 <script setup>
 import { RouterView } from 'vue-router'
-import MobileNavTabs from './components/navigation/MobileNavTabs.vue';
-import DesktopNavHeader from './components/navigation/DesktopNavHeader.vue';
+import MobileNavTabs from '@/components/navigation/MobileNavTabs.vue';
+import DesktopNavHeader from '@/components/navigation/DesktopNavHeader.vue';
 </script>
 
 

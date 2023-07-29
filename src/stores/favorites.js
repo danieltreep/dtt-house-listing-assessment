@@ -32,6 +32,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
         localStorage.setItem('favorites', JSON.stringify(favorites.value))
     }
 
+    // Compare id to all favorite id's from storage
     const checkIfFavorite = (id) => {
         getFavoritesFromStorage()
         const favoritesIds = favorites.value.map(listing => listing.id)

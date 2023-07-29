@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import getHouseListings from '@/composables/getHouseListings'
+import getListings from '@/composables/getListings'
 
 export const useListingsStore = defineStore('listings', () => {
 
@@ -9,7 +9,7 @@ export const useListingsStore = defineStore('listings', () => {
   
     // Fetch all listings and update the listings ref. Immediately sort the listings on price
     const fetchListings = async () => {
-        const { documents } = await getHouseListings()
+        const { documents } = await getListings()
         listings.value = documents.value
         sortListings('price')
     }

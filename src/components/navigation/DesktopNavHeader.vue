@@ -1,9 +1,16 @@
 <template>
     <header>
         <div class="header-content">
-            <img class="logo" src="@/assets/images/img_logo_dtt@3x.png" alt="Doing Things Together logo">
+            <img 
+                class="logo" 
+                src="@/assets/images/img_logo_dtt@3x.png" 
+                alt="Doing Things Together logo"
+            >
             <nav>
-                <router-link :to="{name: 'Houses'}" :class="route.path.includes('houses') ? 'router-link-active' : ''">Houses</router-link>
+                <router-link 
+                    :to="{name: 'Houses'}" 
+                    :class="route.path.includes('houses') ? 'router-link-active' : ''"
+                >Houses</router-link>
                 <router-link :to="{name: 'MyListings'}">My Listings</router-link>
                 <router-link :to="{name: 'Favorites'}">Favorites</router-link>
                 <router-link :to="{name: 'About'}">About</router-link>
@@ -17,7 +24,7 @@
 
 // Add active router class to all links that include houses
 import { useRoute } from 'vue-router';
-import RandomListing from '../RandomListing.vue';
+import RandomListing from '@/components/RandomListing.vue';
 
 const route = useRoute();
 
@@ -51,6 +58,25 @@ nav a {
     margin-right: 2.5rem;
     color: #999;
     font-weight: normal;
+    transition: .3s;
+    position: relative;
+}
+nav a::after {
+    content: '';
+    width: 0;
+    height: 2px;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    background-color: var(--element-color-primary);
+    transition: width .3s;
+}
+nav a:hover {
+    color: var(--text-color-primary);
+    
+}
+nav a:hover::after {
+    width: 100%;
 }
 .router-link-active {
     color: var(--text-color-primary);

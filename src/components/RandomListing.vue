@@ -5,35 +5,36 @@
 </template>
 
 <script setup>
+// External
 import { storeToRefs } from 'pinia';
 import { ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
 
+// Stores
 import { useListingsStore } from '@/stores/listings'
 
-// Get all listings and save listing id's and random listing id
 const { listings } = storeToRefs(useListingsStore())
 const { fetchListings } = useListingsStore()
 
-const listingIds = ref(null)
+const allListingIds = ref(null)
 const randomListingId = ref(2)         // Start with a number because of first render                
 const router = useRouter()
 
 // Everytime listings are fetched, save an array of the id's
 watchEffect(() => {
-    listingIds.value = listings.value.map(listing => listing.id) 
+    allListingIds.value = listings.value.map(listing => listing.id) 
 })
 
 // Create a random index from the amount of items in the array and save value at random index
 const handleRandom = async () => {
 
     // Fetch listings if there are not yet there, for example when a single listing is the first loaded page
-    if (!listingIds.value.length) {
+    if (!allListingIds.value.length) {
         await fetchListings()
     }
 
-    const randomIndex = Math.floor(Math.random() * listingIds.value.length)
-    randomListingId.value = listingIds.value[randomIndex]
+    const randomIndex = Math.floor(Math.random() * allListingIds.value.length)
+    randomListingId.value = allListingIds.value[randomIndex]
     router.push({name: 'SingleListing', params: {id: randomListingId.value}})
 };
 

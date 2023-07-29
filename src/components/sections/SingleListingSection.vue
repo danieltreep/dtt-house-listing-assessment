@@ -3,11 +3,11 @@
 
         <div class="listing-hero">
             <!-- <img class="hero-image" v-if="!singleListing?.image" src="@/assets/images/img_empty_houses@3x.png" alt="There is no image" > -->
-            <img class="hero-image" :src="singleListing?.image" alt="">
+            <img class="hero-image" :src="singleListing?.image">
 
             <BackButtonMobile color="white"/>
 
-            <div class="listing-options-mobile" v-if="singleListing?.madeByMe">
+            <div v-if="singleListing?.madeByMe" class="listing-options-mobile" >
                 
                 <button @click="router.push({name: 'EditListing'})">
                     <img src="@/assets/icons/ic_edit_white@3x.png" alt="Edit this listing">
@@ -23,7 +23,7 @@
         <div class="listing-information">
             <h1> {{ singleListing?.location.street }} {{ singleListing?.location.houseNumber }} {{ singleListing?.location.houseNumberAddition }}</h1>
 
-            <div class="listing-options-desktop" v-if="singleListing?.madeByMe">
+            <div v-if="singleListing?.madeByMe" class="listing-options-desktop" >
                 <button @click="router.push({name: 'EditListing'})">
                     <img src="@/assets/icons/ic_edit@3x.png" alt="Edit this listing">
                 </button>
@@ -98,11 +98,10 @@ const { addFavorite, deleteFavorite, checkIfFavorite } = useFavoritesStore()
 
 const router = useRouter()
 const isFavorite = ref(checkIfFavorite(props.id));
+
 const props = defineProps({
     id: String
 })
-
-await fetchSingleListing(props.id)
 
 // Fetch data when id in the URL changes. Scroll to the top for mobile and push to recently viewed
 watchEffect(async () => {
@@ -114,12 +113,20 @@ watchEffect(async () => {
     addRecentListing(singleListing.value)
 });
 
+// Check if favorite
+onMounted(() => {
+    if (checkIfFavorite(Number(props.id))) {
+        isFavorite.value = true
+    }
+})
+
 // Handle delete function that is emitted from the modal
 const handleDelete = () => {
     modalActive.value = true
     toDeleteListingId.value = Number(props.id)
 };
 
+// Check if listing is favorite and call right function
 const handleFavorite = () => {
     
     if (isFavorite.value) {
@@ -130,11 +137,7 @@ const handleFavorite = () => {
         isFavorite.value = true
     }
 }
-onMounted(() => {
-    if (checkIfFavorite(Number(props.id))) {
-        isFavorite.value = true
-    }
-})
+
 
 // Function that adds dots to a number
 // Credit to: https://stackoverflow.com/questions/2901102/how-to-format-a-number-with-commas-as-thousands-separators
@@ -212,7 +215,7 @@ button {
         background-color: var(--background-color-2);
         padding: 1.5rem;
         border-radius: 0;
-        translate: 0;
+        translate: 0 -5px;
         margin-bottom: 0;
     }
     .listing-options-desktop {

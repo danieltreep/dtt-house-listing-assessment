@@ -23,7 +23,7 @@ import HouseListingList from '@/components/houseList/HouseListingList.vue';
 import SuspenseList from '@/components/suspense/SuspenseList.vue';
 
 // Stores
-import { useFavoritesStore } from '../stores/favorites';
+import { useFavoritesStore } from '@/stores/favorites';
 
 const { favorites } = storeToRefs(useFavoritesStore());
 

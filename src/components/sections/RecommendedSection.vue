@@ -11,10 +11,15 @@
 </template>
 
 <script setup>
-import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
-import { useRecommendedStore } from '@/stores/recommended';
+// External
 import { storeToRefs } from 'pinia';
-import SuspenseList from '../suspense/SuspenseList.vue';
+
+// Stores
+import { useRecommendedStore } from '@/stores/recommended';
+
+// Components
+import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
+import SuspenseList from '@/components/suspense/SuspenseList.vue';
 
 const { recommendedListings } = storeToRefs(useRecommendedStore());
 

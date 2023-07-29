@@ -8,6 +8,7 @@ export const useRecommendedStore = defineStore('recommended', () => {
     const { listings } = storeToRefs(useListingsStore())
     const { singleListing } = storeToRefs(useSingleListingStore())
 
+    // Recommend a listing when the amount of bathrooms or bedrooms match the current listing and exclude current listing
     const recommendedListings = computed(() => {
 
         return listings.value.filter(listing => {

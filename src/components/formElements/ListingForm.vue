@@ -124,10 +124,12 @@
             class="validateInput"
         ></textarea>
         
+        <p v-if="err" class="error-message">It looks like your listing couldn't be posted, please try again.</p>
+        
         <button 
             type="submit" 
             :disabled="!allRequiredFieldsFilledIn"
-        >POST</button>
+        >{{ isPending ? 'Sending...' : 'POST'}}</button>
     </form>  
 </template>
 
@@ -162,10 +164,14 @@ const props = defineProps({
     text: String
 })
 
+// Save is pending and error state 
+const isPending = ref(false)
+const err = ref(false)
+
 // Enable input at the start if all required fields are already filled in
 const allRequiredFieldsFilledIn = ref(checkFormInputs())
 
-// When single listing changes, check if all required inputs have a value
+// When single listing changes, check if all required inputs have a value. If true enable submit button
 watch(singleListing.value, () => {
     
     if (checkFormInputs()) {
@@ -176,87 +182,95 @@ watch(singleListing.value, () => {
 });
 
 const handleSubmit = async () => {
+    err.value = false
+    isPending.value = true
 
-    let listingId = singleListing.value.id;
+    // Initially set id when form is used to edit
+    const listingId = ref(singleListing.value.id)
 
+    // Return when form is not valid, otherwise check which function to call
     if (!validateForm()) {
+        isPending.value = false
         return
     } else if (props.title === 'Create') {
-        listingId = await createListing()
+        const { id, error } = await createListing()
+        err.value = error.value
+        listingId.value = id.value
         resetSingleListing()
     } else if (props.title === 'Edit') {
-        await editListing(listingId)
+        const { error } = await editListing(listingId.value)
+        err.value = error.value
     }
     
-    router.push({name: 'SingleListing', params: {id: listingId}})
+    isPending.value = false
+    router.push({name: 'SingleListing', params: {id: listingId.value}})
     
 };
 </script>
 
 <style lang="css" scoped>
-    .input-wrapper {
-        display: flex;
-        flex-direction: column;
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+}
+select,
+textarea {
+    font-family: 'Open Sans';
+    font-size: 12px;
+    border: none;
+    padding: .8rem 0 .8rem 1rem;
+    border-radius: var(--border-radius-s);
+    z-index: 1;
+}
+select {
+    color: var(--text-color-secondary);
+    border-right: .5rem solid transparent;
+}
+button[type='submit'] {
+    background-color: var(--element-color-primary);
+    border: none;
+    padding: .5rem 1rem;
+    color: white;
+    border-radius: var(--border-radius-s);
+    margin-top: 2rem;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1rem;
+}
+
+@media (max-width: 370px) {
+    .grid-layout {
+        grid-template-columns: 1fr;
     }
+}
+
+@media (min-width: 1116px) {
     h1 {
-        text-align: center;
-        margin-bottom: 1rem;
+        text-align: start;
+        margin-block: 1rem;
     }
-    /* This dims the background */
     form {
-        display: flex;
-        flex-direction: column;
-        padding: 1.5rem;
-        position: relative;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    select,
-    textarea {
-        font-family: 'Open Sans';
-        font-size: 12px;
-        border: none;
-        padding: .8rem 0 .8rem 1rem;
-        border-radius: var(--border-radius-s);
-        z-index: 1;
-    }
-    select {
-        color: var(--text-color-secondary);
-        border-right: .5rem solid transparent;
+        margin-left: 0rem;
+        padding: 0;
     }
     button[type='submit'] {
-        background-color: var(--element-color-primary);
-        border: none;
-        padding: .5rem 1rem;
-        color: white;
-        border-radius: var(--border-radius-s);
-        margin-top: 2rem;
+        width: calc(50% - 1rem);
+        margin-left: auto;
     }
-
-    .grid-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0 1rem;
-    }
-
-    @media (max-width: 370px) {
-        .grid-layout {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @media (min-width: 1116px) {
-        h1 {
-            text-align: start;
-            margin-block: 1rem;
-        }
-        form {
-            margin-left: 0rem;
-            padding: 0;
-        }
-        button[type='submit'] {
-            width: calc(50% - 1rem);
-            margin-left: auto;
-        }
-    }
+}
 </style>

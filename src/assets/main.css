@@ -75,7 +75,7 @@ label {
   margin: 1rem 0 .5rem;
   z-index: 1;
 }
-.errorMessage {
+.error-message {
   color: red;
   font-family: 'Montserrat';
   font-weight: 600;
@@ -112,7 +112,7 @@ label {
   ::placeholder {
     font-size: 14px;
   }
-  .errorMessage {
+  .error-message {
     font-size: 14px;
   }
   label {

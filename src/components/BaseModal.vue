@@ -1,12 +1,26 @@
 <template>
     <Teleport to="body">
         <Transition name="open">
-        <div class="modal-wrapper" @keydown.esc="modalActive = false" v-if="modalActive" >
+            <div 
+                v-if="modalActive" 
+                class="modal-background" 
+                @keydown.esc="modalActive = false" 
+            >
                 <dialog open>
-                    <h2>Delete listing</h2>
-                    <p>Are you sure you want to delete this listing? <br> This action cannot be undone.</p>
-                    <button @click="handleDelete" class="delete">YES, DELETE</button>
-                    <button @click="modalActive = false" class="return">GO BACK</button>
+                    <div v-if="!confirmDeletion" class="delete-listing-dialog" >
+                        <h2>Delete listing</h2>
+                        <p>Are you sure you want to delete this listing? <br> This action cannot be undone.</p>
+
+                        <p class="error-message" v-if="error">Something went wrong...</p>
+                        
+                        <button @click="handleDelete" class="delete">{{ isPending ? 'Deleting...' : 'YES, DELETE'}}</button>
+                        <button @click="modalActive = false" class="return">GO BACK</button>
+                    </div>
+
+                    <div class="confirmDeletion" v-if="confirmDeletion">
+                        <h2>The listing has been deleted</h2>
+                        <button @click="handleConfirm" class="return">GO BACK</button>
+                    </div>
                 </dialog>
             </div>
         </Transition>
@@ -25,6 +39,7 @@ import { useFavoritesStore } from '@/stores/favorites';
 
 // Composables
 import deleteListing from '@/composables/deleteListing';
+import { ref } from 'vue';
 
 const { modalActive, toDeleteListingId } = storeToRefs(useModalStore())
 const { deleteListingStore } = useListingsStore();
@@ -33,22 +48,36 @@ const { deleteFavorite } = useFavoritesStore()
 
 const router = useRouter();
 
-// Delete listing from database, recent listing and API. Then close modal and push to homepage
-const handleDelete = () => {
+const error = ref(false)
+const confirmDeletion = ref(false)
+const isPending = ref(false)
 
-    deleteListing(toDeleteListingId.value)
-    deleteListingStore(toDeleteListingId.value)
-    deleteRecentListing(toDeleteListingId.value)
-    deleteFavorite(toDeleteListingId.value)
+// Delete listing from store, recent listings, favorites if deletion from API is succesful
+const handleDelete = async () => {
+    isPending.value = true
+    error.value = await deleteListing(toDeleteListingId.value)
+
+    if (error.value) {
+        isPending.value = false
+        return
+    } else {
+        deleteListingStore(toDeleteListingId.value)
+        deleteRecentListing(toDeleteListingId.value)
+        deleteFavorite(toDeleteListingId.value)
+        confirmDeletion.value = true
+        isPending.value = false
+    }
+};
+
+const handleConfirm = () => {
     modalActive.value = false
     router.push({name: 'Houses'})
-
-    // CONFIRM DELETION
 };
+
 </script>
 
 <style lang="css" scoped>
-.modal-wrapper {
+.modal-background {
     position: fixed;
     display: flex;
     align-items: center;
@@ -62,6 +91,9 @@ dialog {
     border: none;
     margin: 0 auto;
     text-align: center;
+    
+}
+.delete-listing-dialog {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,6 +101,7 @@ dialog {
 }
 h2 {
     font-size: 18px;
+    margin-bottom: 1rem;
 }
 button {
     padding: .5rem;
@@ -92,15 +125,22 @@ p {
     dialog {
         padding: 4rem 4.5rem;
     }
+    h2 {
+        font-size: 24px;
+    }
 }
-/* Transition */ 
-.open-enter-from,
-.open-leave-to {
-    scale: 1.1;
-    opacity: 0;
-}
-.open-enter-active,
-.open-leave-active {
-    transition: all .3s ease;
+
+/* Transition effects of modal if no preference for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+     
+    .open-enter-from,
+    .open-leave-to {
+        scale: 1.1;
+        opacity: 0;
+    }
+    .open-enter-active,
+    .open-leave-active {
+        transition: all .3s ease;
+    }
 }
 </style>

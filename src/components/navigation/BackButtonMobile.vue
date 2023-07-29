@@ -1,6 +1,9 @@
 <template>
     <button @click.prevent="router.push({name: 'Houses'})" >
-        <img :src="imageUrl" alt="Go back to overview" >
+        <img 
+            :src="imageUrl" 
+            alt="Go back to overview" 
+        >
     </button>
 </template>
 
@@ -15,10 +18,10 @@ const props = defineProps({
     }
 });
 
-// Load image based on prop color
-const imageUrl = ref(new URL(`/src/assets/icons/ic_back_${props.color}@3x.png`, import.meta.url).href)
-
 const router = useRouter();
+
+// Load image based on prop color
+const imageUrl = ref(new URL(`/src/assets/icons/ic_back_${props.color}@3x.png`, import.meta.url).href);
 
 </script>
 

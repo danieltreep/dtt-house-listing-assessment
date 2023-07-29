@@ -1,23 +1,55 @@
 <template>
     <nav>
         <router-link :to="{name: 'Houses'}">
-            <img v-if="page === 'Houses'" src="@/assets/icons/ic_mobile_navigation_home_active@3x.png" alt="Go to the home page">
-            <img v-else src="@/assets/icons/ic_mobile_navigation_home@3x.png" alt="Go to the home page">
+            <img 
+                v-if="page === 'Houses'" 
+                src="@/assets/icons/ic_mobile_navigation_home_active@3x.png" 
+                alt="Go to the home page"
+            >
+            <img 
+                v-else 
+                src="@/assets/icons/ic_mobile_navigation_home@3x.png" 
+                alt="Go to the home page"
+            >
         </router-link>
 
         <router-link :to="{name: 'MyListings'}">
-            <img v-if="page === 'MyListings'" src="@/assets/icons/ic_mobile_navigation_mylistings_active@3x.png" alt="Go to the about page">
-            <img v-else src="@/assets/icons/ic_mobile_navigation_mylistings@3x.png" alt="Go to the about page"> 
+            <img 
+                v-if="page === 'MyListings'" 
+                src="@/assets/icons/ic_mobile_navigation_mylistings_active@3x.png" 
+                alt="Go to the about page"
+            >
+            <img 
+                v-else 
+                src="@/assets/icons/ic_mobile_navigation_mylistings@3x.png" 
+                alt="Go to the about page"
+            > 
         </router-link>
 
         <router-link :to="{name: 'Favorites'}">
-            <img v-if="page === 'Favorites'" src="@/assets/icons/ic_mobile_navigation_favorites_active@3x.png" alt="Go to the about page">
-            <img v-else src="@/assets/icons/ic_mobile_navigation_favorites@3x.png" alt="Go to the about page"> 
+            <img 
+                v-if="page === 'Favorites'" 
+                src="@/assets/icons/ic_mobile_navigation_favorites_active@3x.png" 
+                alt="Go to the about page"
+            >
+            <img 
+                v-else 
+                src="@/assets/icons/ic_mobile_navigation_favorites@3x.png" 
+                alt="Go to the about page"
+            > 
         </router-link>
         
         <router-link :to="{name: 'About'}">
-            <img v-if="page === 'About'" src="@/assets/icons/ic_mobile_navigation_info_active@3x.png" alt="Go to the about page">
-            <img v-else src="@/assets/icons/ic_mobile_navigation_info@3x.png" alt="Go to the about page"> 
+            <img 
+                v-if="page === 'About'" 
+                src="@/assets/icons/ic_mobile_navigation_info_active@3x.png" 
+                alt="Go to the about page"
+            >
+            <img 
+                v-else 
+                src="@/assets/icons/ic_mobile_navigation_info@3x.png" 
+                alt="Go to the about page"
+            > 
         </router-link>
 
     </nav>
@@ -31,6 +63,7 @@ import { useRoute } from 'vue-router';
 const page = ref('Houses');
 const route = useRoute();
 
+// If path includes houses update ref so correct active image is shown
 watchEffect(() => {
     page.value = route.name;
     if (route.path.includes('houses')) {

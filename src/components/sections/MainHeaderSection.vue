@@ -13,13 +13,13 @@
             <SortBar />
         </div>
 
-        <div>
-            <FilterBar />
-        </div>
+        <FilterBar />
+        
     </section>
 </template>
 
 <script setup>
+// Components
 import SearchBar from '@/components/filterListings/SearchBar.vue';
 import SortBar from '@/components/filterListings/SortBar.vue';
 import CreateListingButton from '@/components/CreateListingButton.vue';

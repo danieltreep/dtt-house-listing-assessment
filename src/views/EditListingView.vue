@@ -7,12 +7,12 @@
 </template>
 
 <script setup>
-import ListingForm from '../components/formElements/listingForm.vue';
+import ListingForm from '@/components/formElements/listingForm.vue';
 </script>
 
 <style lang="css" scoped>
 main {
-    background-image: url('../assets/images/img_background@3x.png');
+    background-image: url('@/assets/images/img_background@3x.png');
     background-position: 20px 100%;
     background-size: 150%;
     background-repeat: no-repeat;

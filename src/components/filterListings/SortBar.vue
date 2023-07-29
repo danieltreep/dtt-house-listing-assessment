@@ -3,18 +3,24 @@
         <button class="sort-by" @click="handleClick('price')">
             <p>Price</p>
         </button>
+
         <button class="sort-by" @click="handleClick('size')">
             <p>Size</p>
         </button>
+
         <button class="sort-by" @click="handleClick('year')">
             <p>Year</p>
         </button>
+
         <div class="active-bar"></div>
     </div>
 </template>
 
 <script setup>
+// External
 import { ref } from 'vue'
+
+// Stores
 import { useListingsStore } from '@/stores/listings';
 
 const { sortListings } = useListingsStore();
@@ -22,8 +28,10 @@ const { sortListings } = useListingsStore();
 // Translate the active bar based on the button clicked
 const styles = ref('0%');
 
+// Sort listings based on the criteria
 const handleClick = (criteria) => {
     sortListings(criteria)
+
     if (criteria === 'price') {
         styles.value = '0%'
     } else if (criteria === 'size') {

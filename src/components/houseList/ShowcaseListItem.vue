@@ -1,14 +1,24 @@
 <template>
     <router-link :to="{name: 'SingleListing', params: {id: listing.id}}">
-        <li class="list-item" tabindex="0" >
-            <img class="listing-thumbnail" :src="listing.image">
+        <li class="list-item" >
+            <img 
+                class="listing-thumbnail" 
+                :src="listing.image"
+            >
 
             <!-- Showcase list item does not have the listing options like delete and edit directly -->
 
             <div class="listing-information">
-                <h2 class="title">{{ listing.location.street }} {{ listing.location.houseNumber }} {{ listing.location?.houseNumberAddition }}</h2>
+                <h2 class="title">
+                    {{ listing.location.street }} 
+                    {{ listing.location.houseNumber }} 
+                    {{ listing.location?.houseNumberAddition }}
+                </h2>
                 <p class="price">&euro; {{ numberWithCommas(listing.price) }}</p>
-                <p class="adress">{{ listing.location.zip }} {{ listing.location.city }}</p>
+                <p class="adress">
+                    {{ listing.location.zip }} 
+                    {{ listing.location.city }}
+                </p>
     
                 <div class="listing-details">
                     <img src="@/assets/icons/ic_bed@3x.png" alt="">

@@ -24,21 +24,21 @@
 import { storeToRefs } from 'pinia'
 
 // Components
-import HouseListingListItem from './HouseListingListItem.vue';
+import HouseListingListItem from '@/components/houselist/HouseListingListItem.vue';
 import BaseModal from '@/components/BaseModal.vue';
 
 // Stores
 import { useListingsStore } from '@/stores/listings';
 import { useFilteredListingsStore } from '@/stores/filteredListings';
 
-const { fetchListings } = useListingsStore()
-const { searchTerm } = storeToRefs(useFilteredListingsStore())
-
 defineProps({
     list: {
         type: Array
     }
 });
+
+const { fetchListings } = useListingsStore()
+const { searchTerm } = storeToRefs(useFilteredListingsStore())
 
 // Fetch here so the suspense component in the parent component will load
 await fetchListings()
@@ -68,6 +68,7 @@ h2 {
     margin: 2rem 0 1rem;
 }
 
+/* List Transition effects when there is no preference for reduced motion */
 @media (prefers-reduced-motion: no-preference) {
     /* Transition effects */
     .list-move,

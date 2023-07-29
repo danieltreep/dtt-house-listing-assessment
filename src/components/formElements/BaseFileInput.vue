@@ -1,6 +1,7 @@
 <template>
     <div class="input-wrapper" >
         <label>{{ label }}</label>
+
         <label 
             v-show="!imageUrl"
             for="file-input" 
@@ -9,6 +10,7 @@
         >
             <img src="@/assets/icons/ic_upload@3x.png" alt="Upload a picture of the listing">
         </label>
+
         <input 
             type="file"
             id="file-input"
@@ -20,12 +22,16 @@
     <!-- / Label pointing to file input acts as the input so it can be styled. Only shown if there is no image url or file -->
     
     <div class="image-preview-container" v-if="imageUrl">
-        <img class="image-preview" :src="imageUrl" >
         <img 
-        class="reset-image" 
-        src="@/assets/icons/ic_clear_white@3x.png" 
-        alt="Reset image"
-        @click="handleReset"    
+            class="image-preview" 
+            :src="imageUrl" 
+        >
+
+        <img 
+            class="reset-image" 
+            src="@/assets/icons/ic_clear_white@3x.png" 
+            alt="Reset image"
+            @click="handleReset"    
         >
     </div>
     <!-- / Image preview and reset. Only shown if there is an image link or file -->

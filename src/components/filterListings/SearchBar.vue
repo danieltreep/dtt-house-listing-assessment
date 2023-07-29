@@ -21,8 +21,10 @@
 </template>
 
 <script setup>
+// External
 import { storeToRefs } from 'pinia';
 
+// Stores
 import { useFilteredListingsStore } from '@/stores/filteredListings'
 
 const { searchTerm } = storeToRefs(useFilteredListingsStore()); 

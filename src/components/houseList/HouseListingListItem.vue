@@ -1,11 +1,25 @@
 <template>
-    <li class="list-item" tabindex="0" @click="router.push({name: 'SingleListing', params: {id: listing.id}})">
-        <img class="listing-thumbnail" :src="listing.image" alt="listing ...">
+    <li 
+        class="list-item" 
+        @click="router.push({name: 'SingleListing', params: {id: listing.id}})"
+    >
+        <img 
+            class="listing-thumbnail" 
+            :src="listing.image" 
+            alt="listing ..."
+        >
 
         <div class="listing-information">
-            <h2 class="title">{{ listing.location.street }} {{ listing.location.houseNumber }} {{ listing.location?.houseNumberAddition }}</h2>
+            <h2 class="title">
+                {{ listing.location.street }} 
+                {{ listing.location.houseNumber }} 
+                {{ listing.location?.houseNumberAddition }}
+            </h2>
             <p class="price">&euro; {{ numberWithCommas(listing.price) }}</p>
-            <p class="adress">{{ listing.location.zip }} {{ listing.location.city }}</p>
+            <p class="adress">
+                {{ listing.location.zip }} 
+                {{ listing.location.city }}
+            </p>
             <!-- / Location details of listing-->
 
             <div class="listing-details">

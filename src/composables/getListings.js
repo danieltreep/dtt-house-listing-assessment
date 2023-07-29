@@ -9,7 +9,7 @@ const requestOptions = {
     redirect: 'follow'
 };
 
-const getHouseListings = async () => {
+const getListings = async () => {
 
     // Save the listings in this ref that can be returned
     const documents = ref([])
@@ -22,4 +22,4 @@ const getHouseListings = async () => {
     return { documents }
 }
 
-export default getHouseListings
+export default getListings

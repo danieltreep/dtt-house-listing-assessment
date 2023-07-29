@@ -10,14 +10,17 @@
 </template>
 
 <script setup>
+// Components
 import ShowcaseListItem from '@/components/houseList/ShowcaseListItem.vue';
 
+// Stores
 import { useRecentListingsStore } from '@/stores/recentListings';
-import { useListingsStore } from '../../stores/listings';
+import { useListingsStore } from '@/stores/listings';
 
 const { getRecentListingsFromStorage } = useRecentListingsStore()
 const { fetchListings } = useListingsStore()
 
+// Load listings so here so suspense component is triggered
 await getRecentListingsFromStorage()
 await fetchListings()
 

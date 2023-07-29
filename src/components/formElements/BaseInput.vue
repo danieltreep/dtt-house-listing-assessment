@@ -9,7 +9,7 @@
             :class="required ? 'validateInput' : ''"
         >
 
-        <p v-if="required" class="errorMessage"></p>
+        <p v-if="required" class="error-message"></p>
         <!-- If there is an error message display it here -->
     </div>
 </template>

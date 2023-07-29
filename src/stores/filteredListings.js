@@ -31,6 +31,7 @@ export const useFilteredListingsStore = defineStore('filteredListings', () => {
     const bathrooms = ref('')
     const size = ref('')
 
+    // Filter listings based on the filters
     const filteredResults = computed(() => {
         
         // Return all matching search results when there are no values from filters
@@ -40,7 +41,7 @@ export const useFilteredListingsStore = defineStore('filteredListings', () => {
             size.value === ''
         ) return matchingResults.value
         
-        // Compare filters against values in matchingresults. Return true if it's a match or if there's no filter
+        // Compare filters against values in matchingresults. Return true if it's a match or if filter is any
         return matchingResults.value.filter(listing => {
             return (
                 (listing.rooms.bedrooms === +bedrooms.value || bedrooms.value === '') &&

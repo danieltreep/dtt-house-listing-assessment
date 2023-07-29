@@ -30,9 +30,14 @@
 </template>
 
 <script setup>
+// External
 import { storeToRefs } from 'pinia';
+
+// Stores
 import { useFilteredListingsStore } from '@/stores/filteredListings'
-import FilterSelect from './FilterSelect.vue';
+
+// Components
+import FilterSelect from '@/components/filterListings/FilterSelect.vue';
 
 const { bedrooms, bathrooms, size } = storeToRefs(useFilteredListingsStore())
 const { resetFilters } = useFilteredListingsStore();
@@ -41,11 +46,10 @@ const { resetFilters } = useFilteredListingsStore();
 
 <style lang="css" scoped>
 .filter-bar {
-    border-bottom: 1px solid rgb(207, 207, 207);
+    border-bottom: 1px solid rgb(216, 216, 216);
     margin: 1rem 0;
     padding-bottom: 1rem;
     display: flex;
-    /* justify-content: stretch; */
     gap: .5rem;
 }
 select {
@@ -68,14 +72,6 @@ button {
     align-items: center;
     font-size: 12px;
     color: var(--text-color-secondary);
-}
-.input-wrapper {
-    display: flex;
-    border-radius: var(--border-radius-s);
-    gap: .5rem;
-    padding: .5rem;
-    align-items: center;
-    background-color: white;
 }
 
 @media (min-width: 768px) {

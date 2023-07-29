@@ -1,6 +1,9 @@
 <template>
     <button @click.prevent="handleClick" >
-        <img src="@/assets/icons/ic_back_grey@3x.png" alt="Go back to overview">
+        <img 
+            src="@/assets/icons/ic_back_grey@3x.png" 
+            alt="Go back to overview"
+        >
         <p>{{ text }} </p>
     </button>
 </template>
@@ -19,6 +22,7 @@ const props = defineProps({
     }
 }); 
 
+// Push to route passed in by props
 const handleClick = () => {
     router.push({name: `${props.route}`})
 };

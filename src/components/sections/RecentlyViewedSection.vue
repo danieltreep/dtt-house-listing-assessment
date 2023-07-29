@@ -11,11 +11,16 @@
 </template>
 
 <script setup>
-import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
-import SuspenseList from '../suspense/SuspenseList.vue';
+// External
 import { storeToRefs } from 'pinia';
 
+// Components
+import ShowcaseList from '@/components/houseList/ShowcaseList.vue'
+import SuspenseList from '@/components/suspense/SuspenseList.vue';
+
+// Stores
 import { useRecentListingsStore } from '@/stores/recentListings';
+
 const { recentListings } = storeToRefs(useRecentListingsStore());
 
 </script>

@@ -3,9 +3,16 @@
             
         <img :src="imageURL" alt="">
         
-        <select @input="$emit('update:modelValue', $event.target.value)" :value="modelValue">
+        <select 
+            @input="$emit('update:modelValue', $event.target.value)" 
+            :value="modelValue"
+        >
             <option value="">Any</option>
-            <option v-for="(option, index) in options" :key="option" :value="values[index]">{{ option }}</option>
+            <option 
+                v-for="(option, index) in options" 
+                :key="option" 
+                :value="values[index]"
+            >{{ option }}</option>
         </select>
     </div>
 </template>
@@ -38,17 +45,6 @@ select {
 img {
     height: 14px;
 }
-button {
-    border: none;
-    background-color: transparent;
-    padding: 0;
-    display: flex;
-    gap: .5rem;
-    display: none;
-    align-items: center;
-    font-size: 12px;
-    color: var(--text-color-secondary);
-}
 .input-wrapper {
     display: flex;
     border-radius: var(--border-radius-s);
@@ -56,18 +52,5 @@ button {
     padding: .5rem;
     align-items: center;
     background-color: white;
-}
-
-@media (min-width: 768px) {
-    button {
-        display: flex;
-    }
-    button p {
-        font-size: 14px;
-    }
-    .filter-bar {
-        justify-content: start;
-        gap: 1rem;
-    }
 }
 </style>
