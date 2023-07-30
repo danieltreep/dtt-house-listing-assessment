@@ -11,6 +11,7 @@
             placeholder="Enter the street name"
             name="street"
             v-model="singleListing.location.street"
+            class="street"
         />
 
         <div class="grid-layout">

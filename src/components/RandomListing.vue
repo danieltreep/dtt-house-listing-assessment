@@ -1,6 +1,6 @@
 <template>
     <button @click="handleRandom" @keydown.enter="handleRandom" title="Show me a random house">
-        <img src="@/assets/icons/ic_random.png"  >
+        <img src="@/assets/icons/ic_random.png" alt="Show me a random listing" >
     </button>
 </template>
 

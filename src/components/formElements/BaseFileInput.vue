@@ -77,7 +77,7 @@ const handleChange = (event) => {
     if (selected) {
         imageUrl.value = URL.createObjectURL(selected)
         emit('update:modelValue', selected)
-        } else {
+    } else {
         imageUrl.value = ''
         emit('update:modelValue', '')
     }
@@ -95,6 +95,7 @@ label {
 .upload-picture {
     border: 2px dashed var(--element-color-quartenary);
     aspect-ratio: 1 / 1;
+    width: -moz-fit-content;
     width: fit-content;
     padding: 2rem;
     margin-block: .2rem;
@@ -105,6 +106,7 @@ label {
 }
 .image-preview-container {
     position: relative;
+    width: -moz-fit-content;
     width: fit-content;
 }
 .image-preview {

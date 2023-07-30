@@ -21,11 +21,7 @@ export const useFilteredListingsStore = defineStore('filteredListings', () => {
         })
     })
 
-    // Filter listings that match search term and are madebyme
-    const listingsMadeByMe = computed(() => {
-        return filteredResults.value.filter(listing => listing.madeByMe)
-    })
-
+    
     // FilterOptions
     const bedrooms = ref('')
     const bathrooms = ref('')
@@ -49,6 +45,11 @@ export const useFilteredListingsStore = defineStore('filteredListings', () => {
                 (listing.size >= +size.value || size.value === '')
             )
         })
+    })
+
+    // Filter listings that match filters and are madebyme
+    const listingsMadeByMe = computed(() => {
+        return filteredResults.value.filter(listing => listing.madeByMe)
     })
 
     const resetFilters = () => {

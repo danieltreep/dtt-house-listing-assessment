@@ -17,7 +17,7 @@
                         <button @click="modalActive = false" class="return">GO BACK</button>
                     </div>
 
-                    <div class="confirmDeletion" v-if="confirmDeletion">
+                    <div class="confirm-deletion" v-if="confirmDeletion">
                         <h2>The listing has been deleted</h2>
                         <button @click="handleConfirm" class="return">GO BACK</button>
                     </div>
@@ -119,6 +119,9 @@ button.return {
 }
 p {
     color: var(--text-color-secondary);
+}
+.confirm-deletion button{
+    margin-top: 2rem;
 }
 
 @media (min-width: 768px) {

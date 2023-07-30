@@ -3,15 +3,15 @@
 
         <FilterSelect 
             v-model="bedrooms"
-            :options="['1', '2', '3', '4']"
-            :values="['1', '2', '3', '4']"
+            :options="['1', '2', '3', '4', '5']"
+            :values="['1', '2', '3', '4', '5']"
             img="bed"
         />
 
         <FilterSelect 
             v-model="bathrooms"
-            :options="['1', '2', '3', '4']"
-            :values="['1', '2', '3', '4']"
+            :options="['1', '2', '3', '4', '5']"
+            :values="['1', '2', '3', '4', '5']"
             img="bath"
         />
 
@@ -23,7 +23,7 @@
         />
 
         <button @click="resetFilters" v-if="bedrooms || bathrooms || size">
-            <img src="@/assets/icons/ic_reset@3x.png" alt="">
+            <img src="@/assets/icons/ic_reset@3x.png" alt="Reset filters">
             <p>Reset</p>
         </button>
     </div>

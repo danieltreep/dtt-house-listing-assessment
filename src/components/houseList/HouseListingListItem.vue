@@ -6,7 +6,7 @@
         <img 
             class="listing-thumbnail" 
             :src="listing.image" 
-            alt="listing ..."
+            :alt="listing.location.street"
         >
 
         <div class="listing-information">
@@ -23,20 +23,20 @@
             <!-- / Location details of listing-->
 
             <div class="listing-details">
-                <img src="@/assets/icons/ic_bed@3x.png">
+                <img src="@/assets/icons/ic_bed@3x.png" aria-hidden="true">
                 <p>{{ listing.rooms.bedrooms }}</p>
-                <img src="@/assets/icons/ic_bath@3x.png">
+                <img src="@/assets/icons/ic_bath@3x.png" aria-hidden="true">
                 <p>{{ listing.rooms.bathrooms }}</p>
-                <img src="@/assets/icons/ic_size@3x.png">
+                <img src="@/assets/icons/ic_size@3x.png" aria-hidden="true">
                 <p>{{ listing.size }} m2</p>
             </div>
             <!-- / Three details of the listing -->
 
             <div class="listing-options" v-if="listing.madeByMe">
-                <button @click.stop.prevent="handleEdit">
-                    <img src="@/assets/icons/ic_edit@3x.png">
+                <button @click.stop.prevent="handleEdit" title="Edit this listing">
+                    <img src="@/assets/icons/ic_edit@3x.png" aria-hidden="true">
                 </button>
-                <button>
+                <button title="Delete this listing">
                     <img @click.stop.prevent="handleDelete" src="@/assets/icons/ic_delete@3x.png" alt="">
                 </button>
             </div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="favorite" v-if="isFavorite">
-            <img src="@/assets/icons/ic_favorite_white@3x.png">
+            <img src="@/assets/icons/ic_favorite_white@3x.png" alt="Favorite this listing">
         </div>
         <!-- / Favorite indicator -->
     </li>

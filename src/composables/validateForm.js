@@ -3,9 +3,10 @@ const validateForm = () => {
     // Call the validate functions
     validateZip()
     validateConstructionYear()
+    validateStreet()
     
     // Return true if all required elements match
-    if (validateZip() && validateConstructionYear()) {
+    if (validateZip() && validateConstructionYear() && validateStreet()) {
         return true
     }
 };
@@ -22,6 +23,23 @@ const validateConstructionYear = () => {
     } else {
         constructionYearInput.classList.remove('error')
         constructionYearInput.nextElementSibling.innerText = '';
+        return true
+    }
+}
+
+const validateStreet = () => {
+
+    const street = document.querySelectorAll('.street')[1]
+    const streetRegEx = new RegExp(/\d/);
+    
+    // Validate if the value has no numbers. If not add error message and class
+    if (streetRegEx.test(street.value)) {
+        street.classList.add('error')
+        street.nextElementSibling.innerText = 'A street name can not include a number';
+        
+    } else {
+        street.classList.remove('error')
+        street.nextElementSibling.innerText = '';
         return true
     }
 }
