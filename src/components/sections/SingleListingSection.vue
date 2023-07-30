@@ -103,6 +103,9 @@ const props = defineProps({
     id: String
 })
 
+// Fetch here so suspense in parent will be loaded
+await fetchSingleListing(props.id)
+
 // Fetch data when id in the URL changes. Scroll to the top for mobile and push to recently viewed
 watchEffect(async () => {
     await fetchSingleListing(props.id)
